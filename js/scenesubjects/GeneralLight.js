@@ -1,5 +1,5 @@
 
-import * as THREE from 'three';
+import * as THREE from "https://unpkg.com/three@0.138.0/build/three.module.js";
 
 
 export function GeneralLight(scene, {x, y, z}, brightness) {

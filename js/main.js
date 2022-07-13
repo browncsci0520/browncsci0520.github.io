@@ -1,5 +1,5 @@
 
-import * as THREE from 'three';
+import * as THREE from "https://unpkg.com/three@0.138.0/build/three.module.js";
 import { Shear3DScene } from './Shear3D.js'
 import { Shear3DCrossSectionScene } from './Shear3DCrossSection.js'
 import { Transformations2D } from './Transformations2D'
