@@ -399,9 +399,9 @@
                 Let's think about what this definition of homogeneous coordinates implies about the structure of the space they encode, and why that lets us think about
                 translation as a higher dimensional shear.  First lets simplify things.
 
-                Suppose we wanted to encode a 1D translation in a matrix.  Then we would have to homogenize its coordinate to get (x, 1), perform a 2D shear, and then recover 
-                whatever ends up in the x slot.  We get something like this:
-                [widget]                
+                Suppose we wanted to encode a 1D translation in a matrix.  Then we would have to homogenize its coordinate to get (1, y), perform a 2D shear, and then recover 
+                whatever ends up in the y slot.  We get something like this:
+                [widget that shows a shear of a line in 2D and how it effects translation of some cross section of that line with x = 1... just like the 3D shear widget but 1 dim lower]                
             </p>
             <p>
                 By saying that every coordinate in this 2D world is homogeneous, we say that all proportional vectors reprpesent the same point.
@@ -410,7 +410,7 @@
                 a distinct point represented by homogeneous coordinates.  For R^2 there can only fit one dimension of one dimensional subspaces.  That is to say, 
                 if we had a space where each element was a one dimensional subspace of R^2, that space would only have one dimension, which is one dimension less than
                 R^2.  We can visualize this as the dehomogenization map which takes a point in R^2 (homogeneous space) and sends it to the point it represents in euclidan space (R1).
-                [widget]
+                [this widget shows a bunch of subspaces intersecting the projective line and when you click on a subspace it tells you what point on the line it intersects / represents]
             </p>
             <div>
                 <canvas id="projective-line-canvas"></canvas>
@@ -434,10 +434,10 @@
             </div>
             <p>
                 Back to higher dimensions.  The projective plane, just like the projective line, is the isomorph to all 1-dim subspaces
-                (encoded by homogeneous coordinates) in R^3 (instead of R^1).  Since two dimensions of one dimensional subspaces can fit into R^3, this yeilds a plane instead of a line.
+                (encoded by homogeneous coordinates) in R^3 (instead of R^2).  Since two dimensions of one dimensional subspaces can fit into R^3, this yeilds a plane instead of a line.
                 The afformentioned dehomogenization map sends all of R^3 to this projective plane.  And the projective frame for this plane is 
                 a choice of z instead of y.
-                [widget]
+                [same as the previous widget, just a dimension higher]
             </p>
             <div>
                 <canvas id="projective-plane-canvas"></canvas>
