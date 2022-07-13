@@ -100,10 +100,7 @@
                 vector, no matter what, it would still be an arrow from the origin.  There are no "points".
                 The second way we can make sense of this is by returning to our definition of a linear map.  The map must always send the 0 vector to 0.
                 But in a translation, this doesn't hold.  Say we define a 2D translation to be something like T(x, y) = (x + 1, y + 1).
-                Then T(0, 0) = (1, 1), failing our definition of linearity.  So how do we translate 2D objects in computer graphics?  Well
-                we could keep track of the position of the object independently, but that's not ideal since it leads to a lot of bookkeeping overhead
-                and it isn't <i>composable</i> with other transformations.  That is to say, we can't "multiply" it with a rotation and get an map Which
-                translates and rotates.
+                Then T(0, 0) = (1, 1), failing our definition of linearity.  So how do we translate 2D objects in computer graphics?
             </p>
         </div>
         <div>
