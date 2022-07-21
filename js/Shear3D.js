@@ -1,6 +1,6 @@
 
-import * as THREE from "https://unpkg.com/three@0.138.0/build/three.module.js";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { ShearSheep } from './scenesubjects/ShearSheep';
 import { GeneralLight } from './scenesubjects/GeneralLight';
 import { Grid } from './scenesubjects/Grid';
@@ -66,12 +66,10 @@ export function Shear3DScene(canvas, matrixHTML) {
             new GeneralLight(scene, {x: -20, y: -10, z: 20}, 6),
             new GeneralLight(scene, {x: 20, y: 10, z: -20}, 5),
             new ShearSheep(scene, matrixHTML),
-            new Grid(scene, {x: 0, y: 0, z: 1}),
-            new Grid(scene, {x: 0, y: 1, z: 0}),
             new Z1Plane(scene)
         ];
 
-        return sceneSubjects
+        return sceneSubjects;
     }
 
     /* public functions */

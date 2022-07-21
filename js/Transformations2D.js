@@ -1,8 +1,9 @@
 
-import * as THREE from "https://unpkg.com/three@0.138.0/build/three.module.js";
+import * as THREE from "three";
 import { Sheep } from './scenesubjects/Sheep';
 import { GeneralLight } from './scenesubjects/GeneralLight';
 import { Grid } from './scenesubjects/Grid';
+import { GridBasis } from "./scenesubjects/GridBasis";
 export function Transformations2D(canvas,
                                 rotMatrixHTML,
                                 refMatrixHTML,
@@ -21,11 +22,24 @@ export function Transformations2D(canvas,
     const scene = buildScene();
     const renderer = buildRenderer(screenDimensions);
     const camera = buildCamera(screenDimensions);
-    const sceneSubjects = createSceneSubjects(scene,  
-                                              rotMatrixHTML,
-                                              refMatrixHTML,
-                                              scaleMatrixHTML,
-                                              shearMatrixHTML);
+    const sceneSubjects = createSceneSubjects(scene);
+
+    let rotMatrix = buildMatrix(rotMatrixHTML);
+    let refMatrix = buildMatrix(refMatrixHTML);
+    let scaleMatrix = buildMatrix(scaleMatrixHTML);
+    let shearMatrix = buildMatrix(shearMatrixHTML);
+    let matrix = rotMatrix
+                 .multiply(refMatrix)
+                 .multiply(scaleMatrix)
+                 .multiply(scaleMatrix)
+                 .multiply(shearMatrix);
+
+    updateMatrix(
+        rotMatrixHTML,
+        refMatrixHTML,
+        scaleMatrixHTML,
+        shearMatrixHTML
+    );
 
     /* private functions */
 
@@ -72,28 +86,66 @@ export function Transformations2D(canvas,
                       refMatrixHTML,
                       scaleMatrixHTML,
                       shearMatrixHTML),
-            new Grid(scene, {x: 1, y: 0, z: 0}),
+            new GridBasis(scene, {x: 0, y: 0, z: 0}),
         ];
 
         return sceneSubjects
     }
 
+    function updateMatrix(rotMatrixHTML,
+        refMatrixHTML,
+        scaleMatrixHTML,
+        shearMatrixHTML) {
+            rotMatrix = buildMatrix( rotMatrixHTML );
+            refMatrix = buildMatrix( refMatrixHTML );
+            scaleMatrix = buildMatrix( scaleMatrixHTML );
+            shearMatrix = buildMatrix( shearMatrixHTML );
+            matrix = rotMatrix
+            .multiply(refMatrix)
+            .multiply(scaleMatrix)
+            .multiply(scaleMatrix)
+            .multiply(shearMatrix);
+        }
+
+        function buildMatrix(matrixHTML) {
+
+            let ret = new THREE.Matrix4();
+
+            let arr = []
+            for (let i = 0; i < 4; i++) {
+            arr[i] = matrixHTML[i].innerHTML;
+            }
+
+            ret.set (arr[0], arr[2], 0,       0,
+            arr[1], arr[3], 0,       0,
+            0,      0,      1,       0,
+            0,      0,      0,       1 );
+
+            return ret;
+        }
+
     /* public functions */
 
-    this.update = function(rotMatrixHTML,
-                           refMatrixHTML,
-                           scaleMatrixHTML,
-                           shearMatrixHTML) {
+    this.onMatInput = function(rotMatrixHTML,
+                                refMatrixHTML,
+                                scaleMatrixHTML,
+                                shearMatrixHTML) {
+        sceneSubjects[1].update(matrix.invert());
+        sceneSubjects[2].update(matrix.invert());
 
-        const elapsedTime = clock.getElapsedTime();
+        updateMatrix(
+            rotMatrixHTML,
+            refMatrixHTML,
+            scaleMatrixHTML,
+            shearMatrixHTML
+        );
+        
+        sceneSubjects[1].update(matrix);
+        sceneSubjects[2].update(matrix);
+    }
 
-        for (let i = 0; i < sceneSubjects.length; i++) {
-           sceneSubjects[i].update(elapsedTime, 
-                                   rotMatrixHTML,
-                                   refMatrixHTML,
-                                   scaleMatrixHTML,
-                                   shearMatrixHTML);
-        }
+    this.update = function() {  
+        
         renderer.render(scene, camera);
     }
 

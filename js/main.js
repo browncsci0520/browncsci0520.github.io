@@ -1,5 +1,5 @@
 
-import * as THREE from "https://unpkg.com/three@0.138.0/build/three.module.js";
+import * as THREE from "three";
 import { Shear3DScene } from './Shear3D.js'
 import { Shear3DCrossSectionScene } from './Shear3DCrossSection.js'
 import { Transformations2D } from './Transformations2D'
@@ -76,12 +76,27 @@ function bindEventListeners() {
         rot2DMatrixHTML[1].innerHTML = Math.sin(rot2DSlider.value);
         rot2DMatrixHTML[2].innerHTML = -Math.sin(rot2DSlider.value);
         rot2DMatrixHTML[3].innerHTML = Math.cos(rot2DSlider.value);
+        transformations2DScene.onMatInput(
+            rot2DMatrixHTML,
+            ref2DMatrixHTML,
+            scale2DMatrixHTML,
+            shear2DMatrixHTML);
     };
     shearX2DSlider.oninput = function() {
         shear2DMatrixHTML[2].innerHTML = shearX2DSlider.value;
+        transformations2DScene.onMatInput(
+            rot2DMatrixHTML,
+            ref2DMatrixHTML,
+            scale2DMatrixHTML,
+            shear2DMatrixHTML);
     }
     shearY2DSlider.oninput = function() {
         shear2DMatrixHTML[1].innerHTML = shearY2DSlider.value;
+        transformations2DScene.onMatInput(
+            rot2DMatrixHTML,
+            ref2DMatrixHTML,
+            scale2DMatrixHTML,
+            shear2DMatrixHTML);
     }
 
     numSubspacesSlider.oninput = function() {

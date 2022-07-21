@@ -1,5 +1,5 @@
 
-import * as THREE from "https://unpkg.com/three@0.138.0/build/three.module.js";
+import * as THREE from "three";
 import { Grid } from './scenesubjects/Grid';
 import { Subspace } from './scenesubjects/Subspace';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"

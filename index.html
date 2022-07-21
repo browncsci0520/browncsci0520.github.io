@@ -105,15 +105,23 @@
                 <canvas id="transformations-2D-canvas"></canvas>
             </div>
             <p>
-                Notice whats missing from this list.  2D translation.  Translation is where we basically move the object around in 2D space.
-                We can make sense of why translation isn't linear in two ways: first, we are in a vector space, so all elements of the vector space are vectors, not points.  
-                The "points" of the [image] are actually each just vectors, thought of as arrows coming from the origin.  And when we manipulate the
-                geometry of the image linearly as we've done, we really send each of these vectors through the linear map (matrix) and display what comes out.
-                In translation, we take a point and increment or decrement each of its dimensions, changing its position in space.  If we did this with 
-                vector, no matter what, it would still be an arrow from the origin.  There are no "points".
-                The second way we can make sense of this is by returning to our definition of a linear map.  The map must always send the 0 vector to 0.
-                But in a translation, this doesn't hold.  Say we define a 2D translation to be something like T(x, y) = (x + 1, y + 1).
-                Then T(0, 0) = (1, 1), failing our definition of linearity.  So how do we translate 2D objects in computer graphics?
+                Notice whats missing from this list.  2D translation.  Translation is where we move the object around in 2D space.  Why might translation not be a linear map?
+                Let's first think about what a translation does to a vector (1,2) in R^2.  A translation of 2 units to the left and 3 units up would do what to x and y?
+                It would result in a vector at (1 - 2, 2 + 3) or (-1, 5).  If we generalize this function for any vector (x, y), we get Translation(x, y) = (x - 2, x + 3).
+                Now to ensure it is a linear map, it must satisfy the three properties we've discussed: additivity, homogeneity, and zero.  Which one of these properties does it fail?
+                If we send the zero vector through the translation map we get Translation(0, 0) = (-2, 3).  The zero property of linear maps demands that a map sends the zero vector to the zero vector.
+                (-2, 3) is clearly not the zero vector.  And so it fails.
+            </p>
+            <p>
+                We can make sense of this in another way: we are in a vector space, so all elements of the vector space are vectors, not points.  
+                The "points" of the [image] are actually each just vectors, thought of as arrows coming from the origin while points are just floating around in space without anything "tethering"
+                it to the origin.  When we manipulate the geometry of the image linearly as we've done, we really send each of its vectors through the linear map (matrix) and display what comes out.
+                Linear maps, if we recall, are functions that send vectors in one vector space to vectors in another.  Thus their output must be vectors.  But this means anything we send through the linear map
+                will still come as an arrow attached to the origin-- when for translation what we realy want is a point output.  The fundamental problem here is that translation is a function that acts on points, while
+                linear maps act only on vectors.
+            </p>
+            <p>
+                So thats a problem then.  What do we do in computer graphics when we want to translate an object?
             </p>
         </div>
         <div>
@@ -155,10 +163,16 @@
                 </div>
             </div>
             <p>
-                This works just fine, but isn't ideal.  Why?  For two reasons: 1) suddenly our nice one matrix encoding of a transformation is forever doomed to be a matrix plus some vector.
+                This works just fine, but isn't ideal.  Why?  For two reasons: 
+            </p>
+            <p>
+                1) we lose the ability to compose all of the transformations we want to apply on an object into one matrix.  Under this model, best case is a matrix for every other transformation plus some vector for translation.
                 We always have to keep track of displacement from the origin in a seperate vector that we add to the end of the matrix.  And this can get to be a real headache and waste of memory
-                in very computationally intensive graphics operations.  We would like to keep *all* transformations in one matrix-- no extra additions or bookkeeping.  2) We can't represent points
-                that are infinitely far away.  The best we can do is translate very far away which is inefficient.  For example in computer graphics we sometimes need a light source whose
+                in very computationally intensive graphics operations.  We would like to keep *all* transformations in one matrix-- no extra additions or bookkeeping.  
+        
+            </p>
+            <p>
+                2) We can't represent points that are infinitely far away.  The best we can do is translate very far away which is inefficient.  For example in computer graphics we sometimes need a light source whose
                 photons hit everything in the scene parallel to the horizon.  Since photons radiate from the light source, to achieve this we would need one "infinitely" far away, otherwise the light rays
                 would intersect at the light source.  We will attack the second point later on, but what can we do about the first point?
             </p>
@@ -193,8 +207,8 @@
                 <canvas id="shear-3D-cross-section-canvas"></canvas>
             </div>
             <p>
-                Why is it the case that a shear in 3D encodes 2D translation?  What we are doing is designating a subspace of R^3 as the
-                representation of R^2.  In our case, that subspace is the z = 1 plane (in red).  Now let's look at our 3D shear along the z axis.  If we multiply
+                Why is it the case that a shear in 3D encodes 2D translation?  Let's think about what we are doing.  By focusing on a cross section, we are effectivley designating a 2 dimensional subspace of R^3 as the
+                representation of our R^2 world.  In our case, that subspace is the z = 1 plane (in red).  Now let's look at our 3D shear along the z axis.  If we multiply
                 it with any vector in R^3, (x, y, z) we get the following:
             </p>
             <div class="matrix">
@@ -230,8 +244,8 @@
                 </div>
             </div>
             <p>
-                If we factor, we see that (x', y') = (x, y) + z(A, B) indicating we have a translation
-                in x and y on each plane parallel to z by a vector (A, B) proportional to z.  Which if you recall, is
+                By factoring, we see that (x', y') = (x, y) + z(A, B) indicating we have a translation
+                in x and y on each plane parallel to z by a vector (A, B) proportional to z.  Which if we recall, is
                 exactlly the definition of a shear, but in 3D.  And for the plane z = 1, we have the following:
             </p>
             <div class="matrix">
@@ -299,13 +313,16 @@
                     <span class="limit-dp">1</span>
                 </div>
             </div>
-            <p>[include widget here supporting every transformation in 2D now INCLUDING translation]</p>
             <p>
-                So now we see the main benefit for encoding translation as a higher dimensional shear-- we can compose the translation transformation with all the other transformations as before!
+                We are essentially only performing transformations 2 of the 3 dimensions in R^3 until we get to translation, which requires a shear in the 3rd dimension.
+                So now are able to reap the main benefit for encoding translation as a higher dimensional shear-- we can compose the translation transformation with all the other transformations as before!
                 This means we only need one matrix to encode all transformations in 2D space, even if that transformation translates the origin!  We have a <i>composable</i> way to represent translation.
                 And it only took one more dimension!  We call the coordinate system of this 'higher-dimension-to-encode-lower-dimension' world <i>homogeneous coordinates</i>  And likewise, adding the 1 in the 
                 z slot for our originally 2D coordinate is called homogenizing that coordinate, wihle recovering the 2D coordinate from the homogeneous 3D coordinate by taking the z slot away is called
                 dehomogenizing the coordinate.  So our transformations from now on should take the form: homogenize coordinate -> multiply by transform in homogeneous coordinates -> dehomogenize coordiniate.
+            </p>
+            <p>
+                What exactly are homogeneous coordinates?  And, most importantly, why do we say that the vectors in our translation matrix (3D shear) are homogeneous vectors?
             </p>
         </div>
         <div>
