@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <script type="text/javascript"
+    src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <link rel="stylesheet" href="/assets/nested.6cdeac5a.css">
+  </head>
+  <body>
+    <a href="index.html">home</a>
+    <div id="content"></div>
+    <div>
+      <iframe src="./pages/affine-transform-demo.html"  width="900" height="2000" frameBorder="0"></iframe>
+
+      <h3>Introduction</h3>
+      <p>
+        As of now we just learned how to encode linear maps inside mathematical objects called matrices. 
+        Matrices are also a useful representation of linear maps in computer graphics because of how 
+        compact they are, and because of how easy they are to compose (just multiply the matrices!).  In 2D, we can use matrices to manipulate geometry at low cost.
+      </p>
+      <p>
+        Lets review some examples of such manipulations in 2D and their corresponding linear maps / matricies
+      </p>
+    
+
+      <p>
+        Notice whats missing from this list.  2D translation.  Translation is where we move the object around in 2D space.  Why might translation not be a linear map?
+        Let's first think about what a translation does to a vector (1,2) in R^2.  A translation of 2 units to the left and 3 units up would do what to x and y?
+        It would result in a vector at (1 - 2, 2 + 3) or (-1, 5).  If we generalize this function for any vector (x, y), we get Translation(x, y) = (x - 2, x + 3).
+        Now to ensure it is a linear map, it must satisfy the three properties we've discussed: additivity, homogeneity, and zero.  Which one of these properties does it fail?
+        If we send the zero vector through the translation map we get Translation(0, 0) = (-2, 3).  The zero property of linear maps demands that a map sends the zero vector to the zero vector.
+        (-2, 3) is clearly not the zero vector.  And so it fails.
+      </p>
+      <p>
+        We can make sense of this in another way: we are in a vector space, so all elements of the vector space are vectors, not points.  
+        The "points" of the [image] are actually each just vectors, thought of as arrows coming from the origin while points are just floating around in space without anything "tethering"
+        it to the origin.  When we manipulate the geometry of the image linearly as we've done, we really send each of its vectors through the linear map (matrix) and display what comes out.
+        Linear maps, if we recall, are functions that send vectors in one vector space to vectors in another.  Thus their output must be vectors.  But this means anything we send through the linear map
+        will still come as an arrow attached to the origin-- when for translation what we realy want is a point output.  The fundamental problem here is that translation is a function that acts on points, while
+        linear maps act only on vectors.
+      </p>
+      <p>
+        So thats a problem then.  What do we do in computer graphics when we want to translate an object?
+      </p>
+    </div>
+    <div>
+      <h3>Encoding Translation</h3>
+      <p>
+        A naive way we might enccode the translation of a point (x, y) by some vector (A, B) could be
+      </p>
+      <p>
+      $$
+      \begin{bmatrix}
+      x + A\\
+      y + B
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      1 & 0\\
+      0 & 1
+      \end{bmatrix}
+
+      \begin{bmatrix}
+      x\\
+      y
+      \end{bmatrix}
+
+      +
+
+      \begin{bmatrix}
+      A\\
+      B
+      \end{bmatrix}
+
+      $$
+      </p>
+
+      <p>
+        This works just fine, but isn't ideal.  Why?  For two reasons: 
+      </p>
+      <p>
+        1) we lose the ability to compose all of the transformations we want to apply on an object into one matrix.  Under this model, best case is a matrix for every other transformation plus some vector for translation.
+        We always have to keep track of displacement from the origin in a seperate vector that we add to the end of the matrix.  And this can get to be a real headache and waste of memory
+        in very computationally intensive graphics operations.  We would like to keep *all* transformations in one matrix-- no extra additions or bookkeeping.  
+    
+      </p>
+      <p>
+        2) We can't represent points that are infinitely far away.  The best we can do is translate very far away which is inefficient.  For example in computer graphics we sometimes need a light source whose
+        photons hit everything in the scene parallel to the horizon.  Since photons radiate from the light source, to achieve this we would need one "infinitely" far away, otherwise the light rays
+        would intersect at the light source.  We will attack the second point later on, but what can we do about the first point?
+      </p>
+      <p>
+        It turns out, we can encode a 2D translation as the cross section of a shear in 3D in such a way that we get all the nice properties we want.  By just increasing
+        the dimension, we can efficiently represent translations using matrix multiplication.
+      </p>      
+
+      <p>
+        Why is it the case that a shear in 3D encodes 2D translation?  Let's think about what we are doing.  By focusing on a cross section, we are effectivley designating a 2 dimensional subspace of R^3 as the
+        representation of our R^2 world.  In our case, that subspace is the z = 1 plane (in red).  Now let's look at our 3D shear along the z axis.  If we multiply
+        it with any vector in R^3, (x, y, z) we get the following:
+      </p>
+      <p>
+      $$
+
+      \begin{bmatrix}
+      x + zA\\
+      y + zB\\
+      z\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      1 & 0 & A\\
+      0 & 1 & B\\
+      0 & 0 & 1\\
+      \end{bmatrix}
+
+      \begin{bmatrix}
+      x\\
+      y\\
+      z\\
+      \end{bmatrix}
+
+      $$
+      </p>
+      <p>
+        By factoring, we see that (x', y') = (x, y) + z(A, B) indicating we have a translation
+        in x and y on each plane parallel to z by a vector (A, B) proportional to z.  Which if we recall, is
+        exactlly the definition of a shear, but in 3D.  And for the plane z = 1, we have the following:
+      </p>
+      <p>
+      $$
+
+      \begin{bmatrix}
+      x + A\\
+      y + B\\
+      1\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      1 & 0 & A\\
+      0 & 1 & B\\
+      0 & 0 & 1\\
+      \end{bmatrix}
+
+      \begin{bmatrix}
+      x\\
+      y\\
+      1\\
+      \end{bmatrix}
+      $$
+      </p>
+      
+      <p>
+        So for any point on the z = 1 plane, this 3D shear translates its x and y coordinates exactly by our A and B values.  Meaning
+        recovering the new 2D translated point is as easy as just taking the z coordinate away!  So next time we want to translate a point (x, y),
+        we have to plug it into (x, y, 1) and send it through the 3D shear transform, then take out the x and y coordinates of the resulting point in
+        3D space to get our translated (x, y)!  No need to keep track of an extra translation vector.  And we don't have to worry about the transformation not sending 0 to 0 since in our subspace world,
+        the vector (0, 0, 1) encodes the origin of R^2, and that can be freely moved in R^3 no problem!  And our other favorite 2D transformations like rotation,
+        reflection, scaling, and shear can be trivially encoded into a 3x3 matrix by just sticking it in the upper left corner of the identity matrix.
+        For example:
+      </p>
+
+      <p>
+      $$
+
+      \begin{bmatrix}
+      A & B\\
+      C & D\\
+      \end{bmatrix}
+
+      $$
+
+
+      becomes
+
+      $$
+
+      \begin{bmatrix}
+      A & B & 0\\
+      C & D & 0\\
+      0 & 0 & 1\\
+      \end{bmatrix}
+
+      $$
+      </p>
+      <p>
+        We are essentially only performing transformations 2 of the 3 dimensions in R^3 until we get to translation, which requires a shear in the 3rd dimension.
+        So now are able to reap the main benefit for encoding translation as a higher dimensional shear-- we can compose the translation transformation with all the other transformations as before!
+        This means we only need one matrix to encode all transformations in 2D space, even if that transformation translates the origin!  We have a <i>composable</i> way to represent translation.
+        And it only took one more dimension!  We call the coordinate system of this 'higher-dimension-to-encode-lower-dimension' world <i>homogeneous coordinates</i>  And likewise, adding the 1 in the 
+        z slot for our originally 2D coordinate is called homogenizing that coordinate, wihle recovering the 2D coordinate from the homogeneous 3D coordinate by taking the z slot away is called
+        dehomogenizing the coordinate.  So our transformations from now on should take the form: homogenize coordinate -> multiply by transform in homogeneous coordinates -> dehomogenize coordiniate.
+      </p>
+      <p>
+        What exactly are homogeneous coordinates?  And, most importantly, why do we say that the vectors in our translation matrix (3D shear) are homogeneous vectors?
+      </p>
+    </div>
+    <div>
+      <h3>Homogeneous Coordinates</h3>
+      <p>
+        homogeneous coordinates are called "homogeneous" because every coordinate represents the same point in space up to a scalar.  That means that so long as you can multiply
+        a homogeneous coordinate by some number to get to another coordinate, the two represent the same point.  For example:
+      </p>
+
+      <p>
+      $$
+
+      \begin{bmatrix}
+      3\\
+      4\\
+      2\\
+      \end{bmatrix}
+
+      =
+      3
+      \begin{bmatrix}
+      9\\
+      12\\
+      6\\
+      \end{bmatrix}
+
+      $$
+      </p>
+
+      <p>
+        Since vector B and vector A are proportional to each other by a factor of 3, if thought of as homogeneous coordinates,
+        we would get
+      </p>
+
+      <p>
+      $$
+      \begin{bmatrix}
+      3\\
+      4\\
+      2\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      9\\
+      12\\
+      6\\
+      \end{bmatrix}
+
+      $$
+      </p>
+      <p>
+        Meaning that the two coordinates represent the same point in space.  What does this mean for translation?
+        If we have two points (x, y, z) and lamda(x, y, z).  The two are considered equal.  When each are sent through our translation matrix (the higher dimensional shear),
+        the two resultant points must also be proportional to each other-- and thus must represent the same new, translated, point.  Here we see that holds:
+      </p>
+
+      <p>
+      $$
+
+      \begin{bmatrix}
+      Q(x + zA)\\
+      Q(y + zB)\\
+      Q(z)\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      Qx + QzA)\\
+      Qy + QzB)\\
+      Qz\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      1 & 0 & A\\
+      0 & 1 & B\\
+      0 & 0 & 1\\
+      \end{bmatrix}
+
+      \begin{bmatrix}
+      Qx\\
+      Qy\\
+      Qz\\
+      \end{bmatrix}
+      $$
+      </p>
+      
+      <p>
+        Let's think about what this definition of homogeneous coordinates implies about the structure of the space they encode, and why that lets us think about
+        translation as a higher dimensional shear.  First lets simplify things.
+
+        Suppose we wanted to encode a 1D translation in a matrix.  Then we would have to homogenize its coordinate to get (1, y), perform a 2D shear, and then recover 
+        whatever ends up in the y slot.  We get something like this:
+        [widget that shows a shear of a line in 2D and how it effects translation of some cross section of that line with x = 1... just like the 3D shear widget but 1 dim lower]        
+      </p>
+      <p>
+        By saying that every coordinate in this 2D world is homogeneous, we say that all proportional vectors reprpesent the same point.
+        For instance take the random point (2, 3).  All vectors of the form lambda(2, 3) are equal.  Since lambda(2, 3) defines a one dimensional subspace,
+        we can say everything in this subspace is equal.  If we do this for all points, we will have some number of subspaces which each correspond to
+        a distinct point represented by homogeneous coordinates.  For R^2 there can only fit one dimension of one dimensional subspaces.  That is to say, 
+        if we had a space where each element was a one dimensional subspace of R^2, that space would only have one dimension, which is one dimension less than
+        R^2.  We can visualize this as the dehomogenization map which takes a point in R^2 (homogeneous space) and sends it to the point it represents in euclidan space (R1).
+        [this widget shows a bunch of subspaces intersecting the projective line and when you click on a subspace it tells you what point on the line it intersects / represents]
+      </p>
+      
+
+      
+      <iframe src="./pages/projective-geometry-demo.html" frameBorder="0"></iframe>
+  
+
+
+      <p>
+        We see that the line in blue is "induced" by the homogenous space (red).
+        Every point beloning to the same line through the origin is sent to the same point on the R^1 subspace (y = 1)?
+        By declaring a space as homogeneous, we are sending it to one dimension lower.  The "point" in R^1 we choose to represent a whole 1-dim subspace in R^2 can be arbitrary.
+        In this example its the x coordinate at y = 1, but we could instead choose y = 2, or y = 1083.  This choice of y is what we call the projective frame, and 
+        the line of points in R^1 which we have mapped R^2 to is called the projective line.
+
+        We can slide around the projective frame and still see that the overall structure holds: everything is one dimension less-- the only thing that changes is the point in R^1 used to identify with its corresponding 1-dim R^2 subspace.
+      </p>
+
+
+      <p>
+        Back to higher dimensions.  The projective plane, just like the projective line, is the isomorph to all 1-dim subspaces
+        (encoded by homogeneous coordinates) in R^3 (instead of R^2).  Since two dimensions of one dimensional subspaces can fit into R^3, this yeilds a plane instead of a line.
+        The afformentioned dehomogenization map sends all of R^3 to this projective plane.  And the projective frame for this plane is 
+        a choice of z instead of y.
+        [same as the previous widget, just a dimension higher]
+      </p>
+  
+
+      <p>
+        Now lets examine why this structure enables us to encode a translation in a higher dimensional shear.  As we've discussed before, the 3D shear preserves proportion.  So in homogeneous coordinates,
+        it will send two coordinates which encode the same point on the projective plane to two coordinates which encode the same point on a different spot of the projective plane.  The only thing that changes
+        is the "spot" of the point they encode-- or the displacement of that point from the origin of the projective plane.  Of course this is all dependant on the projective frame we choose, but lets just assume that the projective frame is always z = 1 to keep it simple.
+        Basically, if we put R^3 in the lense of homogeneous coordinates, the only new information coming out of a 3D shear map is the translation on the projective plane.  And that is why we call the column vectors of the 3D shear homogeneous when we want it to encode a 2D translation.
+      </p>
+    </div>
+    <div>
+      <h3>Projection and Perspective</h3>
+      <p>
+        A projection map, P, is a map which satisfies PP = P.  That is to say, for any vector v, P(v) = P(P(v)).
+        This makes sense when we think about it more.  A projection is a map from a higher dimension to a lower dimension.  In other words,
+        it maps to a subspace.  What the added requirement PP = P really means is, if the vector v already belongs to that subspace we map to, then 
+        v = Pv.  We can think of P as an identity map when we restrict its domain to its range (the subspace).
+      </p>
+      <p>
+        This is of course the most general definition of a projection.  And many different types of projections satisfy this property.
+        The main types we care about in computer vision and graphics being: orthographic, oblique, and perspective projection.
+        [image examples I guess? maybe could do a widget without interactivity]
+        Both orthographic and oblique projections are a type of parallel projection, where parallel lines in the higher dimension are preserved in its projection.
+      </p>
+      
+      <p>
+      $$
+      \text{orthographic matrix}
+      \begin{bmatrix}
+      1 & 0 & 0\\
+      0 & 1 & 0\\
+      0 & 0 & 0\\
+      \end{bmatrix}
+
+      \text{oblique matrix}
+      \begin{bmatrix}
+      1 & 0 & \frac{1}{2}\cos a\\
+      0 & 1 & \frac{1}{2}\sin a\\
+      0 & 0 & 0\\
+      \end{bmatrix}
+
+      $$
+      </p>
+      
+      <p>
+        [examples]
+      </p>
+      <p>
+        [maybe here would be a pinhole camera presentation..., not lin alg related]  
+      </p>
+      <p>
+        Let's start out with a perspective projection in 2D.  That is, sending a point in 2D space to 1D space while preserving perspective.
+        [it should be clear from earlier content that the size of a projection is inversley propotional to the distance away] 
+        Say we are projecting onto x = 1 subspace.  For a point in R^2 with constant y, the larger its x value gets, the smaller its
+        projected y value gets.  It turns out this inverse relationship is very simple: y_projected = y / x.
+        In 3D where we project to 2D, the formula for the new x and y is analagous.  Suppose we project onto z = 1,
+        x_projected = x / z, y_projected = y / z.
+        [widget that proves x / z, y / z is the case]
+      </p>
+      <p>
+        Conceptually, if we tried to develop a transformation which encodes these divisions, we might start out trying to represent x, y, and z as a combination
+        of the same basis: x_projected = (1 / z)x + 0y + 0z, y_projected = 0x + (1 / z)y + 0z, z_projected = 0x + 0y + (1)z.
+        If we arranged these weights as we would for a matrix, we would get
+      </p>
+
+      <p>
+      $$
+
+      \begin{bmatrix}
+      \frac{x}{z}\\
+      \frac{y}{z}\\
+      1\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      \frac{1}{z} & 0 & 0\\
+      0 & \frac{1}{z} & 0\\
+      0 & 0 & \frac{1}{z}\\
+      \end{bmatrix}
+
+      \begin{bmatrix}
+      x\\
+      y\\
+      z\\
+      \end{bmatrix}
+
+      $$
+      </p>
+
+      <p>
+        The problem here is that this matrix depends on a choice of z-- and so cannot be linear.  This means we can't treat projection as another linear transformation
+        operation we could perform on some object as we would rotation, scaling, shearing, or reflection... sound familiar?
+        Note that we determined all transformations should take the form of homogenous coordinates.  Recall, since translations could only be encoded with homogenous coordinates,
+        in order to make it composable with other transformations we had to bring them all up one dimension as well.  That is to say, we always homogenize our space before performing
+        a transformation, and then when we finally need the results we recover the coordinates by dehomogenization.  So if we wanted to "force" perspective projection into
+        a linear transformation, the matrix would have to be homogenous (4x4) not 3x3.
+        A naive way of doing this would just be to do what we did for *already* linear transformations: stick it into the upper corner of a 4x4 identity.  This naive homogenization of our projection "matrix" would look like
+      </p>
+
+      <p>
+      $$
+
+      \begin{bmatrix}
+      \frac{x}{z}\\
+      \frac{y}{z}\\
+      1\\
+      1\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      \frac{1}{z} & 0 & 0 & 0\\
+      0 & \frac{1}{z} & 0 & 0\\
+      0 & 0 & \frac{1}{z} & 0\\
+      0 & 0 & 0 & 1\\
+      \end{bmatrix}
+
+      \begin{bmatrix}
+      x\\
+      y\\
+      z\\
+      1\\
+      \end{bmatrix}
+
+      $$
+      </p>
+      
+      <p>
+        Okay now we are a bit closer, but the matrix is still not encoding a linear transformation since our weights aren't constant.
+        But wait, we are working with homogeneous coordinates right?  What if instead of building a transformation that sends (x, y, z, 1) to (x/z, y/z, 1, 1), we make it
+        send (x, y, z, 1) to the proportional (and therefore equivalent in homogenous space) (x, y, z, z).  It's clear that
+        (x / z, y / z, 1, 1) lies in the same 1-dim subspace as (x, y, z, z) since
+      </p>
+
+      <p>
+      $$
+
+
+      \begin{bmatrix}
+      x\\
+      y\\
+      z\\
+      z\\
+      \end{bmatrix}
+
+      = 
+
+      z
+      \begin{bmatrix}
+      \frac{x}{z}\\
+      \frac{y}{z}\\
+      1\\
+      1\\
+      \end{bmatrix}
+
+      $$
+      </p>
+
+     
+      <p>
+        This is a lot easier to deal with.  Again, if we write these values as a combination of the same basis we would get
+        x' = x = (1) * x + (0) * y + (0) * z + (0) * w,
+        y' = y = (0) * x + (1) * y + (0) * z + (0) * w,
+        z' = z = (0) * x + (0) * y + (1) * z + (0) * w,
+        w' = z = (1) * x + (0) * y + (1) * z + (0) * w
+        Giving us the following, more proper looking, matrix
+      </p>
+
+
+
+      <p>
+      $$
+
+      \begin{bmatrix}
+      \frac{x}{z}\\
+      \frac{y}{z}\\
+      1\\
+      1\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      x\\
+      y\\
+      z\\
+      z\\
+      \end{bmatrix}
+
+      =
+
+      \begin{bmatrix}
+      1 & 0 & 0 & 0\\
+      0 & 1 & 0 & 0\\
+      0 & 0 & 1 & 0\\
+      0 & 0 & 1 & 0\\
+      \end{bmatrix}
+
+      \begin{bmatrix}
+      x\\
+      y\\
+      z\\
+      1\\
+      \end{bmatrix}
+
+      $$
+      </p>
+      <p>
+        Now <i>thats</i> linear!  The problem is now in dehomogenization.  When we were only dealing with translation, our approach to dehomogenization was simple: just take off the homogenous coordinate and you're left with the result you want.  But clearly
+        that's not enough for this case.  What we need to do to recover our desired projected coordinates (x/ z, y / z, 1) is to divide x, y, and z by w.
+        The reason this never came up with translation is because the homogeneous slot was always 1.  But since we need w to be equal to z, and z might not always be 1, we have to divide.  Since dividing by 1 is the identity, you can think of this dividing-by-homogenous-slot
+        operation as a more general case version of what we did for translations.
+        So now the dehomogenization map looks like: divide the other slots by the homogenous slot, then remove the homogenous slot.  We call this the <i>perspective divide</i>.
+        And our general formula for tranformations remains: homogenize the coordinate -> transform in homogenous space -> dehomogenize and recover result.
+        Now we can take an object, rotate it, scale it, shear it, translate it, and then project it all with one matrix!  (since now all of these transformations are linear and composable).
+      </p>
+
+    </div>
+  </body>
+</html>
