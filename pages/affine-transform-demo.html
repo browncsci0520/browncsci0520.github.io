@@ -1,0 +1,216 @@
+
+
+<script type="text/javascript"
+src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<div>
+
+    <button id="animate-button"
+        type="button">
+    Animation
+    </button>
+
+    <button id="full-transform-button"
+        type="button">
+    Full transform
+    </button>
+
+    <button id="reset-button"
+    type="button">
+    Reset
+    </button>
+
+    
+    <ul>
+        <div id="other-transform-sliders">
+        <li>Rotation
+                <div class="slidecontainer">
+                    <p>y axis rotation</p>
+                    <input type="range" min="0" max="6.28318530718" step="0.1" value="0" class="slider" id="rotation-3d-slider">
+                </div>
+        </li>
+        <li>Reflection
+            <div class="slidecontainer">
+                <p>reflect x</p>
+                <input type="range" min="-10" max="10" step="0.1" value="0" class="slider" id="reflect-x-3d-slider">
+                <p>reflect y</p>
+                <input type="range" min="-10" max="10" step="0.1" value="0" class="slider" id="reflect-y-3d-slider">
+            </div>
+        </li>
+        <li>Scaling
+            <div class="slidecontainer">
+                <p>x-plane</p>
+                <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-x-3d-slider">
+                <p>yz-plane</p>
+                <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-y-3d-slider">
+            </div>
+        </li>
+        <li>Shear
+            <div class="slidecontainer">
+                <p>x-plane</p>
+                <input type="range" min="0" max="4" step="0.1" value="1" class="slider" id="shear-x-3d-slider">
+                <p>yz-plane</p>
+                <input type="range" min="0" max="4" step="0.1" value="1" class="slider" id="shear-y-3d-slider">
+            </div>
+        </li>
+        </div>
+
+        <div id="affine-transform-sliders">
+        <li>"Translation"
+            <div class="slidecontainer">
+                <p>yx-plane</p>
+                <input type="range" min="-10" max="10" step="0.1" value="0" class="slider" id="shear-yx-3d-slider">
+                <p>yz-plane</p>
+                <input type="range" min="-10" max="10" step="0.1" value="0" class="slider" id="shear-yz-3d-slider">
+            </div>
+        </li>
+        </div>
+    </ul>
+
+
+
+
+    <div id="matrices-2d">
+        <table class="matrix" id="rotation-2d-matrix">
+            <tr>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <table class="matrix" id="reflection-2d-matrix">
+            <tr>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <table class="matrix" id="scaling-2d-matrix">
+            <tr>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <table class="matrix" id="shear-2d-matrix">
+            <tr>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+        </table>
+        </div>
+
+
+
+
+    <div id="matrices-3d">
+    <table class="matrix" id="rotation-3d-matrix">
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    </table>
+    <table class="matrix" id="reflection-3d-matrix">
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    </table>
+    <table class="matrix" id="scaling-3d-matrix">
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    </table>
+    <table class="matrix" id="shear-3d-matrix">
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    </table>
+   
+    </div>
+    <div id="affine">
+    <table class="matrix" id="affine-matrix">
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    </table>
+    </div>
+
+
+    <canvas id="shear-2d-cross-section-canvas" width="800" height="500"></canvas>
+    <canvas id="shear-3d-canvas" width="800" height="500"></canvas>
+    <script type="module" src="../js/homogeneous-coords-handout/affine-transform-demo/main.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</div>

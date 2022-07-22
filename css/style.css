@@ -1,39 +1,74 @@
 
+p {
+    margin-right: 62%;
+  }
+
+h3 {
+    margin-right: 62%;
+}
+
+iframe {
+    width: 60%;
+    height: 2000px;
+    float: right;
+}
+
 body {
     background-color: #f0f0f0;
     color: #444;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+  
+li {
+    float: left;
+}
+  
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+}
+
 .matrix {
-    display:inline-grid;
-    grid-template-areas:"a a a" "b c d";
-    grid-template-columns:1ch auto 1ch;
-    gap:2ch .25ch
+    position: relative;
 }
-.matrix:before,
-.matrix:after {
-    content:"";
-    font-size:.5rem;
-    border:1px solid #140f0a;
+.matrix:before, .matrix:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 1px solid #000;
+    width: 6px;
+    height: 100%;
 }
 .matrix:before {
-    border-right:none
+    left: -6px;
+    border-right: 0;
 }
 .matrix:after {
-    border-left:none
+    right: -6px;
+    border-left: 0;
 }
-.matrix-label {
-    grid-area:a;
-    font-size:.75rem;
-    font-weight:325;
-    color:#050403
+
+table {
+    float: left;
+    margin-left: 20px;
 }
-.matrix-elements {
-    padding:.75ch .5ch;
-    display:grid;
-    place-items:center;
-    grid-auto-flow:column;
-    gap:.5ch .75ch
+
+.affine-matrix {
+    display: none;
 }
-.limit-dp {
-    min-width:5ch
+
+.matrices-3d {
+    display: none;
 }

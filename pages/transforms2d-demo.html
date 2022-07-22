@@ -1,0 +1,78 @@
+<div>
+    <div>
+        <ul>
+            <li>Rotation
+                <div class="slidecontainer">
+                    <input type="range" min="-(3.14195)" max="3.14195" step="0.1" value="0" class="slider" id="rotation-2d-slider">
+                </div>
+            </li>
+            <li>Reflection
+                <div class="slidecontainer">
+                    <p>yx</p>
+                    <input type="range" min="-10" max="10" step="0.1" value="0" class="slider" id="reflection-2d-slider">
+                </div>
+            </li>
+            <li>Scaling
+                <div class="slidecontainer">
+                    <p>scale x</p>
+                    <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-x-2d-slider">
+                    <p>scale y</p>
+                    <input type="range" min="1" max="2.5" step="0.1" value="1" class="slider" id="scaling-y-2d-slider">
+                </div>
+            </li>
+            <li>Shear
+                <div class="slidecontainer">
+                    <p>x-axis</p>
+                    <input type="range" min="0" max="2" step="0.1" value="0" class="slider" id="shearX-2d-slider">
+                    <p>y-axis</p>
+                    <input type="range" min="0" max="2" step="0.1" value="0" class="slider" id="shearY-2d-slider">
+                </div>
+            </li>               
+         </ul>
+    </div>
+    <div class="matrix">
+        <div class="matrix-label">Rotation</div>
+        <div class="matrix-elements" id="rotation-2d-matrix" style="grid-template: repeat(2, 1fr) / repeat(2, 1fr);">
+            <span class="limit-dp">1</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">1</span>
+        </div>
+    </div>
+    *
+    <div class="matrix">
+        <div class="matrix-label">Reflection</div>
+        <div class="matrix-elements" id="reflection-2d-matrix" style="grid-template: repeat(2, 1fr) / repeat(2, 1fr);">
+            <span class="limit-dp">1</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">1</span>
+        </div>
+    </div>
+    *
+    <div class="matrix">
+        <div class="matrix-label">Scaling</div>
+        <div class="matrix-elements" id="scaling-2d-matrix" style="grid-template: repeat(2, 1fr) / repeat(2, 1fr);">
+            <span class="limit-dp">1</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">1</span>
+        </div>
+    </div>
+    *
+    <div class="matrix">
+        <div class="matrix-label">Shear</div>
+        <div class="matrix-elements" id="shear-2d-matrix" style="grid-template: repeat(2, 1fr) / repeat(2, 1fr);">
+            <span class="limit-dp">1</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">0</span>
+            <span class="limit-dp">1</span>
+        </div>
+    </div>shear
+    <div>
+        <canvas id="transforms-2d-canvas" width="500" height="300"></canvas>
+    </div>
+  <script id="transforms2d-script" type="module" src="../js/homogeneous-coords-handout/transforms2d-demo/main.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
+
+</div>
