@@ -61,7 +61,7 @@ export function animate(){
     $("#affine-matrix-wrapper").css("display", "block");
     canvas3DWrapper.style.display = "block";
     shear3DScene.start();
-    shear2DCrossSectionScene.applyTransform(new Matrix4());
+    shear2DCrossSectionScene.applyTransform(new THREE.Matrix4());
     resetInput();
 
     $("#rotation-matrix-wrapper").css("display", "none");
