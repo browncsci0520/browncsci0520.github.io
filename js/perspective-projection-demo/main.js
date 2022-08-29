@@ -1,4 +1,4 @@
-import { OrthographicProjectionScene } from "./orthographic-projection";
+import { OrthographicProjectionScene } from "./orthographic-projection.js";
 
 
 const canvasOrtho = document.getElementById('orthographic-projection-canvas');
