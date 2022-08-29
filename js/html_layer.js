@@ -1,7 +1,7 @@
 
 import * as AFFINE from "./affine-transform-demo/main.js"
 import * as PROJ from "./projective-geometry-demo/main.js"
-//import * as PERS from "./perspective-projection-demo/main.js"
+import * as PERS from "./perspective-projection-demo/main.js"
 
 
 /* affine transform demo triggers */
@@ -100,7 +100,7 @@ affineModelMatrixButton.onclick = function() {
     $('#affine-transform-demo-input-model-matrix').html($input);
 }
 */
-/*
+
 
 persStartButton.onclick = function() {
     PROJ.reset();
@@ -115,4 +115,4 @@ persObliqueButton.onclick = function() {
     let $input = $('#perspective-projection-demo-input');
     $('#perspective-projection-demo-oblique').html($input);
 }
-*/
+
