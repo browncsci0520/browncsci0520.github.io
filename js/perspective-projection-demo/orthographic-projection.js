@@ -1,9 +1,9 @@
 
 
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
-import { CubeWireframe } from "../assets/cube_wireframe";
+import { CubeWireframe } from "../assets/cube_wireframe.js";
 
-import { Subspace } from "../assets/subspace";
+import { Subspace } from "../assets/subspace.js";
 
 export function OrthographicProjectionScene(canvas, canvas2) {
 
