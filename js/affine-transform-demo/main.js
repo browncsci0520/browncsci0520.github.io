@@ -2,7 +2,6 @@
 import { Shear3DScene } from './shear3d.js'
 import { Shear2DCrossSectionScene } from './shear2d_cross_section.js'
 import { ModelMatrix } from "./model_matrix.js";
-import { Matrix4 } from 'three';
 
 const canvas3DWrapper = document.getElementById('shear-3d-canvas-wrapper');
 const canvas3D = document.getElementById('shear-3d-canvas');

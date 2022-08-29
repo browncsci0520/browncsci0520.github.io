@@ -1,5 +1,4 @@
 
-import * as THREE from 'three';
 
 export function GridBasis(scene, z) {
 
