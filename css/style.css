@@ -151,7 +151,7 @@ h1 {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     float: left;
-    width: 680px;
+    width: 45%;
     height: 900px;
 }
 
@@ -165,7 +165,7 @@ h1 {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     float: right;
-    width: 750px;
+    width: 50%;
     height: 900px;
 }
 
