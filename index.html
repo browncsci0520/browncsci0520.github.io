@@ -434,10 +434,12 @@
           </div>
 
           <div id="screen-canvas-wrapper">
+            <h3>Projected View</h3>
             <canvas class="demo-canvas" id="screen-canvas" width="500" height="500"></canvas>
           </div>
 
           <div id="orthographic-projection-canvas-wrapper">
+            <h3>Normal View</h3>
             <canvas class="demo-canvas"  id="orthographic-projection-canvas" width="500" height="500"></canvas>
           </div>
 
@@ -466,7 +468,7 @@
             These transforms are linear because they satisfy two properties:  <a href="https://en.wikipedia.org/wiki/Linear_map#Definition_and_first_consequences" target="_blank">additivity and homogeneity</a>.
           </p>
           <p>
-            We compose the rotation, reflection, scaling, and shearing into one final matrix: the model matrix, or \(M\).  This allows us to use just one matrix for all transformations.
+            We compose the rotation, reflection, scaling, and shearing into one final matrix: the model matrix, or \(M\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting model matrix.
           </p>
           <p>
             Notice what's missing from this list of common transformations of 2D geometry: translation. Translation moves a point around in space.  We can use it to describe any displacement of an object in a scene.  For example, translating ball rolling on the floor, an egg falling from a skyscraper, a car driving down the road, etc.  Let's derive a function that will do this for us.  </p>
@@ -530,24 +532,23 @@
           </p>
   
           <p>
-            The vector we have before translation
-            would be \(M
+            If we apply the model matrix to the vector first, we have \(M(
             \begin{bmatrix}
             x\\
             y
-            \end{bmatrix}\).
+            \end{bmatrix})\).
 
-            Then when we plug it into \(T\) to get
+            Then when we plug it into \(T\) we get
             $$
-            T(M\begin{bmatrix}
+            T(M(\begin{bmatrix}
             x\\
             y
-            \end{bmatrix}) =
+            \end{bmatrix})) =
             M
-            \begin{bmatrix}
+            (\begin{bmatrix}
               x\\
               y
-              \end{bmatrix}
+              \end{bmatrix})
             +
             \begin{bmatrix}
               A\\
@@ -586,7 +587,7 @@
             we always have to keep track of displacement from the origin in a seperate vector that we add to the end of the linear transformation established by \(M\).  Or, even worse, if we want to translate after rotating but before shearing, we'd have to decompose \(M\) into at least two different matrices so we can apply \(T\) in between.
 <p>
           </p>
-            In computationally intensive graphics operations, using so many matrices per vertex slows everything down.  We would like to keep <em>all</em> transformations in one matrix-- no extra additions or bookkeeping.  
+            In computationally intensive graphics operations, using so many matrices per vertex slows everything down.  We would like to keep <em>all</em> transformations in one matrix&mdash;  no extra additions or bookkeeping.  
           </p>
 
         </div>
@@ -602,7 +603,7 @@
           Animation
           </button>
           <div id="affine-transform-demo-input-animate"></div>
-          <p>Adjust the values in the shear matrix and watch how it affects the cross section with our plane</p>
+          <p>Adjust the values in the shear matrix and watch how it affects the cross section (highlighted in red) with our plane</p>
           <p>
             Why does this work?  If we multiply
             the 3D shear matrix with any vector in \(\mathbb{R}^3\), \((x, y, z)\) we get the following:
@@ -634,9 +635,9 @@
             $$
           </p>
           <p>
-            By factoring, we see that \((x', y') = (x, y) + z(A, B)\) indicating we have a translation
-            in \(x\) and \(y\) on each plane parallel to \(z\) by a vector \((A, B)\) proportional to \(z\).  Which if we recall, is
-            exactlly the definition of a shear along the \(z\) axis.  And for the plane \(z = 1\) (our chosen plane to represent all of \(\mathbb{R}^2\)), we have the following:
+            By factoring, we see that \( \begin{bmatrix}x'\\y'\\\end{bmatrix} = \begin{bmatrix}x\\y\\\end{bmatrix} + z\begin{bmatrix}A\\B\\\end{bmatrix}\) indicating we have a translation
+            in \(x\) and \(y\) on each plane parallel to \(z\) by a vector \(\begin{bmatrix}A\\B\\\end{bmatrix}\) proportional to \(z\).  Which if we recall, is
+            exactly the definition of a shear along the \(z\) axis.  And for the plane \(z = 1\) (our chosen plane to represent all of \(\mathbb{R}^2\)), we have the following:
           </p>
           <p>
             $$
@@ -668,7 +669,7 @@
           </p>
           <p>
             It is simple to represent a 2D linear map with 3 dimensions.  Suppose some linear map looks like
-            \(T(x, y) = (Ax + By, Cx + Dy)\).  Then in 3D, it would be \(T(x, y, z) = (Ax + By, Cx + Dy, z)\) where simply nothing happends to the \(z\) axis.
+            \(T(\begin{bmatrix}x\\y\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\\end{bmatrix}\).  Then in 3D, it would be \(T(\begin{bmatrix}x\\y\\z\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\z\end{bmatrix}\) where simply nothing happends to the \(z\) axis.
             In matrix form, this places the original matrix inside the upper left region of the identity matrix of \(\mathbb{R}^3\).
           </p>
           <p>
@@ -697,7 +698,7 @@
           </button>
           <div id="affine-transform-demo-input-full-transform"></div>
           <p>
-            So now are able to reap the main benefit for encoding translation as a higher dimensional shear-- we can compose the translation transformation with all other transformations.
+            So now are able to reap the main benefit for encoding translation as a higher dimensional shear&mdash;  we can compose the translation transformation with all other transformations.
             All it takes is temporarily sending a vector in \(\mathbb{R}^2\) to the plane \(z = 1\) in \(\mathbb{R^3}\) before passing it through the transformations,
             and then we have to get rid of the \(z\) coordinate to recover the resultant vector in \(\mathbb{R}^2\)
             $$
@@ -745,7 +746,7 @@
           </p>
         
           <p>
-            Homogeneous means "the same thing" or "alike".  Likewise, the homogeneous coordinate system allows coordinates to be considered "the same"
+            Homogeneous means "the same thing" or "alike". The homogeneous coordinate system allows coordinates to be considered "the same"
             so long as they are proportional to each other.
             For example:
           </p>
@@ -888,7 +889,7 @@
             H^{-1}(\begin{bmatrix} x\\ y\end{bmatrix}) = \begin{bmatrix} \frac{x}{y}\end{bmatrix}
             $$
             
-            That is the key effect of homogeneous coordinates in \(\mathbb{R}^2\): it maps one-dimensional subspaces-- the lines-- to individual vectors.  In other words, this map we just defined, \(H^{-1}\) is induced when we declare a space is homogeneous.
+            That is the key effect of homogeneous coordinates in \(\mathbb{R}^2\): it maps lines (the 'elements' of \(\mathcal{P}(\mathbb{R}^2)\)) to the blue dots (vectors of \(\mathbb{R}\)).  In other words, this map we just defined, \(H^{-1}\) is induced when we declare a space is homogeneous.
           </p>
           
           <p>
@@ -1076,11 +1077,11 @@
             $$
             H: \mathbb{R}^3 \rightarrow \mathcal{P}(\mathbb{R}^4)
             $$
-            So all of our transformations will operate in \(\mathcal{P}(\mathbb{R}^4)\), meaning they will be 4 by 4 matrices.
+            So all of our transformations will operate in \(\mathcal{P}(\mathbb{R}^4)\), meaning they will be \(4\) by \(4\) matrices.
           </p>
 
           <p>
-            In \(\mathcal{P}(\mathbb{R}^4)\), the 4D shear matrix encodes a 3D translation.  As such, for a translation of A in the x direction, B in the y direction, and C in the z direction, we would apply the following matrix:
+            In \(\mathcal{P}(\mathbb{R}^4)\), the 4D shear matrix encodes a 3D translation.  As such, for a translation of \(A\) in the \(x\) direction, \(B\) in the \(y\) direction, and \(C\) in the \(z\) direction, we would apply the following matrix:
             $$
             \begin{bmatrix}
             1 & 0 & 0 & A\\
@@ -1089,7 +1090,7 @@
             0 & 0 & 0 & 1\\
             \end{bmatrix}
             $$
-            The rest of the transformations: rotation, reflection, scaling, and shearing, are the same as in \(\mathbb{R}^3\) just fitted into a 4 by 4 matrix.
+            The rest of the transformations: rotation, reflection, scaling, and shearing, are the same as in \(\mathbb{R}^3\) just fitted into a \(4\) by \(4\) matrix.
           </p>
 <!--
           <p>
@@ -1116,7 +1117,7 @@
           </p>
 
           <p>
-            For example, take the plane \(z = 0\) in \(\mathbb{R}^3\).   A valid projection map \(P\) could be the one that simply replaces whatever is in the \(z\) slot with 0.  i.e,
+            For example, take the plane \(z = 0\) as a subspace of \(\mathbb{R}^3\).   A valid projection map \(P\) could be the one that simply replaces whatever is in the \(z\) slot with \(0\).  i.e,
             $$
             P(\begin{bmatrix} x\\ y\\ z\\ \end{bmatrix}) = \begin{bmatrix} x\\ y\\ 0\\ \end{bmatrix}\
             $$
@@ -1127,7 +1128,7 @@
             $$
             P(P(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix})) = P( \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
             $$
-            since the \(z\) slot is already 0.  In this example, we send every vector not on the plane \(z = 0\) to \(z = 0\), and we send every vector already on the plane \(z = 0\) to itself.
+            since the \(z\) slot is already \(0\).  In this example, we send every vector not on the plane \(z = 0\) to \(z = 0\), and we send every vector already on the plane \(z = 0\) to itself.
           </p>
           <img src="projection_02.jpg"  width="700" height="400" class="center">
 
@@ -1267,11 +1268,11 @@
           </p>
 
           <p>
-            Except what we <em>really</em> want is to end up with the vector \(\begin{bmatrix} \frac{x}{z}\\  \frac{y}{z} \\ -1\end{bmatrix}\)  Let's see if we can avoid having to tack on a -1 after performing our projection and instead do it all at once.
+            Except what we <em>really</em> want is to end up with the vector \(\begin{bmatrix} \frac{x}{-z}\\  \frac{y}{-z} \\ -1\end{bmatrix}\)  Let's see if we can avoid having to tack on a \(-1\) after performing our projection and instead do it all at once.
           </p>
 
           <p>
-            Conceptually, if we tried to develop a transformation which encodes these divisions, we might start out trying to represent x, y, and z as a systems of equations: 
+            Conceptually, if we tried to develop a transformation which encodes these divisions, we might start out trying to represent \(x'\), \(y'\), and \(z'\)&mdash; the result of perspective projection&mdash; as a system of equations: 
             
             $$x' = \frac{1}{-z} \cdot x + 0 \cdot y + 0 \cdot z$$
             $$y' = 0 \cdot x + \frac{1}{-z} \cdot y + 0 \cdot z$$
@@ -1331,17 +1332,19 @@
             Okay now we are a bit closer, but the "matrix" is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
             It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation that sends 
             $$
-            \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ -1\end{bmatrix}
+            \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ 1\end{bmatrix}
             $$ we make it
-            send \(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y \\ 0\\ z\end{bmatrix}\)  Since
-          </p>
-          <p>
+            send 
+            $$
+            \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y \\ 0\\ -z\end{bmatrix}
+            $$  
+            since
             $$
             \begin{bmatrix}
             x\\
             y\\
             0\\
-            z\\
+            -z\\
             \end{bmatrix}
             = 
             -z
@@ -1349,9 +1352,10 @@
             \frac{x}{-z}\\
             \frac{y}{-z}\\
             0\\
-            -1\\
+            1\\
             \end{bmatrix}
             $$
+          
             and are therefore proportional, or <em>equal</em> under homogeneous coordinates
           </p>
           <p>
@@ -1377,7 +1381,7 @@
             This means we can send the vector to \(z = -1\) at no extra cost.  i.e, no extra transformation.
           </p>
           <p>
-            This is a lot easier to deal with.  Again, if we write these values as a systems of equations we would get
+            This is a lot easier to deal with.  Again, if we write these values as a system of equations we would get
             
             $$x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w$$
             $$y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w$$
@@ -1427,13 +1431,13 @@
               H^{-1}(\begin{bmatrix}
               x\\
               y\\
-              -z\\
               z\\
+              -z\\
               \end{bmatrix})
               =
               \begin{bmatrix}
-              \frac{x}{z}\\
-              \frac{y}{z}\\
+              \frac{x}{-z}\\
+              \frac{y}{-z}\\
               -1\\
               \end{bmatrix}$$
               which is exactly what we wanted!
@@ -1441,7 +1445,7 @@
 
           
           <p>
-            And there we have it, the perspective projection matrix.  
+            And there we have it, the perspective projection matrix and the translation matrix, useful applications of homogeneous coordinates in computer vision! 
           </p>
         </div>
       </div>
