@@ -170,7 +170,7 @@ export function ProjectivePlaneScene(canvas) {
     }
 
     function buildPlane(offset) {
-        const geometry = new THREE.PlaneGeometry( 50, 50 );
+        const geometry = new THREE.PlaneGeometry( 500, 500 );
         const material = new THREE.MeshBasicMaterial({
             color: 0x0000ff, 
             side: THREE.DoubleSide,

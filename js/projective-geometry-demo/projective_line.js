@@ -30,6 +30,9 @@ export function ProjectiveLineScene(canvas) {
 
 
     let greenDot = buildDot(0xff0000);
+    let greenDotX = 0;
+    let greenDotLambda = 0;
+
 
     let p = buildSubspace(scene, {x: 0, y: 1, z: 0 });
     let grid = new GridBasis(scene, 0);
@@ -155,9 +158,11 @@ export function ProjectiveLineScene(canvas) {
     this.applyTransform = function(matrix) {
         let A = matrix.clone().elements[4];
         blueDot.position.x = A * 12.5;
+        
         p.geometry.applyMatrix4(transform.invert());
         transform = matrix;
         p.geometry.applyMatrix4(transform);
+        greenDot.position.x = greenDotLambda * A * 12.5
 
         console.log(matrix);
 
@@ -191,6 +196,8 @@ export function ProjectiveLineScene(canvas) {
     this.moveGreenDot = function(lambda) {
         greenDot.position.x = lambda * blueDot.position.x;
         greenDot.position.y = lambda * blueDot.position.y;
+        greenDotX = lambda * blueDot.position.x;
+        greenDotLambda = lambda;
     }
 
     this.moveFrame = function(frameOffset) {

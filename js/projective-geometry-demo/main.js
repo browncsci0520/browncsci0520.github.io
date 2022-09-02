@@ -105,6 +105,7 @@ function bindEventListeners() {
                    0, 0, 1, 0,
                    0, 0, 0, 1);
         blueDotPos.innerHTML = v;
+        greenDotPos.innerHTML = Math.round(lambdaSlider.value * affineXSlider.value * 100) / 100;
         projectiveLineScene.applyTransform(matrix.clone());
         buildToHTML(matrix, affineMatrixHTML);
     }
