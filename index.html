@@ -477,7 +477,7 @@
             These transforms are linear because they satisfy two properties:  <a href="https://en.wikipedia.org/wiki/Linear_map#Definition_and_first_consequences" target="_blank">additivity and homogeneity</a>.
           </p>
           <p>
-            We compose the rotation, reflection, scaling, and shearing into one final matrix: the <em>affine matrix</em>, or \(A\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting model matrix.
+            We compose the rotation, reflection, scaling, and shearing into one final matrix: the <em>affine matrix</em>, or \(A\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting affine matrix.
           </p>
           <p>
             Why do we call this an affine matrix? That's because affine transformation is basically just a combination of reflection, rotation, scaling, and shear transformations. It also preserves points and straight lines, which is exactly what's happening here.
@@ -720,15 +720,15 @@
               x\\
               y
               \end{bmatrix}
-              \rightarrow
+              \xrightarrow{H}
 
               \begin{bmatrix}
               x\\
               y\\
               1
               \end{bmatrix}
-              \rightarrow
-              M
+              \xrightarrow{A}
+              A
               \begin{bmatrix}
               x\\
               y\\
@@ -740,7 +740,7 @@
               y'\\
               1
               \end{bmatrix}
-              \rightarrow
+              \xrightarrow{H^{-1}}
               \begin{bmatrix}
               x'\\
               y'\\
@@ -1197,7 +1197,7 @@
               \mathbb{R^3}
               $$
 
-              Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(M\), the model matrix.  And \(O\) is the orthographic projection matrix.  And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
+              Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(A\), the affine matrix.  And \(O\) is the orthographic projection matrix.  And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
             </p>
 
             <p>
