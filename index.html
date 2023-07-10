@@ -1131,22 +1131,22 @@
             </p>
   
             <p>
-              A projection map, \(P\), is a map which satisfies \(PP = P\).  That is to say, for any vector \(v\), \(P(v) = P(P(v))\).
+              A projection map, \(M\), is a map which satisfies \(M·M = M\).  That is to say, for any vector \(v\), \(M(v) = M(M(v))\).
               
-              All this definition means is that \(P\) is an identity map for all vectors in a subspace.  And if the vector is not in that subspace to begin with, it sends \(v\) to the subspace.  That way, \(P(v)\) is garunteed to be in the subspace on which \(P\) does nothing to.
+              What this definition means is that \(M\) is an identity map for all vectors in a subspace.  And if the vector is not in that subspace to begin with, it sends \(v\) to the subspace.  That way, \(M(v)\) is guaranteed to be in the subspace on which \(M\) does nothing to.
             </p>
 
             <p>
-              For example, take the plane \(z = 0\) as a subspace of \(\mathbb{R}^3\).   A valid projection map \(P\) could be the one that simply replaces whatever is in the \(z\) slot with \(0\).  i.e,
+              For example, take the plane \(z = 0\) as a subspace of \(\mathbb{R}^3\).   A valid projection map \(M\) could be the one that simply replaces whatever is in the \(z\) slot with \(0\).  i.e,
               $$
-              P(\begin{bmatrix} x\\ y\\ z\\ \end{bmatrix}) = \begin{bmatrix} x\\ y\\ 0\\ \end{bmatrix}\
+              M(\begin{bmatrix} x\\ y\\ z\\ \end{bmatrix}) = \begin{bmatrix} x\\ y\\ 0\\ \end{bmatrix}\
               $$
               For example
               $$
-              P(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
+              M(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
               $$
               $$
-              P(P(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix})) = P( \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
+              M(M(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix})) = M( \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
               $$
               since the \(z\) slot is already \(0\).  In this example, we send every vector not on the plane \(z = 0\) to \(z = 0\), and we send every vector already on the plane \(z = 0\) to itself.
             </p>
@@ -1227,7 +1227,7 @@
               $$
             </p>
 
-            <button id="pers-oblique-button" type="button" style="width: 100px; height: 40px;">
+            <button id="pers-oblique-button" type="button" style="width: 200px; height: 80px;">
               Oblique Projection
             </button>
             <div id="perspective-projection-demo-oblique"></div>
