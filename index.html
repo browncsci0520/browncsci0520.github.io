@@ -457,11 +457,15 @@
             This reduces bookkeeping and computational cost.
           </p>
           <p>
-            Let's review examples of 2D transforms. 
+            Let's review examples of 2D transforms.
+          </p>
+          <p>
             Rotation refers to rotating an object around a fixed point or axis.
             Reflection flips an object across a line or a plane.
             Scaling changes the size of an object uniformly or along different dimensions.
             Shearing distorts an object by shifting points along a given axis while keeping other dimensions fixed. 
+          </p>
+          <p>
             Their corresponding matrices are shown below. 
           </p>
  
@@ -473,7 +477,8 @@
             These transforms are linear because they satisfy two properties:  <a href="https://en.wikipedia.org/wiki/Linear_map#Definition_and_first_consequences" target="_blank">additivity and homogeneity</a>.
           </p>
           <p>
-            We compose the rotation, reflection, scaling, and shearing into one final matrix: the model matrix, or \(M\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting model matrix.
+            We compose the rotation, reflection, scaling, and shearing into one final matrix: the affine matrix, or \(A\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting model matrix.
+            Why's this resulting matrix called affine matrix? That's because affine transformation in itself can be a combination of reflection, rotation, scaling, and shear transformations. It also preserves points and straight lines, which is what exactly is happening here.
           </p>
           <p>
             Notice what's missing from this list of common transformations of 2D geometry: translation. Translation moves a point around in space.  We can use it to describe any displacement of an object in a scene.  For example, translating ball rolling on the floor, an egg falling from a skyscraper, a car driving down the road, etc.  Let's derive a function that will do this for us.  </p>
