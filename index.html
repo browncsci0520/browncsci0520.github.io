@@ -460,10 +460,10 @@
             Let's review examples of 2D transforms.
           </p>
           <p>
-            Rotation refers to rotating an object around a fixed point or axis.
-            Reflection flips an object across a line or a plane.
-            Scaling changes the size of an object uniformly or along different dimensions.
-            Shearing distorts an object by shifting points along a given axis while keeping other dimensions fixed. 
+            <em>Rotation</em> rotates a point around a fixed point or axis.
+            <em>Reflection</em> flips a point across a line or a plane.
+            <em>Scaling</em> multiplies the one or more coordinates of a point by a certain factor.
+            <em>Shearing</em> shifts a point along a given axis while keeping other dimensions of the point's coordinates fixed. 
           </p>
           <p>
             Their corresponding matrices are shown below. 
@@ -478,7 +478,9 @@
           </p>
           <p>
             We compose the rotation, reflection, scaling, and shearing into one final matrix: the affine matrix, or \(A\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting model matrix.
-            Why's this resulting matrix called affine matrix? That's because affine transformation in itself can be a combination of reflection, rotation, scaling, and shear transformations. It also preserves points and straight lines, which is what exactly is happening here.
+          </p>
+          <p>
+            Why do we call this an affine matrix? That's because affine transformation is basically just a combination of reflection, rotation, scaling, and shear transformations. It also preserves points and straight lines, which is what's exactly happening here.
           </p>
           <p>
             Notice what's missing from this list of common transformations of 2D geometry: translation. Translation moves a point around in space.  We can use it to describe any displacement of an object in a scene.  For example, translating ball rolling on the floor, an egg falling from a skyscraper, a car driving down the road, etc.  Let's derive a function that will do this for us.  </p>
