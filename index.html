@@ -25,7 +25,14 @@
       <ul>
         <li> <a href="index.html">Home</a> </li>
         <li> <a href="#introduction">Why's Translation Special?</a> </li>
-        <li> <a href="#encoding-translation">Encoding Translation</a> </li>
+        <li> <a href="#encoding-translation">Encoding Translation</a>
+          <li>
+            <a href="#extending-2D-to-3D">Extending 2D to 3D</a>
+          </li>
+          <li>
+            <a href="#composing-all-transformations">Composing All Transformations</a>
+          </li>
+         </li>
         <li> <a href="#homogeneous-coordinates">Homogeneous Coordinates</a> </li>
         <li> <a href="#projection-and-perspective">Projection and Perspective</a> </li>
 
@@ -605,146 +612,148 @@
         </div>
         <div>
           <h1 id="encoding-translation">Encoding Translation</h1>
-          <p>
-            So how can we express translation as a linear transform? 
-            If we think about our space in \(\mathbb{R}^2\) as a plane in \(\mathbb{R}^3\), and extend our 2D geometry to 3D, then we can encode a 2D translation as the shearing of the extended geometry along the \(z\) axis.
-            What does this mean?  Let's observe.
-          </p>
-          <button id="animate-button"
-            type="button">
-          Animation
-          </button>
-          <div id="affine-transform-demo-input-animate"></div>
-          <p>Adjust the values in the shear matrix and watch how it affects the cross section (highlighted in red) with our plane</p>
-          <p>
-            Why does this work?  If we multiply
-            the 3D shear matrix with any vector in \(\mathbb{R}^3\), \((x, y, z)\) we get the following:
-          </p>
-          <p>
-            $$
-            \begin{bmatrix}
-            x'\\
-            y'\\
-            z'\\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            x + zA\\
-            y + zB\\
-            z\\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            1 & 0 & A\\
-            0 & 1 & B\\
-            0 & 0 & 1\\
-            \end{bmatrix}
-            \begin{bmatrix}
-            x\\
-            y\\
-            z\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-            By factoring, we see that \( \begin{bmatrix}x'\\y'\\\end{bmatrix} = \begin{bmatrix}x\\y\\\end{bmatrix} + z\begin{bmatrix}A\\B\\\end{bmatrix}\) indicating we have a translation
-            in \(x\) and \(y\) on each plane parallel to \(z\) by a vector \(\begin{bmatrix}A\\B\\\end{bmatrix}\) proportional to \(z\).  Which if we recall, is
-            exactly the definition of a shear along the \(z\) axis.  And for the plane \(z = 1\) (our chosen plane to represent all of \(\mathbb{R}^2\)), we have the following:
-          </p>
-          <p>
-            $$
-            \begin{bmatrix}
-            x + A\\
-            y + B\\
-            1\\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            1 & 0 & A\\
-            0 & 1 & B\\
-            0 & 0 & 1\\
-            \end{bmatrix}
-            \begin{bmatrix}
-            x\\
-            y\\
-            1\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-            So for any point on the \(z = 1\) plane, this 3D shear translates its \(x\) and \(y\) coordinates exactly by our \(A\) and \(B\) values.  Meaning
-            we can recover the new 2D translated point by ignoring the \(z\) coordinate.
-          </p>
-          <p>
-            But this model glosses over an important detail.  We want our transformations to be composable with each other, but how can a map
-            which operates in \(\mathbb{R}^3\) compose with our rotation, reflection, scaling, and shear matrices which operate in \(\mathbb{R}^2\)?
-          </p>
-          <p>
-            It is simple to represent a 2D linear map with 3 dimensions.  Suppose some linear map looks like
-            \(T(\begin{bmatrix}x\\y\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\\end{bmatrix}\).  Then in 3D, it would be \(T(\begin{bmatrix}x\\y\\z\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\z\end{bmatrix}\) where simply nothing happends to the \(z\) axis.
-            In matrix form, this places the original matrix inside the upper left region of the identity matrix of \(\mathbb{R}^3\).
-          </p>
-          <p>
-            $$
-            \begin{bmatrix}
-            A & B\\
-            C & D\\
-            \end{bmatrix}
-            $$
-            becomes
-            $$
-            \begin{bmatrix}
-            A & B & 0\\
-            C & D & 0\\
-            0 & 0 & 1\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-            If we do this for all of our former 2D tranformation matrices, then everything
-            becomes composable with our "2D translation" matrix (which is a 3D shear).      
-          </p>
-          <button id="full-transform-button"
-            type="button">
-          Full transform
-          </button>
-          <div id="affine-transform-demo-input-full-transform"></div>
-          <p>
-            So now are able to reap the main benefit for encoding translation as a higher dimensional shear&mdash;  we can compose the translation transformation with all other transformations.
-            All it takes is temporarily sending a vector in \(\mathbb{R}^2\) to the plane \(z = 1\) in \(\mathbb{R^3}\) before passing it through the transformations,
-            and then we have to get rid of the \(z\) coordinate to recover the resultant vector in \(\mathbb{R}^2\)
-            $$
-            \begin{bmatrix}
-            x\\
-            y
-            \end{bmatrix}
-            \rightarrow
+            <h2 id="extending-2D-to-3D">Extending 2D to 3D</h2>
+            <p>
+              So how can we express translation as a linear transform? 
+              If we think about our space in \(\mathbb{R}^2\) as a plane in \(\mathbb{R}^3\), and extend our 2D geometry to 3D, then we can encode a 2D translation as the shearing of the extended geometry along the \(z\) axis.
+              What does this mean?  Let's observe.
+            </p>
+            <button id="animate-button"
+              type="button">
+            Animation
+            </button>
+            <div id="affine-transform-demo-input-animate"></div>
+            <p>Adjust the values in the shear matrix and watch how it affects the cross section (highlighted in red) with our plane</p>
+            <p>
+              Why does this work?  If we multiply
+              the 3D shear matrix with any vector in \(\mathbb{R}^3\), \((x, y, z)\) we get the following:
+            </p>
+            <p>
+              $$
+              \begin{bmatrix}
+              x'\\
+              y'\\
+              z'\\
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              x + zA\\
+              y + zB\\
+              z\\
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              1 & 0 & A\\
+              0 & 1 & B\\
+              0 & 0 & 1\\
+              \end{bmatrix}
+              \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              \end{bmatrix}
+              $$
+            </p>
+            <p>
+              By factoring, we see that \( \begin{bmatrix}x'\\y'\\\end{bmatrix} = \begin{bmatrix}x\\y\\\end{bmatrix} + z\begin{bmatrix}A\\B\\\end{bmatrix}\) indicating we have a translation
+              in \(x\) and \(y\) on each plane parallel to \(z\) by a vector \(\begin{bmatrix}A\\B\\\end{bmatrix}\) proportional to \(z\).  Which if we recall, is
+              exactly the definition of a shear along the \(z\) axis.  And for the plane \(z = 1\) (our chosen plane to represent all of \(\mathbb{R}^2\)), we have the following:
+            </p>
+            <p>
+              $$
+              \begin{bmatrix}
+              x + A\\
+              y + B\\
+              1\\
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              1 & 0 & A\\
+              0 & 1 & B\\
+              0 & 0 & 1\\
+              \end{bmatrix}
+              \begin{bmatrix}
+              x\\
+              y\\
+              1\\
+              \end{bmatrix}
+              $$
+            </p>
+            <p>
+              So for any point on the \(z = 1\) plane, this 3D shear translates its \(x\) and \(y\) coordinates exactly by our \(A\) and \(B\) values.  Meaning
+              we can recover the new 2D translated point by ignoring the \(z\) coordinate.
+            </p>
+            <p>
+              But this model glosses over an important detail.  We want our transformations to be composable with each other, but how can a map
+              which operates in \(\mathbb{R}^3\) compose with our rotation, reflection, scaling, and shear matrices which operate in \(\mathbb{R}^2\)?
+            </p>
+            <p>
+              It is simple to represent a 2D linear map with 3 dimensions.  Suppose some linear map looks like
+              \(T(\begin{bmatrix}x\\y\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\\end{bmatrix}\).  Then in 3D, it would be \(T(\begin{bmatrix}x\\y\\z\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\z\end{bmatrix}\) where simply nothing happends to the \(z\) axis.
+              In matrix form, this places the original matrix inside the upper left region of the identity matrix of \(\mathbb{R}^3\).
+            </p>
+            <p>
+              $$
+              \begin{bmatrix}
+              A & B\\
+              C & D\\
+              \end{bmatrix}
+              $$
+              becomes
+              $$
+              \begin{bmatrix}
+              A & B & 0\\
+              C & D & 0\\
+              0 & 0 & 1\\
+              \end{bmatrix}
+              $$
+            </p>
+            <p>
+              If we do this for all of our former 2D tranformation matrices, then everything
+              becomes composable with our "2D translation" matrix (which is a 3D shear).      
+            </p>
+          <h2 id="composing-all-transformations">Composing All Transformations</h2>
+            <button id="full-transform-button"
+              type="button">
+            Full transform
+            </button>
+            <div id="affine-transform-demo-input-full-transform"></div>
+            <p>
+              So now are able to reap the main benefit for encoding translation as a higher dimensional shear&mdash;  we can compose the translation transformation with all other transformations.
+              All it takes is temporarily sending a vector in \(\mathbb{R}^2\) to the plane \(z = 1\) in \(\mathbb{R^3}\) before passing it through the transformations,
+              and then we have to get rid of the \(z\) coordinate to recover the resultant vector in \(\mathbb{R}^2\)
+              $$
+              \begin{bmatrix}
+              x\\
+              y
+              \end{bmatrix}
+              \rightarrow
 
-            \begin{bmatrix}
-            x\\
-            y\\
-            1
-            \end{bmatrix}
-            \rightarrow
-            M
-            \begin{bmatrix}
-            x\\
-            y\\
-            1
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            x'\\
-            y'\\
-            1
-            \end{bmatrix}
-            \rightarrow
-            \begin{bmatrix}
-            x'\\
-            y'\\
-            \end{bmatrix}
-            $$
-          </p>
+              \begin{bmatrix}
+              x\\
+              y\\
+              1
+              \end{bmatrix}
+              \rightarrow
+              M
+              \begin{bmatrix}
+              x\\
+              y\\
+              1
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              x'\\
+              y'\\
+              1
+              \end{bmatrix}
+              \rightarrow
+              \begin{bmatrix}
+              x'\\
+              y'\\
+              \end{bmatrix}
+              $$
+            </p>
         </div>
         <div>
           <h1 id="homogeneous-coordinates">Homogeneous Coordinates</h1>
