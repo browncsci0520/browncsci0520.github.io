@@ -618,6 +618,10 @@
             <div id="affine-transform-demo-input-animate"></div>
             <p>Adjust the values in the shear matrix and watch how it affects the cross section (highlighted in red) with our plane</p>
             <p>
+              Notice that there is no slider for translation along the z axis, just as there was no translation along the y axis when we were talking about 1D translation. 
+              This is because the last dimension is always added just for the purpose for shearing and homogenizing, and this added dimension does <em>not</em> exist in the original space.
+            </p>
+            <p>
               Why does this work?  If we multiply
               the 3D shear matrix with any vector in \(\mathbb{R}^3\), \((x, y, z)\) we get the following:
             </p>
