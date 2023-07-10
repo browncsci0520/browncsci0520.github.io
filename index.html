@@ -23,11 +23,11 @@
   <body>
     <div id="sidebar">
       <ul>
-        <li> <a href="index.html">Home</a> </li>
-        <li> <a href="#introduction">Why's Translation Special?</a> </li>
-        <li> <a href="#encoding-translation">Encoding Translation</a></li>
-        <li> <a href="#homogeneous-coordinates">Homogeneous Coordinates</a> </li>
-        <li> <a href="#projection-and-perspective">Projection and Perspective</a> </li>
+        <li> <a href="index.html"><b>Home</b></a> </li>
+        <li> <a href="#introduction"><b>Why's Translation Special?</b></a> </li>
+        <li> <a href="#encoding-translation"><b>Encoding Translation</b></a></li>
+        <li> <a href="#homogeneous-coordinates"><b>Homogeneous Coordinates</b></a> </li>
+        <li> <a href="#projection-and-perspective"><b>Projection and Perspective</b></a> </li>
 
       </ul>
     </div>
@@ -468,8 +468,8 @@
         
           <h2 id="introduction">Why's Translation Special?</h2>
           <p>
-            By now we have learned how to represent linear maps&mdash;or <em>transforms</em>&mdash;with mathematical objects called matrices. 
-            Matrices are  useful in computer vision because they are <em>composable</em>: 
+            By now we have learned how to represent linear maps&mdash;or <b><em>transforms</em></b>&mdash;with mathematical objects called matrices. 
+            Matrices are  useful in computer vision because they are <b><em>composable</em></b>: 
             we can multiply together the matrices of any number of linear maps to form one matrix representing all transforms in succession.  
             This reduces bookkeeping and computational cost.
           </p>
@@ -477,10 +477,10 @@
             Let's review examples of 2D transforms.
           </p>
           <p>
-            <em>Rotation</em> rotates a point around a fixed point or axis.
-            <em>Reflection</em> flips a point across a line or a plane.
-            <em>Scaling</em> multiplies the one or more coordinates of a point by a certain factor.
-            <em>Shearing</em> shifts a point along a given axis while keeping other dimensions of the point's coordinates fixed. 
+            <b><em>Rotation</em></b> rotates a point around a fixed point or axis.
+            <b><em>Reflection</em></b> flips a point across a line or a plane.
+            <b><em>Scaling</em></b> multiplies the one or more coordinates of a point by a certain factor.
+            <b><em>Shearing</em></b> shifts a point along a given axis while keeping other dimensions of the point's coordinates fixed. 
           </p>
           <p>
             Their corresponding matrices are shown below. 
@@ -934,10 +934,10 @@
             </p>
             
             <p>
-              The <em>projective line</em> is defined as the codomain of this function, \(H^{-1}\). Which in this case is \(y = 1\).
+              The <b><em>projective line</em></b> is defined as the codomain of this function, \(H^{-1}\). Which in this case is \(y = 1\).
             </p>
 
-            <p>  As such, we call the space \(\mathcal{P}(V)\) from earlier, the <em>projective</em> space.
+            <p>  As such, we call the space \(\mathcal{P}(V)\) from earlier, the <b><em>projective</em></b> space.
           
               \(H^{-1}\) is therefore a function which goes from the projective space of \(\mathbb{R}^2\) to \(\mathbb{R}\)
               $$
@@ -1003,7 +1003,7 @@
             </p>
 
             <p>
-              The range of this function we know as the plane \(z = 1\), in this context renamed as the <em>projective plane</em>.  We visualize it here.
+              The range of this function we know as the plane \(z = 1\), in this context renamed as the <b><em>>projective plane</em></b>.  We visualize it here.
             </p>
 
             <button id="proj-plane-button" type="button"
@@ -1013,7 +1013,7 @@
 
             <div id="projective-geometry-demo-input-plane"></div>
           <h1 id="projective-frame">Projective Frame</h1>
-            <p>We can also further generalize our \(H\) and \(H^{-1}\) functions by allowing for a choice of <em>projective frame</em>.  A projective frame is the chosen subspace of \(\mathbb{R}^{n + 1}\) to represent \(\mathbb{R}^{n}\).  We've used the plane \(z = 1\) and the line \(y = 1\) up until now.  We could instead choose \(z = 2\) or \(y = 2\).  How does this affect \(H\) and \(H^{-1}\)?</p>  
+            <p>We can also further generalize our \(H\) and \(H^{-1}\) functions by allowing for a choice of <b><em>projective frame</em></b>.  A projective frame is the chosen subspace of \(\mathbb{R}^{n + 1}\) to represent \(\mathbb{R}^{n}\).  We've used the plane \(z = 1\) and the line \(y = 1\) up until now.  We could instead choose \(z = 2\) or \(y = 2\).  How does this affect \(H\) and \(H^{-1}\)?</p>  
 
 
             <button id="proj-frame-button" type="button"
@@ -1147,7 +1147,7 @@
             <div id="affine-transform-demo-input-model-matrix"></div>
   -->
             <p>
-              But now we have a problem.  We can represent the 3D transforms mathematically, but we have to view them through two dimensional screens.  We need a function which will take a point in 3D and <em>project</em> it to a 2D screen.  In computer graphics, we define a screen as a rectangle positioned at the plane \(z = -1\).  Everything in \(z \leq -1\) is considered "in front" of the screen and is projected to it, while everything in \(z > -1 \) is considered "behind" the screen and thrown away.
+              But now we have a problem.  We can represent the 3D transforms mathematically, but we have to view them through two dimensional screens.  We need a function which will take a point in 3D and <b><em>project</em></b> it to a 2D screen.  In computer graphics, we define a screen as a rectangle positioned at the plane \(z = -1\).  Everything in \(z \leq -1\) is considered "in front" of the screen and is projected to it, while everything in \(z > -1 \) is considered "behind" the screen and thrown away.
             </p>
             <img src="projection_01.jpg"  width="600" height="600" class="center">
             <p>
@@ -1177,7 +1177,7 @@
             <img src="projection_02.jpg"  width="700" height="400" class="center">
 
             <p>
-              The function we discussed above is actually called <em>orthographic projection</em>.
+              The function we discussed above is actually called <b><em>>orthographic projection</em></b>.
             </p>
 
             <p>
@@ -1230,7 +1230,7 @@
             </p>
 
             <p>
-              As you might notice, the orthographic projection doesn't look quite normal.  This is because every line that is parallel in \(\mathbb{R}^3\) is preserved in \(\mathbb{R}^2\) under this projection.  As such it belongs to a class of projections called <em>parallel projections</em>
+              As you might notice, the orthographic projection doesn't look quite normal.  This is because every line that is parallel in \(\mathbb{R}^3\) is preserved in \(\mathbb{R}^2\) under this projection.  As such it belongs to a class of projections called <b><em>parallel projections</em></b>.
             </p>
 
             <p>
@@ -1238,7 +1238,7 @@
             </p>
           <h1 id="oblique-projection">Oblique Projection</h1>
             <p>
-              Another type of parallel projection is called <em>oblique projection</em>.  If the \(z\) axis is at an angle (i.e, if camera is staring down the \(z\) axis), then we can get a better feel for the 3D shape by viewing its sides.  Let this angle be \(\alpha\), then we define oblique projection as the following:
+              Another type of parallel projection is called <b><em>>oblique projection</em></b>.  If the \(z\) axis is at an angle (i.e, if camera is staring down the \(z\) axis), then we can get a better feel for the 3D shape by viewing its sides.  Let this angle be \(\alpha\), then we define oblique projection as the following:
               $$
               O(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} x + \frac{1}{2}z\cos(\alpha)\\ y + \frac{1}{2}z\sin(\alpha)\\ 0\end{bmatrix}
               $$
@@ -1263,7 +1263,7 @@
             </p>
           <h1 id="perspective">Perspective</h1>
             <p>
-              The problem with these parallel projections is that while they may be practical, they hardly look 3D.  That is because of <em>perspective</em>.  Perspective is a distortion of parallel lines caused by them converging at a focal point.  This is more accurate to real life because rays of light converge at our eye.
+              The problem with these parallel projections is that while they may be practical, they hardly look 3D.  That is because of <b><em>perspective</em></b>.  Perspective is a distortion of parallel lines caused by them converging at a focal point.  This is more accurate to real life because rays of light converge at our eye.
             </p>
 
             <img src="projection_03.jpg"  width="600" height="600" class="center">
