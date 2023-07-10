@@ -750,74 +750,42 @@
         </div>
         <div>
           <h2 id="homogeneous-coordinates">Homogeneous Coordinates</h2>
-          <p>
-            We call the coordinate system of this intermediate 'higher-dimension-to-encode-lower-dimension' world <i>homogeneous coordinates</i>.  And likewise, adding the 1 in the 
-            \(z\) slot for our originally 2D coordinate is called homogenizing that coordinate, while recovering the 2D coordinate from the homogeneous 3D coordinate by ignoring the \(z\) slot is called
-            dehomogenizing the coordinate.
-          </p>
-          <p>
-            But what are homogeneous coordinates?  And why do they belong in this 3D-shear-to-encode-2D-translation transform?
-          </p>
-        
-          <p>
-            Homogeneous means "the same thing" or "alike". The homogeneous coordinate system allows coordinates to be considered "the same"
-            so long as they are proportional to each other.
-            For example:
-          </p>
-          <p>
-            $$
-            3
-            \begin{bmatrix}
-            3\\
-            4\\
-            2\\
-            \end{bmatrix}
-            =
-            1
-            \begin{bmatrix}
-            9\\
-            12\\
-            6\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-            In this example, the left vector is proportional to the right vector by a factor of 3.  So if we took these vectors into the homogeneous coordinate system, we would have the following equivalence on the resultant vectors.
-          </p>
-          <p>
-            $$
-            \begin{bmatrix}
-            3\\
-            4\\
-            2\\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            9\\
-            12\\
-            6\\
-            \end{bmatrix}
-            $$
-          </p>
-  
-          <p>
-            To be more formal, we say that for any vector space \(V\), \(\mathcal{P}(V)\) denotes the coordinates as homogeneous.  So while
-            
+            <h1 id="from-1D-points-to-Line">From 1D Points to Line</h1>
+            <p>
+              We call the coordinate system of this intermediate 'higher-dimension-to-encode-lower-dimension' world <i>homogeneous coordinates</i>.  And likewise, adding the 1 in the 
+              \(z\) slot for our originally 2D coordinate is called homogenizing that coordinate, while recovering the 2D coordinate from the homogeneous 3D coordinate by ignoring the \(z\) slot is called
+              dehomogenizing the coordinate.
+            </p>
+            <p>
+              But what are homogeneous coordinates?  And why do they belong in this 3D-shear-to-encode-2D-translation transform?
+            </p>
+          
+            <p>
+              Homogeneous means "the same thing" or "alike". The homogeneous coordinate system allows coordinates to be considered "the same"
+              so long as they are proportional to each other.
+              For example:
+            </p>
+            <p>
               $$
+              3
               \begin{bmatrix}
               3\\
               4\\
               2\\
               \end{bmatrix}
-              \neq
+              =
+              1
               \begin{bmatrix}
               9\\
               12\\
               6\\
               \end{bmatrix}
               $$
-
-              in \(\mathbb{R}^3\),
+            </p>
+            <p>
+              In this example, the left vector is proportional to the right vector by a factor of 3.  So if we took these vectors into the homogeneous coordinate system, we would have the following equivalence on the resultant vectors.
+            </p>
+            <p>
               $$
               \begin{bmatrix}
               3\\
@@ -831,636 +799,670 @@
               6\\
               \end{bmatrix}
               $$
-            in \(\mathcal{P}(\mathbb{R}^3)\)</p>
-            <p>
-            To get a better handle for why we describe translation with these coordinates, let us explore translation one dimension lower.
-          </p>
-
-          <button id="proj-start-button" type="button">
-            1D Translation
-          </button>
-
-          <div id="projective-geometry-demo-input-start"></div>
-
-          <p>
-            The red line is the object in \(\mathbb{R}^2\) that we shear by this matrix.  Our position in \(\mathbb{R}\) is represented by the intersection of this line and \(y = 1\), marked by a blue dot.  All vectors in \(\mathbb{R}^2\) that lie on this red line are in proportion with the blue dot.
-          </p>
-
-          <p>
-            This is easy to verify: just take the position of the dot \(\begin{bmatrix}x\\1\end{bmatrix}\) and the line can be expressed as the set of all vectors which are equal to the dot up to some scalar.
-            $$
-            \{\lambda \begin{bmatrix}
-            x\\
-            1
-            \end{bmatrix} \text{for all } \lambda \in \mathbb{R}\}
-            $$
-          </p>
-
-          <p>
-            To see how this is the case in practice, try grabbing a lambda to multiply the blue dot by and see where it (red dot) lands in \(\mathbb{R}^2\)
-          </p>
-
-          <button id="proj-subspace-button" type="button">
-            Subspace
-          </button>
-
-          <div id="projective-geometry-demo-input-subspace"></div>
-
-          <p>
-            As we can see, every point on the red line is reachable by some lambda.
-            Refering back to our earlier definition of homogeneous coordinate, since every point on the red line proportional by some lambda to the blue dot,
-            the red line contains every vector equal to the blue dot in \(\mathcal{P}(\mathbb{R}^2)\)
-          </p>
-
-          <p>
-            If we take this one step further and draw all the lines in \(\mathbb{R}^2\) which correspond to the blue dots on \(y = 1\) we get the following:
-          </p>
-
-          <button id="proj-line-button" type="button">
-            Projective Line
-          </button>
-
-          <div id="projective-geometry-demo-input-line"></div>
-
-
-          <p>
-            Of course we can't show every line because there are infinitely many, so you can use the slider to show more or fewer lines. Note how each line through the origin in \(\mathbb{R}^2\) corresponds exactly to one point on \(y = 1\).
-          </p>
-          <p>
-            That means there is some function that sends each line to a unique point on \(y = 1\).  Remember the dehomogenization from earlier?  Since each point on the line \(y = 1\) corresponds to a point in \(\mathbb{R}\), this function which pairs red lines in \(\mathbb{R}^2\) to blue dots in \(y = 1\) is the more general version of the dehomogenization map, for now called \(H^{-1}\). 
-          </p>
-            <p> How might we find the formula for the \(H^{-1}\)?  Well if \(H^{-1}\) sends red lines to blue dots, then it sends \(\lambda \begin{bmatrix}x\\1\end{bmatrix} \) to \( \begin{bmatrix}x\\1\end{bmatrix} \) and then to \(\begin{bmatrix}x\end{bmatrix} \) by dropping the value in the \(y\) slot for all \(\lambda \in \mathbb {R}\).
-          </p>
-          <p>
-            We know \(\lambda \begin{bmatrix}x\\1\end{bmatrix} = \begin{bmatrix}\lambda x\\ \lambda\end{bmatrix} \) and
-            \(   \frac{1}{\lambda}\begin{bmatrix}\lambda x\\ \lambda\end{bmatrix} = \begin{bmatrix} x\\ 1\end{bmatrix}     \).  So we just need to divide the vector by whatever value is in the \(y\), and then keep the value in the \(x\) slot.
-            $$
-            \begin{bmatrix} x\\ y\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{y}\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{y}\end{bmatrix}
-            $$
-
-            So, 
-            $$
-            H^{-1}(\begin{bmatrix} x\\ y\end{bmatrix}) = \begin{bmatrix} \frac{x}{y}\end{bmatrix}
-            $$
-            
-            That is the key effect of homogeneous coordinates in \(\mathbb{R}^2\): it maps lines (the 'elements' of \(\mathcal{P}(\mathbb{R}^2)\)) to the blue dots (vectors of \(\mathbb{R}\)).  In other words, this map we just defined, \(H^{-1}\) is induced when we declare a space is homogeneous.
-          </p>
-          
-          <p>
-            The <em>projective line</em> is defined as the codomain of this function, \(H^{-1}\). Which in this case is \(y = 1\).
-          </p>
-
-          <p>  As such, we call the space \(\mathcal{P}(V)\) from earlier, the <em>projective</em> space.
-         
-            \(H^{-1}\) is therefore a function which goes from the projective space of \(\mathbb{R}^2\) to \(\mathbb{R}\)
-            $$
-              H^{-1}: \mathcal{P}(\mathbb{R}^2) \rightarrow \mathbb{R}
-            $$
-          </p>
-
-          <p>
-            All \(\mathcal{P}(V)\) really does is let us know explicitly that we are drawing the homogeneous equivalence on \(V\).  And as soon as we draw that equivalence, we have \(H^{-1}\).  
             </p>
-            <p>We can also define \(H\) which "makes vectors homogeneous":  \(H\) sends a vector in \(V^{n}\) to \(\mathcal{P}(V^{n + 1})\).  Much like \(H^{-1}\), it has two steps, first increase the dimension by appending a 1 to the vector, and then draw the homogeneous equivalence.  In our current example, this has the effect of sending a number on \(\mathbb{R}\) (the blue dot) to its corresponding red line.
-            $$
-            H: \mathbb{R} \rightarrow \mathcal{P}(\mathbb{R}^2)
-            $$
-            For example the number \(3\) in \(\mathbb{R}\).  
-            \(H(3) = \begin{bmatrix}
-            3\\
-            1
-            \end{bmatrix}\) and is now considered equal to vectors \(\begin{bmatrix}
-            6\\
-            2
-            \end{bmatrix}, \begin{bmatrix}
-            9\\
-            3
-            \end{bmatrix}\) and so forth.
-          </p>
+    
+            <p>
+              To be more formal, we say that for any vector space \(V\), \(\mathcal{P}(V)\) denotes the coordinates as homogeneous.  So while
+              
+                $$
+                \begin{bmatrix}
+                3\\
+                4\\
+                2\\
+                \end{bmatrix}
+                \neq
+                \begin{bmatrix}
+                9\\
+                12\\
+                6\\
+                \end{bmatrix}
+                $$
 
-          <p>
-             What about projective spaces of higher dimensions?  Let's take a projective space on \(\mathbb{R}^3\), \(\mathcal{P}(\mathbb{R}^3)\).
-             This means we have the following equivalency on \(\mathbb{R}^3\):
-             $$
-             \begin{bmatrix} x\\ y\\ 1\end{bmatrix} = \lambda \begin{bmatrix} x\\ y\\ 1\end{bmatrix}, \text{for any } \lambda \in \mathbb{R}
-            $$
-          </p>
+                in \(\mathbb{R}^3\),
+                $$
+                \begin{bmatrix}
+                3\\
+                4\\
+                2\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                9\\
+                12\\
+                6\\
+                \end{bmatrix}
+                $$
+              in \(\mathcal{P}(\mathbb{R}^3)\)</p>
+              <p>
+              To get a better handle for why we describe translation with these coordinates, let us explore translation one dimension lower.
+            </p>
 
-          <p>
-            \(H\) would then take vectors on \(\mathbb{R}^2\) and send them to the plane \(z = 1\) in \(\mathbb{R}^3\).  And then we draw an equivalence with that point and all other points proportional to it.
-            $$
-            H(\begin{bmatrix}
-            x\\
-            y\\
-           \end{bmatrix}) = \begin{bmatrix}
-           x\\
-           y\\
-           1
-           \end{bmatrix}
-            $$
-          </p>
+            <button id="proj-start-button" type="button">
+              1D Translation
+            </button>
 
-          <p>
-            This induces our \(H^{-1}\) to send \(\lambda \begin{bmatrix} x\\ y\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y\end{bmatrix}\).  Which takes any point on a red line and sends it to its corresponding blue dot on the plane \(z = 1\).
-            How do we define such an \(H^{-1}\)?  Using the same logic we used in lower dimensions, we arrive at the following definition for \(H^{-1} : \mathcal{P}(\mathbb{R}^3) \rightarrow \mathbb{R}^2\)
-            $$
-            H^{-1}(\begin{bmatrix}
-            x\\
-            y\\
-            z
-            \end{bmatrix}) = \begin{bmatrix}
-            \frac{x}{z}\\
-            \frac{y}{z}
-            \end{bmatrix}
-            $$
-          </p>
+            <div id="projective-geometry-demo-input-start"></div>
 
-          <p>
-            The range of this function we know as the plane \(z = 1\), in this context renamed as the <em>projective plane</em>.  We visualize it here.
-          </p>
+            <p>
+              The red line is the object in \(\mathbb{R}^2\) that we shear by this matrix.  Our position in \(\mathbb{R}\) is represented by the intersection of this line and \(y = 1\), marked by a blue dot.  All vectors in \(\mathbb{R}^2\) that lie on this red line are in proportion with the blue dot.
+            </p>
 
-          <button id="proj-plane-button" type="button">
-            Projective Plane
-          </button>
+            <p>
+              This is easy to verify: just take the position of the dot \(\begin{bmatrix}x\\1\end{bmatrix}\) and the line can be expressed as the set of all vectors which are equal to the dot up to some scalar.
+              $$
+              \{\lambda \begin{bmatrix}
+              x\\
+              1
+              \end{bmatrix} \text{for all } \lambda \in \mathbb{R}\}
+              $$
+            </p>
 
-          <div id="projective-geometry-demo-input-plane"></div>
+            <p>
+              To see how this is the case in practice, try grabbing a lambda to multiply the blue dot by and see where it (red dot) lands in \(\mathbb{R}^2\)
+            </p>
 
-          <p>We can also further generalize our \(H\) and \(H^{-1}\) functions by allowing for a choice of <em>projective frame</em>.  A projective frame is the chosen subspace of \(\mathbb{R}^{n + 1}\) to represent \(\mathbb{R}^{n}\).  We've used the plane \(z = 1\) and the line \(y = 1\) up until now.  We could instead choose \(z = 2\) or \(y = 2\).  How does this affect \(H\) and \(H^{-1}\)?</p>  
+            <button id="proj-subspace-button" type="button">
+              Subspace
+            </button>
+
+            <div id="projective-geometry-demo-input-subspace"></div>
+
+            <p>
+              As we can see, every point on the red line is reachable by some lambda.
+              Refering back to our earlier definition of homogeneous coordinate, since every point on the red line proportional by some lambda to the blue dot,
+              the red line contains every vector equal to the blue dot in \(\mathcal{P}(\mathbb{R}^2)\)
+            </p>
+
+            <p>
+              If we take this one step further and draw all the lines in \(\mathbb{R}^2\) which correspond to the blue dots on \(y = 1\) we get the following:
+            </p>
+
+            <button id="proj-line-button" type="button">
+              Projective Line
+            </button>
+
+            <div id="projective-geometry-demo-input-line"></div>
 
 
-          <button id="proj-frame-button" type="button">
-            Projective Frame
-          </button>
+            <p>
+              Of course we can't show every line because there are infinitely many, so you can use the slider to show more or fewer lines. Note how each line through the origin in \(\mathbb{R}^2\) corresponds exactly to one point on \(y = 1\).
+            </p>
+            <p>
+              That means there is some function that sends each line to a unique point on \(y = 1\).  Remember the dehomogenization from earlier?  Since each point on the line \(y = 1\) corresponds to a point in \(\mathbb{R}\), this function which pairs red lines in \(\mathbb{R}^2\) to blue dots in \(y = 1\) is the more general version of the dehomogenization map, for now called \(H^{-1}\). 
+            </p>
+              <p> How might we find the formula for the \(H^{-1}\)?  Well if \(H^{-1}\) sends red lines to blue dots, then it sends \(\lambda \begin{bmatrix}x\\1\end{bmatrix} \) to \( \begin{bmatrix}x\\1\end{bmatrix} \) and then to \(\begin{bmatrix}x\end{bmatrix} \) by dropping the value in the \(y\) slot for all \(\lambda \in \mathbb {R}\).
+            </p>
+            <p>
+              We know \(\lambda \begin{bmatrix}x\\1\end{bmatrix} = \begin{bmatrix}\lambda x\\ \lambda\end{bmatrix} \) and
+              \(   \frac{1}{\lambda}\begin{bmatrix}\lambda x\\ \lambda\end{bmatrix} = \begin{bmatrix} x\\ 1\end{bmatrix}     \).  So we just need to divide the vector by whatever value is in the \(y\), and then keep the value in the \(x\) slot.
+              $$
+              \begin{bmatrix} x\\ y\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{y}\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{y}\end{bmatrix}
+              $$
 
-          <div id="projective-geometry-demo-input-frame"></div>
-
-          <p>
-            Well for \(H\) the change is simple.  Instead of appending a 1 to the end of the vector, append \(n\).  i.e,$$
-              H(\begin{bmatrix} x\\ y\end{bmatrix}) = \begin{bmatrix} x\\ y\\ n\end{bmatrix}
-            $$
-          </p>
-
-          <p>
-            The blue dots (outputs of \(H^{-1}\)) change as we change the projective frame.  So for any projective frame \(n\), what might \(H^{-1}(\begin{bmatrix} x\\ y\\ z\end{bmatrix})\) be?
-          </p>
-
-          <p>
-            For \(n = 1\) we have \(H^{-1}(\begin{bmatrix} x\\ y\\ z\end{bmatrix}) = \begin{bmatrix} \frac{x}{z}\\ \frac{y}{z}\\ 1\end{bmatrix} \)
-            We want whatever ends up in the \(z\) slot to match \(n\).  This is as simple as dividing \(z\) by \(z\) to get \(1\) and then multiplying by \(n\).  Doing this for all coordinates we get, 
-            $$
-            H^{-1}(\begin{bmatrix} x\\ y\\ z\end{bmatrix}) = \begin{bmatrix} \frac{n}{z}x\\ \frac{n}{z}y\\ n\end{bmatrix}
-            $$
-          </p>
-
-          <p>
-            But to keep things simple, let us continue with the convention that \(n = 1\)
-          </p>
-
-          <p>
-            Now with these tools, we can finally examine why this homogeneous structure enables us to encode a translation in a higher dimensional shear. 
-          </p>
-
-          <p>
-            The 3D shear matrix preserves proportion in \(\mathbb{R}^3\):
-            $$
-            \begin{bmatrix}
-            \lambda(x + zA)\\
-            \lambda(y + zB)\\
-            \lambda(z)\\
-            \end{bmatrix}
-      
-            =
-      
-            \begin{bmatrix}
-            1 & 0 & A\\
-            0 & 1 & B\\
-            0 & 0 & 1\\
-            \end{bmatrix}
-      
-            \begin{bmatrix}
-            \lambda x\\
-            \lambda y\\
-            \lambda z\\
-            \end{bmatrix}
-            $$
-          </p>
-
-          <p>
-            Then it follows that since proportional vectors are equal in \(\mathcal{P}(\mathbb{R}^3)\), the only new information coming out of the 3D shear matrix in \(\mathcal{P}(\mathbb{R}^3)\) is the displacement of the input vector from the origin of the projective plane.
-          </p>
-
-          <p>
-            What we are really doing when translating any vector in \(\mathbb{R}^2\)is first homogenizing it, applying our translation in homogeneous space, \(T\), and dehomogenizing it:
+              So, 
+              $$
+              H^{-1}(\begin{bmatrix} x\\ y\end{bmatrix}) = \begin{bmatrix} \frac{x}{y}\end{bmatrix}
+              $$
+              
+              That is the key effect of homogeneous coordinates in \(\mathbb{R}^2\): it maps lines (the 'elements' of \(\mathcal{P}(\mathbb{R}^2)\)) to the blue dots (vectors of \(\mathbb{R}\)).  In other words, this map we just defined, \(H^{-1}\) is induced when we declare a space is homogeneous.
+            </p>
             
-            $$
-            \mathbb{R^2}
-            \xrightarrow{H}
-            \mathcal{P}(\mathbb{R}^3)
-            \xrightarrow{T}
-            \mathcal{P}(\mathbb{R}^3)
-            \xrightarrow{H^{-1}}
-            \mathbb{R^2}
-            $$
-          </p>
+            <p>
+              The <em>projective line</em> is defined as the codomain of this function, \(H^{-1}\). Which in this case is \(y = 1\).
+            </p>
 
-          <p>
-            If we take the four points in space which make up a square in \(\mathbb{R}^2\), homogenize them, and then send the subspaces of \(\mathbb{R}^3\) which they induce through a shear parallel to the \(z\) axis, we get the following:
-          </p>
+            <p>  As such, we call the space \(\mathcal{P}(V)\) from earlier, the <em>projective</em> space.
+          
+              \(H^{-1}\) is therefore a function which goes from the projective space of \(\mathbb{R}^2\) to \(\mathbb{R}\)
+              $$
+                H^{-1}: \mathcal{P}(\mathbb{R}^2) \rightarrow \mathbb{R}
+              $$
+            </p>
 
-          <button id="proj-translation-button"
-          type="button">
-          Translate
-          </button>
-          <div id="projective-geometry-demo-input-translate"></div>
-         
+            <p>
+              All \(\mathcal{P}(V)\) really does is let us know explicitly that we are drawing the homogeneous equivalence on \(V\).  And as soon as we draw that equivalence, we have \(H^{-1}\).  
+              </p>
+              <p>We can also define \(H\) which "makes vectors homogeneous":  \(H\) sends a vector in \(V^{n}\) to \(\mathcal{P}(V^{n + 1})\).  Much like \(H^{-1}\), it has two steps, first increase the dimension by appending a 1 to the vector, and then draw the homogeneous equivalence.  In our current example, this has the effect of sending a number on \(\mathbb{R}\) (the blue dot) to its corresponding red line.
+              $$
+              H: \mathbb{R} \rightarrow \mathcal{P}(\mathbb{R}^2)
+              $$
+              For example the number \(3\) in \(\mathbb{R}\).  
+              \(H(3) = \begin{bmatrix}
+              3\\
+              1
+              \end{bmatrix}\) and is now considered equal to vectors \(\begin{bmatrix}
+              6\\
+              2
+              \end{bmatrix}, \begin{bmatrix}
+              9\\
+              3
+              \end{bmatrix}\) and so forth.
+            </p>
+          <h1 id="from-2D-points-to-plane">From 2D Points to Plane</h1>
+            <p>
+              What about projective spaces of higher dimensions?  Let's take a projective space on \(\mathbb{R}^3\), \(\mathcal{P}(\mathbb{R}^3)\).
+              This means we have the following equivalency on \(\mathbb{R}^3\):
+              $$
+              \begin{bmatrix} x\\ y\\ 1\end{bmatrix} = \lambda \begin{bmatrix} x\\ y\\ 1\end{bmatrix}, \text{for any } \lambda \in \mathbb{R}
+              $$
+            </p>
 
-          <p>
-            In the lense of homogeneous coordinates, i.e \(\mathcal{P}(\mathbb{R}^3)\), the only new information coming out of a 3D shear map is the translation on the projective plane.  And that is why we call the 3D shear homogeneous when we want it to encode a 2D translation.
-          </p>
+            <p>
+              \(H\) would then take vectors on \(\mathbb{R}^2\) and send them to the plane \(z = 1\) in \(\mathbb{R}^3\).  And then we draw an equivalence with that point and all other points proportional to it.
+              $$
+              H(\begin{bmatrix}
+              x\\
+              y\\
+            \end{bmatrix}) = \begin{bmatrix}
+            x\\
+            y\\
+            1
+            \end{bmatrix}
+              $$
+            </p>
+
+            <p>
+              This induces our \(H^{-1}\) to send \(\lambda \begin{bmatrix} x\\ y\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y\end{bmatrix}\).  Which takes any point on a red line and sends it to its corresponding blue dot on the plane \(z = 1\).
+              How do we define such an \(H^{-1}\)?  Using the same logic we used in lower dimensions, we arrive at the following definition for \(H^{-1} : \mathcal{P}(\mathbb{R}^3) \rightarrow \mathbb{R}^2\)
+              $$
+              H^{-1}(\begin{bmatrix}
+              x\\
+              y\\
+              z
+              \end{bmatrix}) = \begin{bmatrix}
+              \frac{x}{z}\\
+              \frac{y}{z}
+              \end{bmatrix}
+              $$
+            </p>
+
+            <p>
+              The range of this function we know as the plane \(z = 1\), in this context renamed as the <em>projective plane</em>.  We visualize it here.
+            </p>
+
+            <button id="proj-plane-button" type="button">
+              Projective Plane
+            </button>
+
+            <div id="projective-geometry-demo-input-plane"></div>
+          <h1 id="projective-frame">Projective Frame</h1>
+            <p>We can also further generalize our \(H\) and \(H^{-1}\) functions by allowing for a choice of <em>projective frame</em>.  A projective frame is the chosen subspace of \(\mathbb{R}^{n + 1}\) to represent \(\mathbb{R}^{n}\).  We've used the plane \(z = 1\) and the line \(y = 1\) up until now.  We could instead choose \(z = 2\) or \(y = 2\).  How does this affect \(H\) and \(H^{-1}\)?</p>  
+
+
+            <button id="proj-frame-button" type="button">
+              Projective Frame
+            </button>
+
+            <div id="projective-geometry-demo-input-frame"></div>
+
+            <p>
+              Well for \(H\) the change is simple.  Instead of appending a 1 to the end of the vector, append \(n\).  i.e,$$
+                H(\begin{bmatrix} x\\ y\end{bmatrix}) = \begin{bmatrix} x\\ y\\ n\end{bmatrix}
+              $$
+            </p>
+
+            <p>
+              The blue dots (outputs of \(H^{-1}\)) change as we change the projective frame.  So for any projective frame \(n\), what might \(H^{-1}(\begin{bmatrix} x\\ y\\ z\end{bmatrix})\) be?
+            </p>
+
+            <p>
+              For \(n = 1\) we have \(H^{-1}(\begin{bmatrix} x\\ y\\ z\end{bmatrix}) = \begin{bmatrix} \frac{x}{z}\\ \frac{y}{z}\\ 1\end{bmatrix} \)
+              We want whatever ends up in the \(z\) slot to match \(n\).  This is as simple as dividing \(z\) by \(z\) to get \(1\) and then multiplying by \(n\).  Doing this for all coordinates we get, 
+              $$
+              H^{-1}(\begin{bmatrix} x\\ y\\ z\end{bmatrix}) = \begin{bmatrix} \frac{n}{z}x\\ \frac{n}{z}y\\ n\end{bmatrix}
+              $$
+            </p>
+
+            <p>
+              But to keep things simple, let us continue with the convention that \(n = 1\)
+            </p>
+
+            <p>
+              Now with these tools, we can finally examine why this homogeneous structure enables us to encode a translation in a higher dimensional shear. 
+            </p>
+
+            <p>
+              The 3D shear matrix preserves proportion in \(\mathbb{R}^3\):
+              $$
+              \begin{bmatrix}
+              \lambda(x + zA)\\
+              \lambda(y + zB)\\
+              \lambda(z)\\
+              \end{bmatrix}
+      
+              =
+        
+              \begin{bmatrix}
+              1 & 0 & A\\
+              0 & 1 & B\\
+              0 & 0 & 1\\
+              \end{bmatrix}
+        
+              \begin{bmatrix}
+              \lambda x\\
+              \lambda y\\
+              \lambda z\\
+              \end{bmatrix}
+              $$
+            </p>
+
+            <p>
+              Then it follows that since proportional vectors are equal in \(\mathcal{P}(\mathbb{R}^3)\), the only new information coming out of the 3D shear matrix in \(\mathcal{P}(\mathbb{R}^3)\) is the displacement of the input vector from the origin of the projective plane.
+            </p>
+
+            <p>
+              What we are really doing when translating any vector in \(\mathbb{R}^2\)is first homogenizing it, applying our translation in homogeneous space, \(T\), and dehomogenizing it:
+              
+              $$
+              \mathbb{R^2}
+              \xrightarrow{H}
+              \mathcal{P}(\mathbb{R}^3)
+              \xrightarrow{T}
+              \mathcal{P}(\mathbb{R}^3)
+              \xrightarrow{H^{-1}}
+              \mathbb{R^2}
+              $$
+            </p>
+
+            <p>
+              If we take the four points in space which make up a square in \(\mathbb{R}^2\), homogenize them, and then send the subspaces of \(\mathbb{R}^3\) which they induce through a shear parallel to the \(z\) axis, we get the following:
+            </p>
+
+            <button id="proj-translation-button"
+            type="button">
+            Translate
+            </button>
+            <div id="projective-geometry-demo-input-translate"></div>
+          
+
+            <p>
+              In the lense of homogeneous coordinates, i.e \(\mathcal{P}(\mathbb{R}^3)\), the only new information coming out of a 3D shear map is the translation on the projective plane.  And that is why we call the 3D shear homogeneous when we want it to encode a 2D translation.
+            </p>
 
          
         </div>
         <div>
           <h2 id="projection-and-perspective">Projection and Perspective</h2>
-          <p>
-            In computer graphics we don't always focus on how to model geometric transforms in 2D.  Our world is three dimensional.  So how would this concept of using homogeneous coordinates to encode a translation work for a 3D geometry?
-          </p>
+            <h1 id="orthographic-projection">Orthographic Projection</h1>
+            <p>
+              In computer graphics we don't always focus on how to model geometric transforms in 2D.  Our world is three dimensional.  So how would this concept of using homogeneous coordinates to encode a translation work for a 3D geometry?
+            </p>
 
-          <p>
-            Well in \(\mathbb{R}^3\), \(H\) has the following signature:
-            $$
-            H: \mathbb{R}^3 \rightarrow \mathcal{P}(\mathbb{R}^4)
-            $$
-            So all of our transformations will operate in \(\mathcal{P}(\mathbb{R}^4)\), meaning they will be \(4\) by \(4\) matrices.
-          </p>
+            <p>
+              Well in \(\mathbb{R}^3\), \(H\) has the following signature:
+              $$
+              H: \mathbb{R}^3 \rightarrow \mathcal{P}(\mathbb{R}^4)
+              $$
+              So all of our transformations will operate in \(\mathcal{P}(\mathbb{R}^4)\), meaning they will be \(4\) by \(4\) matrices.
+            </p>
 
-          <p>
-            In \(\mathcal{P}(\mathbb{R}^4)\), the 4D shear matrix encodes a 3D translation.  As such, for a translation of \(A\) in the \(x\) direction, \(B\) in the \(y\) direction, and \(C\) in the \(z\) direction, we would apply the following matrix:
-            $$
-            \begin{bmatrix}
-            1 & 0 & 0 & A\\
-            0 & 1 & 0 & B\\
-            0 & 0 & 1 & C\\
-            0 & 0 & 0 & 1\\
-            \end{bmatrix}
-            $$
-            The rest of the transformations: rotation, reflection, scaling, and shearing, are the same as in \(\mathbb{R}^3\) just fitted into a \(4\) by \(4\) matrix.
-          </p>
-<!--
-          <p>
-            Unfortunately we can't visualize the shearing since we don't see 4D, but here is what our chosen 3D subspace of \(\mathbb{R}^4\) would look like.
-          </p>
+            <p>
+              In \(\mathcal{P}(\mathbb{R}^4)\), the 4D shear matrix encodes a 3D translation.  As such, for a translation of \(A\) in the \(x\) direction, \(B\) in the \(y\) direction, and \(C\) in the \(z\) direction, we would apply the following matrix:
+              $$
+              \begin{bmatrix}
+              1 & 0 & 0 & A\\
+              0 & 1 & 0 & B\\
+              0 & 0 & 1 & C\\
+              0 & 0 & 0 & 1\\
+              \end{bmatrix}
+              $$
+              The rest of the transformations: rotation, reflection, scaling, and shearing, are the same as in \(\mathbb{R}^3\) just fitted into a \(4\) by \(4\) matrix.
+            </p>
+  <!--
+            <p>
+              Unfortunately we can't visualize the shearing since we don't see 4D, but here is what our chosen 3D subspace of \(\mathbb{R}^4\) would look like.
+            </p>
 
-          <button id="affine-model-matrix-button" type="button">
-            Complete Model Matrix
-          </button>
-          <div id="affine-transform-demo-input-model-matrix"></div>
--->
-          <p>
-            But now we have a problem.  We can represent the 3D transforms mathematically, but we have to view them through two dimensional screens.  We need a function which will take a point in 3D and <em>project</em> it to a 2D screen.  In computer graphics, we define a screen as a rectangle positioned at the plane \(z = -1\).  Everything in \(z \leq -1\) is considered "in front" of the screen and is projected to it, while everything in \(z > -1 \) is considered "behind" the screen and thrown away.
-          </p>
-          <img src="projection_01.jpg"  width="600" height="600" class="center">
-          <p>
-            Every point that falls within this quadrilateral will be seen.  To do this we will use a projection.
-          </p>
- 
-          <p>
-            A projection map, \(P\), is a map which satisfies \(PP = P\).  That is to say, for any vector \(v\), \(P(v) = P(P(v))\).
-            
-            All this definition means is that \(P\) is an identity map for all vectors in a subspace.  And if the vector is not in that subspace to begin with, it sends \(v\) to the subspace.  That way, \(P(v)\) is garunteed to be in the subspace on which \(P\) does nothing to.
-          </p>
+            <button id="affine-model-matrix-button" type="button">
+              Complete Model Matrix
+            </button>
+            <div id="affine-transform-demo-input-model-matrix"></div>
+  -->
+            <p>
+              But now we have a problem.  We can represent the 3D transforms mathematically, but we have to view them through two dimensional screens.  We need a function which will take a point in 3D and <em>project</em> it to a 2D screen.  In computer graphics, we define a screen as a rectangle positioned at the plane \(z = -1\).  Everything in \(z \leq -1\) is considered "in front" of the screen and is projected to it, while everything in \(z > -1 \) is considered "behind" the screen and thrown away.
+            </p>
+            <img src="projection_01.jpg"  width="600" height="600" class="center">
+            <p>
+              Every point that falls within this quadrilateral will be seen.  To do this we will use a projection.
+            </p>
+  
+            <p>
+              A projection map, \(P\), is a map which satisfies \(PP = P\).  That is to say, for any vector \(v\), \(P(v) = P(P(v))\).
+              
+              All this definition means is that \(P\) is an identity map for all vectors in a subspace.  And if the vector is not in that subspace to begin with, it sends \(v\) to the subspace.  That way, \(P(v)\) is garunteed to be in the subspace on which \(P\) does nothing to.
+            </p>
 
-          <p>
-            For example, take the plane \(z = 0\) as a subspace of \(\mathbb{R}^3\).   A valid projection map \(P\) could be the one that simply replaces whatever is in the \(z\) slot with \(0\).  i.e,
-            $$
-            P(\begin{bmatrix} x\\ y\\ z\\ \end{bmatrix}) = \begin{bmatrix} x\\ y\\ 0\\ \end{bmatrix}\
-            $$
-            For example
-            $$
-            P(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
-            $$
-            $$
-            P(P(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix})) = P( \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
-            $$
-            since the \(z\) slot is already \(0\).  In this example, we send every vector not on the plane \(z = 0\) to \(z = 0\), and we send every vector already on the plane \(z = 0\) to itself.
-          </p>
-          <img src="projection_02.jpg"  width="700" height="400" class="center">
+            <p>
+              For example, take the plane \(z = 0\) as a subspace of \(\mathbb{R}^3\).   A valid projection map \(P\) could be the one that simply replaces whatever is in the \(z\) slot with \(0\).  i.e,
+              $$
+              P(\begin{bmatrix} x\\ y\\ z\\ \end{bmatrix}) = \begin{bmatrix} x\\ y\\ 0\\ \end{bmatrix}\
+              $$
+              For example
+              $$
+              P(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
+              $$
+              $$
+              P(P(\begin{bmatrix} 3\\ 2\\ 4\\ \end{bmatrix})) = P( \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}) = \begin{bmatrix} 3\\ 2\\ 0\\ \end{bmatrix}
+              $$
+              since the \(z\) slot is already \(0\).  In this example, we send every vector not on the plane \(z = 0\) to \(z = 0\), and we send every vector already on the plane \(z = 0\) to itself.
+            </p>
+            <img src="projection_02.jpg"  width="700" height="400" class="center">
 
-          <p>
-            The function we discussed above is actually called <em>orthographic projection</em>.
-          </p>
+            <p>
+              The function we discussed above is actually called <em>orthographic projection</em>.
+            </p>
 
-          <p>
-            This function satisfies linearity as you can verify.  In matrix form, it looks like 
-            $$
-            \begin{bmatrix}
-            1 & 0 & 0\\
-            0 & 1 & 0\\
-            0 & 0 & 0\\
-            \end{bmatrix}
-            $$
-          </p>
+            <p>
+              This function satisfies linearity as you can verify.  In matrix form, it looks like 
+              $$
+              \begin{bmatrix}
+              1 & 0 & 0\\
+              0 & 1 & 0\\
+              0 & 0 & 0\\
+              \end{bmatrix}
+              $$
+            </p>
 
-          <button id="pers-start-button" type="button">
-            Orthographic projection
-          </button>
-          <div id="perspective-projection-demo-start"></div>
+            <button id="pers-start-button" type="button">
+              Orthographic projection
+            </button>
+            <div id="perspective-projection-demo-start"></div>
 
-          <p>
-            Of course since all of our transformations happen in homogeneous coordinates, we must homogenize this matrix.  In homogeneous coordinates, the orthographic projection looks like:
-            $$
-            \begin{bmatrix}
-            1 & 0 & 0 & 0\\
-            0 & 1 & 0 & 0\\
-            0 & 0 & 0 & 0\\
-            0 & 0 & 0 & 1
-            \end{bmatrix}
-            $$
-            And as a result, we can describe what a vector in \(\mathbb{R}^3\) goes through when transformed by rotation, reflection, scaling, shearing, translation and then projection.
-          </p>
-          <p>
-            The problem here is that projection maps like this one only map to subspaces.  Since the plane \(z = -1\) is not a subspace of of \(\mathbb{R}^3\) (because it doesn't contain the origin), we need to manually take the output of the projection and put on the plane \(z = -1\) by appending a \(-1\) to the vector.  So the full pipeline looks like:
+            <p>
+              Of course since all of our transformations happen in homogeneous coordinates, we must homogenize this matrix.  In homogeneous coordinates, the orthographic projection looks like:
+              $$
+              \begin{bmatrix}
+              1 & 0 & 0 & 0\\
+              0 & 1 & 0 & 0\\
+              0 & 0 & 0 & 0\\
+              0 & 0 & 0 & 1
+              \end{bmatrix}
+              $$
+              And as a result, we can describe what a vector in \(\mathbb{R}^3\) goes through when transformed by rotation, reflection, scaling, shearing, translation and then projection.
+            </p>
+            <p>
+              The problem here is that projection maps like this one only map to subspaces.  Since the plane \(z = -1\) is not a subspace of of \(\mathbb{R}^3\) (because it doesn't contain the origin), we need to manually take the output of the projection and put on the plane \(z = -1\) by appending a \(-1\) to the vector.  So the full pipeline looks like:
 
-            $$
-            \mathbb{R^3}
-            \xrightarrow{H}
-            \mathcal{P}(\mathbb{R}^4)
-            \xrightarrow{M}
-            \mathcal{P}(\mathbb{R}^4)
-            \xrightarrow{O}
-            \mathcal{P}(\mathbb{R}^3)
-            \xrightarrow{H^{-1}}
-            \mathbb{R^2}
-            \xrightarrow{\text{append -1}}
-            \mathbb{R^3}
-            $$
+              $$
+              \mathbb{R^3}
+              \xrightarrow{H}
+              \mathcal{P}(\mathbb{R}^4)
+              \xrightarrow{M}
+              \mathcal{P}(\mathbb{R}^4)
+              \xrightarrow{O}
+              \mathcal{P}(\mathbb{R}^3)
+              \xrightarrow{H^{-1}}
+              \mathbb{R^2}
+              \xrightarrow{\text{append -1}}
+              \mathbb{R^3}
+              $$
 
-            Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(M\), the model matrix.  And \(O\) is the orthographic projection matrix.  And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
-          </p>
+              Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(M\), the model matrix.  And \(O\) is the orthographic projection matrix.  And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
+            </p>
 
-          <p>
-            As you might notice, the orthographic projection doesn't look quite normal.  This is because every line that is parallel in \(\mathbb{R}^3\) is preserved in \(\mathbb{R}^2\) under this projection.  As such it belongs to a class of projections called <em>parallel projections</em>
-          </p>
+            <p>
+              As you might notice, the orthographic projection doesn't look quite normal.  This is because every line that is parallel in \(\mathbb{R}^3\) is preserved in \(\mathbb{R}^2\) under this projection.  As such it belongs to a class of projections called <em>parallel projections</em>
+            </p>
 
-          <p>
-            These are used a lot in engineering and architecture where its valuable to quickly know which lines are parallel at a glance.
-          </p>
+            <p>
+              These are used a lot in engineering and architecture where its valuable to quickly know which lines are parallel at a glance.
+            </p>
+          <h1 id="oblique-projection">Oblique Projection</h1>
+            <p>
+              Another type of parallel projection is called <em>oblique projection</em>.  If the \(z\) axis is at an angle (i.e, if camera is staring down the \(z\) axis), then we can get a better feel for the 3D shape by viewing its sides.  Let this angle be \(\alpha\), then we define oblique projection as the following:
+              $$
+              O(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} x + \frac{1}{2}z\cos(\alpha)\\ y + \frac{1}{2}z\sin(\alpha)\\ 0\end{bmatrix}
+              $$
+              Again, this function also satisfies linearity and projection as you can verify.  It has the following matrix:
+              $$
+              \begin{bmatrix}
+              1 & 0 & \frac{1}{2}\cos(\alpha)\\
+              0 & 1 & \frac{1}{2}\sin(\alpha)\\
+              0 & 0 & 0\\
+              \end{bmatrix}
+              $$
+            </p>
 
-          <p>
-            Another type of parallel projection is called <em>oblique projection</em>.  If the \(z\) axis is at an angle (i.e, if camera is staring down the \(z\) axis), then we can get a better feel for the 3D shape by viewing its sides.  Let this angle be \(\alpha\), then we define oblique projection as the following:
-            $$
-            O(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} x + \frac{1}{2}z\cos(\alpha)\\ y + \frac{1}{2}z\sin(\alpha)\\ 0\end{bmatrix}
-            $$
-            Again, this function also satisfies linearity and projection as you can verify.  It has the following matrix:
-            $$
-            \begin{bmatrix}
-            1 & 0 & \frac{1}{2}\cos(\alpha)\\
-            0 & 1 & \frac{1}{2}\sin(\alpha)\\
-            0 & 0 & 0\\
-            \end{bmatrix}
-            $$
-          </p>
+            <button id="pers-oblique-button" type="button">
+              Oblique projection
+            </button>
+            <div id="perspective-projection-demo-oblique"></div>
 
-          <button id="pers-oblique-button" type="button">
-            Oblique projection
-          </button>
-          <div id="perspective-projection-demo-oblique"></div>
+            <p>
+              Here the red line indicates the front of the cube.  Use the slider to change the angle it is from the \(z\) axis.
+            </p>
+          <h1 id="perspective">Perspective</h1>
+            <p>
+              The problem with these parallel projections is that while they may be practical, they hardly look 3D.  That is because of <em>perspective</em>.  Perspective is a distortion of parallel lines caused by them converging at a focal point.  This is more accurate to real life because rays of light converge at our eye.
+            </p>
 
-          <p>
-            Here the red line indicates the front of the cube.  Use the slider to change the angle it is from the \(z\) axis.
-          </p>
-
-          <p>
-            The problem with these parallel projections is that while they may be practical, they hardly look 3D.  That is because of <em>perspective</em>.  Perspective is a distortion of parallel lines caused by them converging at a focal point.  This is more accurate to real life because rays of light converge at our eye.
-          </p>
-
-          <img src="projection_03.jpg"  width="600" height="600" class="center">
+            <img src="projection_03.jpg"  width="600" height="600" class="center">
 
 
-          <p>
-            The effect this has is that objects which are further away from the focal point look smaller, and objects which are closer look larger.  That means the \(x\) and \(y\) positions in \(\mathbb{R}^2\) after projection are some function of \(z\).
-          </p>
+            <p>
+              The effect this has is that objects which are further away from the focal point look smaller, and objects which are closer look larger.  That means the \(x\) and \(y\) positions in \(\mathbb{R}^2\) after projection are some function of \(z\).
+            </p>
 
-          <p>
-            To derive this function, let us walk through an example.  Take 2D slice of a scene where a unit box sits at \(z = -3\).
-          </p>
+            <p>
+              To derive this function, let us walk through an example.  Take 2D slice of a scene where a unit box sits at \(z = -3\).
+            </p>
 
-          <img src="projection_04.jpg"  width="800" height="600" class="center">
+            <img src="projection_04.jpg"  width="800" height="600" class="center">
 
-          <p>
-            This forms a triangle with the end of it being the side of the box, and a similar triangle where the screen intersects the it at \(z = -1\).  That means we can bisect the tringle and use the proportion to solve for the length of the side displayed on the screen.
-          </p>
+            <p>
+              This forms a triangle with the end of it being the side of the box, and a similar triangle where the screen intersects the it at \(z = -1\).  That means we can bisect the tringle and use the proportion to solve for the length of the side displayed on the screen.
+            </p>
 
-          <img src="projection_05.jpg"  width="700" height="500" class="center"> 
+            <img src="projection_05.jpg"  width="700" height="500" class="center"> 
 
-          <p>
+            <p>
   
 
-           $$
-           \frac{\frac{1}{2}}{3} = \frac{x}{1}$$
-         $$  x = \frac{1}{6}
-           $$
-           Then repeat for the right triangle, and we get
-          </p>
-
-          <img src="projection_06.jpg"  width="800" height="600" class="center">
-
-          <p>
-            If we generalize this function, we see that for a given point, we divide its \(x\) by the negative of its \(z\) (i.e, \(-z\) ) to get the corresponding \(x\) on the screen.
             $$
-            x' = \frac{x}{-z}
-            $$The same logic applys to the \(y\) coordinate.
-          </p>
-
-
-          <p>
-            Let \(P\) be the perspective projection function.
-            We define it
-            $$
-            P(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} \frac{x}{-z}\\  \frac{y}{-z} \\0\end{bmatrix}
-            $$
-          </p>
-
-          <p>
-            Except what we <em>really</em> want is to end up with the vector \(\begin{bmatrix} \frac{x}{-z}\\  \frac{y}{-z} \\ -1\end{bmatrix}\)  Let's see if we can avoid having to tack on a \(-1\) after performing our projection and instead do it all at once.
-          </p>
-
-          <p>
-            Conceptually, if we tried to develop a transformation which encodes these divisions, we might start out trying to represent \(x'\), \(y'\), and \(z'\)&mdash; the result of perspective projection&mdash; as a system of equations: 
-            
-            $$x' = \frac{1}{-z} \cdot x + 0 \cdot y + 0 \cdot z$$
-            $$y' = 0 \cdot x + \frac{1}{-z} \cdot y + 0 \cdot z$$
-            $$z' = 0 \cdot x + 0 \cdot y + 0 \cdot z$$
-            If we arranged these weights as we would for a matrix, we would get
-          </p>
-          <p>
-            $$
-            \begin{bmatrix}
-            \frac{x}{-z}\\
-            \frac{y}{-z}\\
-            0\\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            \frac{1}{-z} & 0 & 0\\
-            0 & \frac{1}{-z} & 0\\
-            0 & 0 & 0\\
-            \end{bmatrix}
-            \begin{bmatrix}
-            x\\
-            y\\
-            z\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-
-          </p>
-          <p>
-            And since these transformations happen in homogeneous space, we must homogeneize.
-          </p>
-          <p>
-            $$
-            \begin{bmatrix}
-            \frac{x}{-z}\\
-            \frac{y}{-z}\\
-            0\\
-            1\\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            \frac{1}{-z} & 0 & 0 & 0\\
-            0 & \frac{1}{-z} & 0 & 0\\
-            0 & 0 & 0 & 0\\
-            0 & 0 & 0 & 1\\
-            \end{bmatrix}
-            \begin{bmatrix}
-            x\\
-            y\\
-            z\\
-            1\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-            Okay now we are a bit closer, but the "matrix" is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
-            It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation that sends 
-            $$
-            \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ 1\end{bmatrix}
-            $$ we make it
-            send 
-            $$
-            \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y \\ 0\\ -z\end{bmatrix}
-            $$  
-            since
-            $$
-            \begin{bmatrix}
-            x\\
-            y\\
-            0\\
-            -z\\
-            \end{bmatrix}
-            = 
-            -z
-            \begin{bmatrix}
-            \frac{x}{-z}\\
-            \frac{y}{-z}\\
-            0\\
-            1\\
-            \end{bmatrix}
-            $$
-          
-            and are therefore proportional, or <em>equal</em> under homogeneous coordinates
-          </p>
-          <p>
-            Actually, if we take it one step further:
-            $$
-            \begin{bmatrix}
-            x\\
-            y\\
-            z\\
-            -z\\
-            \end{bmatrix}
-            = 
-            -z
-            \begin{bmatrix}
-            \frac{x}{-z}\\
-            \frac{y}{-z}\\
-            -1\\
-            1\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-            This means we can send the vector to \(z = -1\) at no extra cost.  i.e, no extra transformation.
-          </p>
-          <p>
-            This is a lot easier to deal with.  Again, if we write these values as a system of equations we would get
-            
-            $$x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w$$
-            $$y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w$$
-            $$z' = z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w$$
-            $$w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w$$
-            
-            Giving us the following, more proper looking, matrix
-          </p>
-          <p>
-            $$
-            \begin{bmatrix}
-            x\\
-            y\\
-            z\\
-            -z\\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            1 & 0 & 0 & 0\\
-            0 & 1 & 0 & 0\\
-            0 & 0 & 1 & 0\\
-            0 & 0 & -1 & 0\\
-            \end{bmatrix}
-            \begin{bmatrix}
-            x\\
-            y\\
-            z\\
-            1\\
-            \end{bmatrix}
-            $$
-          </p>
-          <p>
-            Now <i>thats</i> linear!  Our final transformation pipeline looks like this:
-            $$
-            \mathbb{R^3}
-            \xrightarrow{H}
-            \mathcal{P}(\mathbb{R}^4)
-            \xrightarrow{M}
-            \mathcal{P}(\mathbb{R}^4)
-            \xrightarrow{P}
-            \mathcal{P}(\mathbb{R}^4)
-            \xrightarrow{H^{-1}}
-            \mathbb{R^3}
-            $$
-            Just as it looked like before except replace orthographic projection \(O\) with perspective projection \(P\).  And note that, 
+            \frac{\frac{1}{2}}{3} = \frac{x}{1}$$
+            $$  x = \frac{1}{6}
               $$
-              H^{-1}(\begin{bmatrix}
+              Then repeat for the right triangle, and we get
+              </p>
+
+              <img src="projection_06.jpg"  width="800" height="600" class="center">
+
+              <p>
+                If we generalize this function, we see that for a given point, we divide its \(x\) by the negative of its \(z\) (i.e, \(-z\) ) to get the corresponding \(x\) on the screen.
+                $$
+                x' = \frac{x}{-z}
+                $$The same logic applys to the \(y\) coordinate.
+              </p>
+
+
+            <p>
+              Let \(P\) be the perspective projection function.
+              We define it
+              $$
+              P(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} \frac{x}{-z}\\  \frac{y}{-z} \\0\end{bmatrix}
+              $$
+            </p>
+
+              <p>
+                Except what we <em>really</em> want is to end up with the vector \(\begin{bmatrix} \frac{x}{-z}\\  \frac{y}{-z} \\ -1\end{bmatrix}\)  Let's see if we can avoid having to tack on a \(-1\) after performing our projection and instead do it all at once.
+              </p>
+
+              <p>
+                Conceptually, if we tried to develop a transformation which encodes these divisions, we might start out trying to represent \(x'\), \(y'\), and \(z'\)&mdash; the result of perspective projection&mdash; as a system of equations: 
+                
+                $$x' = \frac{1}{-z} \cdot x + 0 \cdot y + 0 \cdot z$$
+                $$y' = 0 \cdot x + \frac{1}{-z} \cdot y + 0 \cdot z$$
+                $$z' = 0 \cdot x + 0 \cdot y + 0 \cdot z$$
+                If we arranged these weights as we would for a matrix, we would get
+              </p>
+              <p>
+                $$
+                \begin{bmatrix}
+                \frac{x}{-z}\\
+                \frac{y}{-z}\\
+                0\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                \frac{1}{-z} & 0 & 0\\
+                0 & \frac{1}{-z} & 0\\
+                0 & 0 & 0\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                \end{bmatrix}
+                $$
+              </p>
+              <p>
+
+              </p>
+              <p>
+                And since these transformations happen in homogeneous space, we must homogeneize.
+              </p>
+              <p>
+                $$
+                \begin{bmatrix}
+                \frac{x}{-z}\\
+                \frac{y}{-z}\\
+                0\\
+                1\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                \frac{1}{-z} & 0 & 0 & 0\\
+                0 & \frac{1}{-z} & 0 & 0\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 1\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                1\\
+                \end{bmatrix}
+                $$
+              </p>
+              <p>
+                Okay now we are a bit closer, but the "matrix" is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
+                It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation that sends 
+                $$
+                \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ 1\end{bmatrix}
+                $$ we make it
+                send 
+                $$
+                \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y \\ 0\\ -z\end{bmatrix}
+                $$  
+                since
+                $$
+                \begin{bmatrix}
+                x\\
+                y\\
+                0\\
+                -z\\
+                \end{bmatrix}
+                = 
+                -z
+                \begin{bmatrix}
+                \frac{x}{-z}\\
+                \frac{y}{-z}\\
+                0\\
+                1\\
+                \end{bmatrix}
+                $$
+              
+                and are therefore proportional, or <em>equal</em> under homogeneous coordinates
+              </p>
+              <p>
+                Actually, if we take it one step further:
+                $$
+                \begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                -z\\
+                \end{bmatrix}
+                = 
+                -z
+                \begin{bmatrix}
+                \frac{x}{-z}\\
+                \frac{y}{-z}\\
+                -1\\
+                1\\
+                \end{bmatrix}
+                $$
+              </p>
+              <p>
+                This means we can send the vector to \(z = -1\) at no extra cost.  i.e, no extra transformation.
+              </p>
+            <p>
+              This is a lot easier to deal with.  Again, if we write these values as a system of equations we would get
+              
+              $$x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w$$
+              $$y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w$$
+              $$z' = z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w$$
+              $$w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w$$
+              
+              Giving us the following, more proper looking, matrix
+            </p>
+            <p>
+              $$
+              \begin{bmatrix}
               x\\
               y\\
               z\\
               -z\\
-              \end{bmatrix})
+              \end{bmatrix}
               =
               \begin{bmatrix}
-              \frac{x}{-z}\\
-              \frac{y}{-z}\\
-              -1\\
-              \end{bmatrix}$$
-              which is exactly what we wanted!
-          </p>
+              1 & 0 & 0 & 0\\
+              0 & 1 & 0 & 0\\
+              0 & 0 & 1 & 0\\
+              0 & 0 & -1 & 0\\
+              \end{bmatrix}
+              \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              1\\
+              \end{bmatrix}
+              $$
+            </p>
+            <p>
+              Now <i>thats</i> linear!  Our final transformation pipeline looks like this:
+              $$
+              \mathbb{R^3}
+              \xrightarrow{H}
+              \mathcal{P}(\mathbb{R}^4)
+              \xrightarrow{M}
+              \mathcal{P}(\mathbb{R}^4)
+              \xrightarrow{P}
+              \mathcal{P}(\mathbb{R}^4)
+              \xrightarrow{H^{-1}}
+              \mathbb{R^3}
+              $$
+              Just as it looked like before except replace orthographic projection \(O\) with perspective projection \(P\).  And note that, 
+                $$
+                H^{-1}(\begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                -z\\
+                \end{bmatrix})
+                =
+                \begin{bmatrix}
+                \frac{x}{-z}\\
+                \frac{y}{-z}\\
+                -1\\
+                \end{bmatrix}$$
+                which is exactly what we wanted!
+            </p>
 
-          
-          <p>
-            And there we have it.  The perspective projection matrix and the translation matrix, two useful applications of homogeneous coordinates in computer vision! 
-          </p>
+            
+            <p>
+              And there we have it.  The perspective projection matrix and the translation matrix, two useful applications of homogeneous coordinates in computer vision! 
+            </p>
         </div>
       </div>
     </div>
