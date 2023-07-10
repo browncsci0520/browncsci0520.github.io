@@ -477,17 +477,17 @@
             These transforms are linear because they satisfy two properties:  <a href="https://en.wikipedia.org/wiki/Linear_map#Definition_and_first_consequences" target="_blank">additivity and homogeneity</a>.
           </p>
           <p>
-            We compose the rotation, reflection, scaling, and shearing into one final matrix: the affine matrix, or \(A\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting model matrix.
+            We compose the rotation, reflection, scaling, and shearing into one final matrix: the <em>affine matrix</em>, or \(A\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting model matrix.
           </p>
           <p>
-            Why do we call this an affine matrix? That's because affine transformation is basically just a combination of reflection, rotation, scaling, and shear transformations. It also preserves points and straight lines, which is what's exactly happening here.
+            Why do we call this an affine matrix? That's because affine transformation is basically just a combination of reflection, rotation, scaling, and shear transformations. It also preserves points and straight lines, which is exactly what's happening here.
           </p>
           <p>
             Notice what's missing from this list of common transformations of 2D geometry: translation. Translation moves a point around in space.  We can use it to describe any displacement of an object in a scene.  For example, translating ball rolling on the floor, an egg falling from a skyscraper, a car driving down the road, etc.  Let's derive a function that will do this for us.  </p>
             <p>
               First think about what a translation of \(2\) units to the left and \(3\) units up does to a vector \((1,2)\) in \( \mathbb{R}^2 \).  It results in a vector \((1 - 2, 2 + 3)\) or \((-1, 5)\).  
-            If we generalize this function for any vector \((x, y)\) and any translation right by \(A\) and up by \(B\), then we define $$
-              T(x, y) = (x + A, y + B)
+            If we generalize this function for any vector \((x, y)\) and any translation right by \(a\) and up by \(b\), then we define $$
+              T(x, y) = (x + a, y + b)
               $$ or in a more vector friendly notation, $$ T(   
               \begin{bmatrix}
               x\\
@@ -498,10 +498,10 @@
               y
               \end{bmatrix} +
               \begin{bmatrix}
-              A\\
-              B
+              a\\
+              b
               \end{bmatrix} $$
-              Where \(A\) and \(B\) are stored in a vector called the translation vector.
+              Where \(a\) and \(b\) are stored in a vector called the translation vector.
           </p>
           <p>
             The trouble is that this function is not linear.  Why might this be?
@@ -516,8 +516,8 @@
             y
             \end{bmatrix}) = \lambda
               \begin{bmatrix}
-            x + A\\
-            y + B
+            x + a\\
+            y + b
             \end{bmatrix} \neq
             \lambda
             \begin{bmatrix}
@@ -526,8 +526,8 @@
               \end{bmatrix}
               +
               \begin{bmatrix}
-              A\\
-              B
+              a\\
+              b
               \end{bmatrix}
               =
             T(\lambda \begin{bmatrix}
@@ -540,11 +540,11 @@
          
     
           <p>
-            In computer vision, how do we translate \(\begin{bmatrix}x\\y\end{bmatrix}\) by some vector \(\begin{bmatrix}A\\B\end{bmatrix}\)?
+            In computer vision, how do we translate \(\begin{bmatrix}x\\y\end{bmatrix}\) by some vector \(\begin{bmatrix}a\\b\end{bmatrix}\)?
           </p>
   
           <p>
-            If we apply the model matrix to the vector first, we have \(M(
+            If we apply the affine matrix to the vector first, we have \(A(
             \begin{bmatrix}
             x\\
             y
@@ -552,28 +552,28 @@
 
             Then when we plug it into \(T\) we get
             $$
-            T(M(\begin{bmatrix}
+            T(A(\begin{bmatrix}
             x\\
             y
             \end{bmatrix})) =
-            M
+            A
             (\begin{bmatrix}
               x\\
               y
               \end{bmatrix})
             +
             \begin{bmatrix}
-              A\\
-              B
+              a\\
+              b
               \end{bmatrix}
             $$
-            If we do no transformations before translation, \(M\) is just the identity matrix.
+            If we do no transformations before translation, \(A\) is just the identity matrix.
           </p>
           <p>
             $$
             \begin{bmatrix}
-            x + A\\
-            y + B
+            x + a\\
+            y + b
             \end{bmatrix}
             =
             \begin{bmatrix}
@@ -586,8 +586,8 @@
             \end{bmatrix}
             +
             \begin{bmatrix}
-            A\\
-            B
+            a\\
+            b
             \end{bmatrix}
             $$
           </p>
@@ -596,7 +596,7 @@
           </p>
           <p>
             We lose the ability to compose every transformation we want into one matrix.  Under this model,
-            we always have to keep track of displacement from the origin in a seperate vector that we add to the end of the linear transformation established by \(M\).  Or, even worse, if we want to translate after rotating but before shearing, we'd have to decompose \(M\) into at least two different matrices so we can apply \(T\) in between.
+            we always have to keep track of displacement from the origin in a seperate vector that we add to the end of the linear transformation established by \(A\).  Or, even worse, if we want to translate after rotating but before shearing, we'd have to decompose \(A\) into at least two different matrices so we can apply \(T\) in between.
 <p>
           </p>
             In computationally intensive graphics operations, using so many matrices per vertex slows everything down.  We would like to keep <em>all</em> transformations in one matrix&mdash;  no extra additions or bookkeeping.  
