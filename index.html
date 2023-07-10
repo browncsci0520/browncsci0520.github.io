@@ -713,8 +713,8 @@
               becomes composable with our "2D translation" matrix (which is a 3D shear).      
             </p>
           <h1 id="composing-all-transformations">Composing All Transformations</h1>
-            <button id="full-transform-button"
-              type="button">
+            <button id="full-transform-button" type="button"
+            style="width: 200px; height: 50px; font-family: Georgia; font-size: 17px;">
             Encode Translation
             </button>
             <div id="affine-transform-demo-input-full-transform"></div>
@@ -844,7 +844,8 @@
               To get a better handle for why we describe translation with these coordinates, let us explore translation one dimension lower.
             </p>
 
-            <button id="proj-start-button" type="button">
+            <button id="proj-start-button" type="button"
+            style="width: 140px; height: 50px; font-family: Georgia; font-size: 15px;">
               1D Translation
             </button>
 
@@ -868,7 +869,8 @@
               To see how this is the case in practice, try grabbing a lambda to multiply the blue dot by and see where it (red dot) lands in \(\mathbb{R}^2\)
             </p>
 
-            <button id="proj-subspace-button" type="button">
+            <button id="proj-subspace-button" type="button"
+            style="width: 80px; height: 50px; font-family: Georgia; font-size: 15px;">
               Subspace
             </button>
 
@@ -884,7 +886,8 @@
               If we take this one step further and draw all the lines in \(\mathbb{R}^2\) which correspond to the blue dots on \(y = 1\) we get the following:
             </p>
 
-            <button id="proj-line-button" type="button">
+            <button id="proj-line-button" type="button"
+            style="width: 150px; height: 50px; font-family: Georgia; font-size: 15px;">
               Projective Line
             </button>
 
@@ -987,7 +990,8 @@
               The range of this function we know as the plane \(z = 1\), in this context renamed as the <em>projective plane</em>.  We visualize it here.
             </p>
 
-            <button id="proj-plane-button" type="button">
+            <button id="proj-plane-button" type="button"
+            style="width: 150px; height: 50px; font-family: Georgia; font-size: 15px;">
               Projective Plane
             </button>
 
@@ -996,7 +1000,8 @@
             <p>We can also further generalize our \(H\) and \(H^{-1}\) functions by allowing for a choice of <em>projective frame</em>.  A projective frame is the chosen subspace of \(\mathbb{R}^{n + 1}\) to represent \(\mathbb{R}^{n}\).  We've used the plane \(z = 1\) and the line \(y = 1\) up until now.  We could instead choose \(z = 2\) or \(y = 2\).  How does this affect \(H\) and \(H^{-1}\)?</p>  
 
 
-            <button id="proj-frame-button" type="button">
+            <button id="proj-frame-button" type="button"
+            style="width: 150px; height: 50px; font-family: Georgia; font-size: 15px;">
               Projective Frame
             </button>
 
@@ -1075,8 +1080,8 @@
               If we take the four points in space which make up a square in \(\mathbb{R}^2\), homogenize them, and then send the subspaces of \(\mathbb{R}^3\) which they induce through a shear parallel to the \(z\) axis, we get the following:
             </p>
 
-            <button id="proj-translation-button"
-            type="button">
+            <button id="proj-translation-button" type="button"
+            style="width: 80px; height: 50px; font-family: Georgia; font-size: 15px;">
             Translate
             </button>
             <div id="projective-geometry-demo-input-translate"></div>
@@ -1170,8 +1175,9 @@
               $$
             </p>
 
-            <button id="pers-start-button" type="button">
-              Orthographic Projection
+            <button id="pers-start-button" type="button"
+            style="width: 250px; height: 50px; font-family: Georgia; font-size: 15px;">
+              Show 3D and Projected Views
             </button>
             <div id="perspective-projection-demo-start"></div>
 
@@ -1232,7 +1238,7 @@
 
             <button id="pers-oblique-button" type="button" 
             style="width: 180px; height: 50px; font-family: Georgia; font-size: 17px;">
-              Show Matrix
+              Tweak Matrix
             </button>
             <div id="perspective-projection-demo-oblique"></div>
 
