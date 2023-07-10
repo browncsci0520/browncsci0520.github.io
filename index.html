@@ -627,6 +627,7 @@
         </div>
         <div>
           <h2 id="encoding-translation">Encoding Translation</h2>
+
             <h1 id="extending-2D-to-3D">Extending 2D to 3D</h1>
             <p>
               So how can we express translation as a linear transform? 
@@ -891,8 +892,8 @@
             </p>
 
             <button id="proj-subspace-button" type="button"
-            style="width: 80px; height: 50px; font-family: Georgia; font-size: 17px;">
-              Subspace
+            style="width: 180px; height: 50px; font-family: Georgia; font-size: 17px;">
+              Move the dots
             </button>
 
             <div id="projective-geometry-demo-input-subspace"></div>
@@ -902,7 +903,7 @@
               Refering back to our earlier definition of homogeneous coordinate, since every point on the red line proportional by some lambda to the blue dot,
               the red line contains every vector equal to the blue dot in \(\mathcal{P}(\mathbb{R}^2)\)
             </p>
-
+            
             <p>
               If we take this one step further and draw all the lines in \(\mathbb{R}^2\) which correspond to the blue dots on \(y = 1\) we get the following:
             </p>
@@ -914,7 +915,10 @@
 
             <div id="projective-geometry-demo-input-line"></div>
 
-
+            <p>
+              Since each red line is a subspace of \(\mathbb{R}^2\), we know that each individual point will represent an individual subspace. 
+              By varying the number of subspaces shown, we'll see different numbers of red lines.
+            </p>
             <p>
               Of course we can't show every line because there are infinitely many, so you can use the slider to show more or fewer lines. Note how each line through the origin in \(\mathbb{R}^2\) corresponds exactly to one point on \(y = 1\).
             </p>
