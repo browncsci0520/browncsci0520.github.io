@@ -613,7 +613,7 @@
             </p>
             <button id="animate-button"
               type="button">
-            Animation
+            Extend Dimensions
             </button>
             <div id="affine-transform-demo-input-animate"></div>
             <p>Adjust the values in the shear matrix and watch how it affects the cross section (highlighted in red) with our plane</p>
@@ -630,14 +630,14 @@
               \end{bmatrix}
               =
               \begin{bmatrix}
-              x + zA\\
-              y + zB\\
+              x + za\\
+              y + zb\\
               z\\
               \end{bmatrix}
               =
               \begin{bmatrix}
-              1 & 0 & A\\
-              0 & 1 & B\\
+              1 & 0 & a\\
+              0 & 1 & b\\
               0 & 0 & 1\\
               \end{bmatrix}
               \begin{bmatrix}
@@ -648,21 +648,21 @@
               $$
             </p>
             <p>
-              By factoring, we see that \( \begin{bmatrix}x'\\y'\\\end{bmatrix} = \begin{bmatrix}x\\y\\\end{bmatrix} + z\begin{bmatrix}A\\B\\\end{bmatrix}\) indicating we have a translation
-              in \(x\) and \(y\) on each plane parallel to \(z\) by a vector \(\begin{bmatrix}A\\B\\\end{bmatrix}\) proportional to \(z\).  Which if we recall, is
+              By factoring, we see that \( \begin{bmatrix}x'\\y'\\\end{bmatrix} = \begin{bmatrix}x\\y\\\end{bmatrix} + z\begin{bmatrix}a\\b\\\end{bmatrix}\) indicating we have a translation
+              in \(x\) and \(y\) on each plane parallel to \(z\) by a vector \(\begin{bmatrix}a\\b\\\end{bmatrix}\) proportional to \(z\).  Which if we recall, is
               exactly the definition of a shear along the \(z\) axis.  And for the plane \(z = 1\) (our chosen plane to represent all of \(\mathbb{R}^2\)), we have the following:
             </p>
             <p>
               $$
               \begin{bmatrix}
-              x + A\\
-              y + B\\
+              x + a\\
+              y + b\\
               1\\
               \end{bmatrix}
               =
               \begin{bmatrix}
-              1 & 0 & A\\
-              0 & 1 & B\\
+              1 & 0 & a\\
+              0 & 1 & b\\
               0 & 0 & 1\\
               \end{bmatrix}
               \begin{bmatrix}
@@ -673,7 +673,7 @@
               $$
             </p>
             <p>
-              So for any point on the \(z = 1\) plane, this 3D shear translates its \(x\) and \(y\) coordinates exactly by our \(A\) and \(B\) values.  Meaning
+              So for any point on the \(z = 1\) plane, this 3D shear translates its \(x\) and \(y\) coordinates exactly by our \(a\) and \(b\) values.  Meaning
               we can recover the new 2D translated point by ignoring the \(z\) coordinate.
             </p>
             <p>
@@ -682,21 +682,21 @@
             </p>
             <p>
               It is simple to represent a 2D linear map with 3 dimensions.  Suppose some linear map looks like
-              \(T(\begin{bmatrix}x\\y\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\\end{bmatrix}\).  Then in 3D, it would be \(T(\begin{bmatrix}x\\y\\z\\\end{bmatrix}) = \begin{bmatrix}Ax + By\\Cx + Dy\\z\end{bmatrix}\) where simply nothing happends to the \(z\) axis.
+              \(T(\begin{bmatrix}x\\y\\\end{bmatrix}) = \begin{bmatrix}ax + by\\cx + dy\\\end{bmatrix}\).  Then in 3D, it would be \(T(\begin{bmatrix}x\\y\\z\\\end{bmatrix}) = \begin{bmatrix}ax + by\\cx + dy\\z\end{bmatrix}\) where simply nothing happends to the \(z\) axis.
               In matrix form, this places the original matrix inside the upper left region of the identity matrix of \(\mathbb{R}^3\).
             </p>
             <p>
               $$
               \begin{bmatrix}
-              A & B\\
-              C & D\\
+              a & b\\
+              c & d\\
               \end{bmatrix}
               $$
               becomes
               $$
               \begin{bmatrix}
-              A & B & 0\\
-              C & D & 0\\
+              a & b & 0\\
+              c & d & 0\\
               0 & 0 & 1\\
               \end{bmatrix}
               $$
@@ -708,7 +708,7 @@
           <h1 id="composing-all-transformations">Composing All Transformations</h1>
             <button id="full-transform-button"
               type="button">
-            Full transform
+            Full Transform
             </button>
             <div id="affine-transform-demo-input-full-transform"></div>
             <p>
