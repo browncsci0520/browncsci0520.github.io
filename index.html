@@ -26,13 +26,10 @@
         <li> <a href="index.html">Home</a> </li>
         <li> <a href="#introduction">Why's Translation Special?</a> </li>
         <li> <a href="#encoding-translation">Encoding Translation</a>
-          <li>
-            <a href="#extending-2D-to-3D">Extending 2D to 3D</a>
-          </li>
-          <li>
-            <a href="#composing-all-transformations">Composing All Transformations</a>
-          </li>
-         </li>
+          <ul>
+            <li><a href="#extending-2D-to-3D">Extending 2D to 3D</a></li>
+            <li><a href="#composing-all-transformations">Composing All Transformations</a></li>
+          </ul>
         <li> <a href="#homogeneous-coordinates">Homogeneous Coordinates</a> </li>
         <li> <a href="#projection-and-perspective">Projection and Perspective</a> </li>
 
@@ -456,7 +453,7 @@
       <div id="content">
         <div>
         
-          <h1 id="introduction">Why's Translation Special?</h1>
+          <h2 id="introduction">Why's Translation Special?</h2>
           <p>
             By now we have learned how to represent linear maps&mdash;or <em>transforms</em>&mdash;with mathematical objects called matrices. 
             Matrices are  useful in computer vision because they are <em>composable</em>: 
@@ -611,8 +608,8 @@
 
         </div>
         <div>
-          <h1 id="encoding-translation">Encoding Translation</h1>
-            <h2 id="extending-2D-to-3D">Extending 2D to 3D</h2>
+          <h2 id="encoding-translation">Encoding Translation</h2>
+            <h1 id="extending-2D-to-3D">Extending 2D to 3D</h1>
             <p>
               So how can we express translation as a linear transform? 
               If we think about our space in \(\mathbb{R}^2\) as a plane in \(\mathbb{R}^3\), and extend our 2D geometry to 3D, then we can encode a 2D translation as the shearing of the extended geometry along the \(z\) axis.
@@ -712,7 +709,7 @@
               If we do this for all of our former 2D tranformation matrices, then everything
               becomes composable with our "2D translation" matrix (which is a 3D shear).      
             </p>
-          <h2 id="composing-all-transformations">Composing All Transformations</h2>
+          <h1 id="composing-all-transformations">Composing All Transformations</h1>
             <button id="full-transform-button"
               type="button">
             Full transform
@@ -756,7 +753,7 @@
             </p>
         </div>
         <div>
-          <h1 id="homogeneous-coordinates">Homogeneous Coordinates</h1>
+          <h2 id="homogeneous-coordinates">Homogeneous Coordinates</h2>
           <p>
             We call the coordinate system of this intermediate 'higher-dimension-to-encode-lower-dimension' world <i>homogeneous coordinates</i>.  And likewise, adding the 1 in the 
             \(z\) slot for our originally 2D coordinate is called homogenizing that coordinate, while recovering the 2D coordinate from the homogeneous 3D coordinate by ignoring the \(z\) slot is called
@@ -1088,7 +1085,7 @@
          
         </div>
         <div>
-          <h1 id="projection-and-perspective">Projection and Perspective</h1>
+          <h2 id="projection-and-perspective">Projection and Perspective</h2>
           <p>
             In computer graphics we don't always focus on how to model geometric transforms in 2D.  Our world is three dimensional.  So how would this concept of using homogeneous coordinates to encode a translation work for a 3D geometry?
           </p>
