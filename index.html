@@ -1499,7 +1499,7 @@
                 1\\
                 \end{bmatrix}
                 =
-                B(
+                F_0(
                   \begin{bmatrix}
                 x\\
                 y\\
@@ -1508,26 +1508,17 @@
                 \end{bmatrix}
                 )
                 $$, 
-              where \(B\) is the transformation matrix resulting from composing \(F\) and \(H\). 
+              where \(F_0\) is the transformation matrix resulting from composing \(F\) and \(H\). 
               </p>
               <p>
-                Okay now we are a bit closer, but the matrix \(B\)is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
-                It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation \(B\) that sends 
+                Okay now we are a bit closer, but the matrix \(F_0\)is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
+                It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation \(F_0\) that sends 
                 $$
-                \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ 1\end{bmatrix}
+                F_0(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix}) = \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ 1\end{bmatrix}
                 $$ we make it
                 send 
                 $$
-                \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} x\\ y \\ 0\\ -z\end{bmatrix}
-                $$  
-                since
-                $$
-                \begin{bmatrix}
-                x\\
-                y\\
-                0\\
-                -z\\
-                \end{bmatrix}
+                F_1(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix})
                 = 
                 -z
                 \begin{bmatrix}
@@ -1536,19 +1527,17 @@
                 0\\
                 1\\
                 \end{bmatrix}
+                = \begin{bmatrix} x\\ y \\ 0\\ -z\end{bmatrix}
+                
+                
                 $$
               
-                and are therefore proportional, or <em>equal</em> under homogeneous coordinates
+                , where the second equivalence comes from the fact that the coordinates are proportional, or <em>equal</em> under homogeneous coordinates.
               </p>
               <p>
                 Actually, if we take it one step further:
                 $$
-                \begin{bmatrix}
-                x\\
-                y\\
-                z\\
-                -z\\
-                \end{bmatrix}
+                F_p(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix})
                 = 
                 -z
                 \begin{bmatrix}
@@ -1557,6 +1546,14 @@
                 -1\\
                 1\\
                 \end{bmatrix}
+                =
+                \begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                -z\\
+                \end{bmatrix}
+                
                 $$
               </p>
               <p>
@@ -1568,14 +1565,16 @@
               \begin{cases}
                 x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w \\
                 y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w \\
-                z' = -z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w\\
-                w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w \\
+                z' = z = 0 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w\\
+                w' = -z = 1 \cdot x + 0 \cdot y + (-1) \cdot z + 0 \cdot w \\
               \end{cases}
               $$
               Giving us the following, more proper looking, matrix
             </p>
             <p>
               $$
+              F_p(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix})
+              =
               \begin{bmatrix}
               x\\
               y\\
@@ -1598,14 +1597,14 @@
               $$
             </p>
             <p>
-              Now <i>thats</i> linear!  Our final transformation pipeline looks like this:
+              Now <i>thats</i> linear!  And this \(F_p\) will be our improved and final perspective projection matrix. Our resulting transformation pipeline looks like this:
               $$
               \mathbb{R^3}
               \xrightarrow{H}
               \mathcal{P}(\mathbb{R}^4)
               \xrightarrow{M}
               \mathcal{P}(\mathbb{R}^4)
-              \xrightarrow{F}
+              \xrightarrow{F_p}
               \mathcal{P}(\mathbb{R}^4)
               \xrightarrow{H^{-1}}
               \mathbb{R^3}
@@ -1634,17 +1633,26 @@
               )
               =
               \begin{bmatrix}
-              \lambda x'\\
-              \lambda y'\\
-              \lambda z'\\
-              \lambda \\
+              x'\\
+              y'\\
+              z'\\
+              1 \\
               \end{bmatrix}
-              \xrightarrow{F}
-              \mathcal{P}(\mathbb{R}^4)
+              \xrightarrow{F_p}
+              \begin{bmatrix}
+              x'\\
+              y'\\
+              z'\\
+              -z' \\
+              \end{bmatrix}
               \xrightarrow{H^{-1}}
-              \mathbb{R^3}
+              \begin{bmatrix}
+              \frac{x'}{-z'}\\
+              \frac{y'}{-z'}\\
+              -1\\
+              \end{bmatrix}
               $$
-              Just as it looked like before except replace orthographic projection \(O\) with perspective projection \(F\).  And note that, 
+              Just as it looked like before except replace orthographic projection \(O\) with perspective projection \(F_p\).  And note that, 
                 $$
                 H^{-1}(\begin{bmatrix}
                 x\\
