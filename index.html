@@ -436,7 +436,7 @@
                 </div>
               </div>
               <div class="demo-sliders">
-                <p>\( \alpha\)</p>
+                <p>Move slider below to change \( \alpha\) to vary the angle between the \(z\) axis and the front of cube</p>
                 <input type="range" min="0" max="6.28318530718" step="0.1" value="0" class="slider" id="oblique-angle-slider">
               </div>
             </div>
@@ -1179,12 +1179,15 @@
             <p>
               In \(\mathcal{P}(\mathbb{R}^4)\), the 4D shear matrix encodes a 3D translation.  As such, for a translation of \(a\) in the \(x\) direction, \(b\) in the \(y\) direction, and \(c\) in the \(z\) direction, we would apply the following matrix:
               $$
+              T(\begin{bmatrix} x\\ y \\ z \\ 1\end{bmatrix})
+              =
               \begin{bmatrix}
               1 & 0 & 0 & a\\
               0 & 1 & 0 & b\\
               0 & 0 & 1 & c\\
               0 & 0 & 0 & 1\\
               \end{bmatrix}
+              \begin{bmatrix} x\\ y \\ z \\ 1\end{bmatrix}
               $$
               The rest of the transformations: rotation, reflection, scaling, and shearing, are the same as in \(\mathbb{R}^3\) just fitted into a \(4\) by \(4\) matrix.
             </p>
@@ -1235,11 +1238,14 @@
             <p>
               This function satisfies linearity as you can verify.  In matrix form, it looks like 
               $$
+              M(\begin{bmatrix} x\\ y \\ z\end{bmatrix})
+              =
               \begin{bmatrix}
               1 & 0 & 0\\
               0 & 1 & 0\\
               0 & 0 & 0\\
               \end{bmatrix}
+              \begin{bmatrix} x\\ y \\ z\end{bmatrix}
               $$
             </p>
 
@@ -1255,12 +1261,15 @@
             <p>
               Of course since all of our transformations happen in homogeneous coordinates, we must homogenize this matrix.  In homogeneous coordinates, the orthographic projection looks like:
               $$
+              M(\begin{bmatrix} x\\ y \\ z \\ 1\end{bmatrix})
+              =
               \begin{bmatrix}
               1 & 0 & 0 & 0\\
               0 & 1 & 0 & 0\\
               0 & 0 & 0 & 0\\
               0 & 0 & 0 & 1
               \end{bmatrix}
+              \begin{bmatrix} x\\ y \\ z \\ 1\end{bmatrix}
               $$
               And as a result, we can describe what a vector in \(\mathbb{R}^3\) goes through when transformed by rotation, reflection, scaling, shearing, translation and then projection.
             </p>
@@ -1352,11 +1361,14 @@
             <p>
               Again, this function also satisfies linearity and projection as you can verify.  It has the following matrix:
               $$
+              O(\begin{bmatrix} x\\ y \\ z\end{bmatrix})
+              =
               \begin{bmatrix}
               1 & 0 & \frac{1}{2}\cos(\alpha)\\
               0 & 1 & \frac{1}{2}\sin(\alpha)\\
               0 & 0 & 0\\
               \end{bmatrix}
+              \begin{bmatrix} x\\ y \\ z\end{bmatrix}
               $$
             </p>
 
