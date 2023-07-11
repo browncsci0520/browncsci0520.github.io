@@ -1471,7 +1471,7 @@
               </p>
               <p>
                 $$
-                F(H(
+                H(F(
                   \begin{bmatrix}
                 x\\
                 y\\
@@ -1498,11 +1498,21 @@
                 z\\
                 1\\
                 \end{bmatrix}
-                $$
+                =
+                B(
+                  \begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                1\\
+                \end{bmatrix}
+                )
+                $$, 
+              where \(B\) is the transformation matrix resulting from composing \(F\) and \(H\). 
               </p>
               <p>
-                Okay now we are a bit closer, but the "matrix" is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
-                It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation that sends 
+                Okay now we are a bit closer, but the matrix \(B\)is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
+                It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation \(B\) that sends 
                 $$
                 \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix} \rightarrow \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ 1\end{bmatrix}
                 $$ we make it
@@ -1558,7 +1568,7 @@
               \begin{cases}
                 x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w \\
                 y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w \\
-                z' = z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w\\
+                z' = -z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w\\
                 w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w \\
               \end{cases}
               $$
