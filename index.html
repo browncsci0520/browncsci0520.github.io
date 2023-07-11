@@ -1294,33 +1294,24 @@
               1\\
               \end{bmatrix}
               \xrightarrow{A}
-              A(
-                \begin{bmatrix}
-              x\\
-              y\\
-              z\\
-              1\\
-              \end{bmatrix}
-              )
-              =
               \begin{bmatrix}
-              \lambda x'\\
-              \lambda y'\\
-              \lambda z'\\
-              \lambda \\
+              x'\\
+              y'\\
+              z'\\
+              1 \\
               \end{bmatrix}
               \xrightarrow{M}
               \begin{bmatrix}
-              \lambda x'\\
-              \lambda y'\\
+              x'\\
+              y'\\
               0 \\
-              \lambda \\
+              1 \\
               \end{bmatrix}
               \rightarrow
               \begin{bmatrix}
-              \lambda x'\\
-              \lambda y'\\
-              \lambda \\
+              x'\\
+              y'\\
+              1 \\
               \end{bmatrix}
               \xrightarrow{H^{-1}}
               \begin{bmatrix}
@@ -1348,13 +1339,13 @@
           <h1 id="oblique-projection">Oblique Projection</h1>
             <p>
               Another type of parallel projection is called <b><em>oblique projection</em></b>.  If the \(z\) axis is at an angle with the front of the cube(i.e, if camera is staring down the \(z\) axis), then not only will we see the front of the cube, but we will also have a tilted view of its side faces. 
-              Then we can get a better feel for its the three-dimensional shape.  Let this angle be \(\alpha\), then we define oblique projection as the following:
+              Then we can get a better feel for its three-dimensional shape.  Let this angle be \(\alpha\), then we define oblique projection as the following:
               $$
               O(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} x + \frac{1}{2}z\cos(\alpha)\\ y + \frac{1}{2}z\sin(\alpha)\\ 0\end{bmatrix}
               $$
             </p>
             <p>
-              Note that \frac{1}{2}
+              Note that $\frac{1}{2}$
             </p>
             <p>
               Again, this function also satisfies linearity and projection as you can verify.  It has the following matrix:
