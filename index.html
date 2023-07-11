@@ -1347,7 +1347,8 @@
             </p>
           <h1 id="oblique-projection">Oblique Projection</h1>
             <p>
-              Another type of parallel projection is called <b><em>oblique projection</em></b>.  If the \(z\) axis is at an angle (i.e, if camera is staring down the \(z\) axis), then we can get a better feel for the 3D shape by viewing its sides.  Let this angle be \(\alpha\), then we define oblique projection as the following:
+              Another type of parallel projection is called <b><em>oblique projection</em></b>.  If the \(z\) axis is at an angle with the front of the cube(i.e, if camera is staring down the \(z\) axis), then not only will we see the front of the cube, but we will also have a tilted view of its side faces. 
+              Then we can get a better feel for its the three-dimensional shape.  Let this angle be \(\alpha\), then we define oblique projection as the following:
               $$
               O(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} x + \frac{1}{2}z\cos(\alpha)\\ y + \frac{1}{2}z\sin(\alpha)\\ 0\end{bmatrix}
               $$
