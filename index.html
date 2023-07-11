@@ -1176,12 +1176,12 @@
             </p>
 
             <p>
-              In \(\mathcal{P}(\mathbb{R}^4)\), the 4D shear matrix encodes a 3D translation.  As such, for a translation of \(A\) in the \(x\) direction, \(B\) in the \(y\) direction, and \(C\) in the \(z\) direction, we would apply the following matrix:
+              In \(\mathcal{P}(\mathbb{R}^4)\), the 4D shear matrix encodes a 3D translation.  As such, for a translation of \(a\) in the \(x\) direction, \(b\) in the \(y\) direction, and \(c\) in the \(z\) direction, we would apply the following matrix:
               $$
               \begin{bmatrix}
-              1 & 0 & 0 & A\\
-              0 & 1 & 0 & B\\
-              0 & 0 & 1 & C\\
+              1 & 0 & 0 & a\\
+              0 & 1 & 0 & b\\
+              0 & 0 & 1 & c\\
               0 & 0 & 0 & 1\\
               \end{bmatrix}
               $$
@@ -1303,7 +1303,7 @@
               \begin{bmatrix}
               \lambda x'\\
               \lambda y'\\
-              \lambda z'
+              \lambda z'\\
               \lambda \\
               \end{bmatrix}
               \xrightarrow{M}
@@ -1321,8 +1321,8 @@
               \end{bmatrix}
               \xrightarrow{H^{-1}}
               \begin{bmatrix}
-              \x'\\
-              \y'\\
+              x'\\
+              y'\\
               \end{bmatrix}
               \xrightarrow{\text{append -1}}
               \begin{bmatrix}
@@ -1425,10 +1425,11 @@
 
               <p>
                 Conceptually, if we tried to develop a transformation which encodes these divisions, we might start out trying to represent \(x'\), \(y'\), and \(z'\)&mdash; the result of perspective projection&mdash; as a system of equations: 
-                
-                $$x' = \frac{1}{-z} \cdot x + 0 \cdot y + 0 \cdot z$$
-                $$y' = 0 \cdot x + \frac{1}{-z} \cdot y + 0 \cdot z$$
-                $$z' = 0 \cdot x + 0 \cdot y + 0 \cdot z$$
+                <div class="equation">
+                  <span>x' = \frac{1}{-z} \cdot x + 0 \cdot y + 0 \cdot z </span><br>
+                  <span>y' = 0 \cdot x + \frac{1}{-z} \cdot y + 0 \cdot z</span><br>
+                  <span>z' = 0 \cdot x + 0 \cdot y + 0 \cdot z </span><br>
+                </div>
                 If we arranged these weights as we would for a matrix, we would get
               </p>
               <p>
@@ -1534,11 +1535,12 @@
               </p>
             <p>
               This is a lot easier to deal with.  Again, if we write these values as a system of equations we would get
-              
-              $$x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w$$
-              $$y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w$$
-              $$z' = z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w$$
-              $$w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w$$
+              <div class="equation">
+                <span>x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w </span><br>
+                <span>y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w</span><br>
+                <span>z' = z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w </span><br>
+                <span>w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w </span><br>
+              </div>
               
               Giving us the following, more proper looking, matrix
             </p>
