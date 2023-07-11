@@ -28,7 +28,7 @@ const persObliqueButton = document.getElementById('pers-oblique-button');
 
 AFFINE.start();
 let $input = $('#affine-transform-demo-input');
-$('#affine-transform-demo-input-start').html($input.html());
+$('#affine-transform-demo-input-start').html($input);
 
 
 /* second state */
