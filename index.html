@@ -742,6 +742,7 @@
               So now are able to reap the main benefit for encoding translation as a higher dimensional shear&mdash;  we can compose the translation transformation with all other transformations.
               All it takes is temporarily sending a vector in \(\mathbb{R}^2\) to the plane \(z = 1\) in \(\mathbb{R^3}\) before passing it through the transformations,
               and then we have to get rid of the \(z\) coordinate to recover the resultant vector in \(\mathbb{R}^2\)
+              
               $$
               \begin{bmatrix}
               x\\
@@ -1072,8 +1073,8 @@
               =
         
               \begin{bmatrix}
-              1 & 0 & A\\
-              0 & 1 & B\\
+              1 & 0 & a\\
+              0 & 1 & b\\
               0 & 0 & 1\\
               \end{bmatrix}
         
@@ -1086,8 +1087,8 @@
               =
               
               \begin{bmatrix}
-              \lambda(x + zA)\\
-              \lambda(y + zB)\\
+              \lambda(x + za)\\
+              \lambda(y + zb)\\
               \lambda(z)\\
               \end{bmatrix}
               $$
@@ -1108,6 +1109,37 @@
               \mathcal{P}(\mathbb{R}^3)
               \xrightarrow{H^{-1}}
               \mathbb{R^2}
+              $$
+
+              $$
+              \begin{bmatrix}
+              x\\
+              y\\
+              \end{bmatrix}
+              \xrightarrow{H}
+              \begin{bmatrix}
+              x\\
+              y\\
+              1\\
+              \end{bmatrix}
+              \xrightarrow{T}
+              T(
+              \begin{bmatrix}
+              x\\
+              y\\
+              1\\
+              \end{bmatrix})
+              =
+              \begin{bmatrix}
+              \lambda x'\\
+              \lambda y'\\
+              \lambda \\
+              \end{bmatrix}
+              \xrightarrow{H^{-1}}
+              \begin{bmatrix}
+              x'\\
+              y'\\
+              \end{bmatrix}
               $$
             </p>
 
@@ -1196,7 +1228,7 @@
             <img src="projection_02.jpg"  width="700" height="400" class="center">
 
             <p>
-              The function we discussed above is actually called <b><em>>orthographic projection</em></b>.
+              The function we discussed above is actually called <b><em>orthographic projection</em></b>.
             </p>
 
             <p>
@@ -1235,9 +1267,9 @@
               \mathbb{R^3}
               \xrightarrow{H}
               \mathcal{P}(\mathbb{R}^4)
-              \xrightarrow{M}
+              \xrightarrow{A}
               \mathcal{P}(\mathbb{R}^4)
-              \xrightarrow{O}
+              \xrightarrow{M}
               \mathcal{P}(\mathbb{R}^3)
               \xrightarrow{H^{-1}}
               \mathbb{R^2}
@@ -1245,7 +1277,62 @@
               \mathbb{R^3}
               $$
 
-              Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(A\), the affine matrix.  And \(O\) is the orthographic projection matrix.  And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
+              $$
+              \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              \end{bmatrix}
+              \xrightarrow{H}
+              \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              1\\
+              \end{bmatrix}
+              \xrightarrow{A}
+              A(
+                \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              1\\
+              \end{bmatrix}
+              )
+              =
+              \begin{bmatrix}
+              \lambda x'\\
+              \lambda y'\\
+              \lambda z'
+              \lambda \\
+              \end{bmatrix}
+              \xrightarrow{M}
+              \begin{bmatrix}
+              \lambda x'\\
+              \lambda y'\\
+              0 \\
+              \lambda \\
+              \end{bmatrix}
+              \rightarrow
+              \begin{bmatrix}
+              \lambda x'\\
+              \lambda y'\\
+              \lambda \\
+              \end{bmatrix}
+              \xrightarrow{H^{-1}}
+              \begin{bmatrix}
+              \x'\\
+              \y'\\
+              \end{bmatrix}
+              \xrightarrow{\text{append -1}}
+              \begin{bmatrix}
+              x'\\
+              y'\\
+              -1 \\
+              \end{bmatrix}
+              $$
+
+              Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(A\), the affine matrix.  And \(M\) is the orthographic projection matrix.  And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
             </p>
 
             <p>
@@ -1325,10 +1412,10 @@
 
 
             <p>
-              Let \(P\) be the perspective projection function.
+              Let \(F\) be the perspective projection function.
               We define it
               $$
-              P(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} \frac{x}{-z}\\  \frac{y}{-z} \\0\end{bmatrix}
+              F(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} \frac{x}{-z}\\  \frac{y}{-z} \\0\end{bmatrix}
               $$
             </p>
 
@@ -1368,7 +1455,7 @@
 
               </p>
               <p>
-                And since these transformations happen in homogeneous space, we must homogeneize.
+                And since these transformations happen in homogeneous space, we must homogenize.
               </p>
               <p>
                 $$
@@ -1486,12 +1573,46 @@
               \mathcal{P}(\mathbb{R}^4)
               \xrightarrow{M}
               \mathcal{P}(\mathbb{R}^4)
-              \xrightarrow{P}
+              \xrightarrow{F}
               \mathcal{P}(\mathbb{R}^4)
               \xrightarrow{H^{-1}}
               \mathbb{R^3}
               $$
-              Just as it looked like before except replace orthographic projection \(O\) with perspective projection \(P\).  And note that, 
+              $$
+              \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              \end{bmatrix}
+              \xrightarrow{H}
+              \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              1\\
+              \end{bmatrix}
+              \xrightarrow{A}
+              A(
+                \begin{bmatrix}
+              x\\
+              y\\
+              z\\
+              1\\
+              \end{bmatrix}
+              )
+              =
+              \begin{bmatrix}
+              \lambda x'\\
+              \lambda y'\\
+              \lambda z'\\
+              \lambda \\
+              \end{bmatrix}
+              \xrightarrow{F}
+              \mathcal{P}(\mathbb{R}^4)
+              \xrightarrow{H^{-1}}
+              \mathbb{R^3}
+              $$
+              Just as it looked like before except replace orthographic projection \(O\) with perspective projection \(F\).  And note that, 
                 $$
                 H^{-1}(\begin{bmatrix}
                 x\\
