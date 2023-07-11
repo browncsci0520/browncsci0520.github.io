@@ -1344,7 +1344,7 @@
             </p>
           <h1 id="oblique-projection">Oblique Projection</h1>
             <p>
-              Another type of parallel projection is called <b><em>>oblique projection</em></b>.  If the \(z\) axis is at an angle (i.e, if camera is staring down the \(z\) axis), then we can get a better feel for the 3D shape by viewing its sides.  Let this angle be \(\alpha\), then we define oblique projection as the following:
+              Another type of parallel projection is called <b><em>oblique projection</em></b>.  If the \(z\) axis is at an angle (i.e, if camera is staring down the \(z\) axis), then we can get a better feel for the 3D shape by viewing its sides.  Let this angle be \(\alpha\), then we define oblique projection as the following:
               $$
               O(\begin{bmatrix} x\\ y \\ z\end{bmatrix}) = \begin{bmatrix} x + \frac{1}{2}z\cos(\alpha)\\ y + \frac{1}{2}z\sin(\alpha)\\ 0\end{bmatrix}
               $$
@@ -1426,14 +1426,23 @@
               <p>
                 Conceptually, if we tried to develop a transformation which encodes these divisions, we might start out trying to represent \(x'\), \(y'\), and \(z'\)&mdash; the result of perspective projection&mdash; as a system of equations: 
                 <div class="equation">
-                  <span>x' = \frac{1}{-z} \cdot x + 0 \cdot y + 0 \cdot z </span><br>
-                  <span>y' = 0 \cdot x + \frac{1}{-z} \cdot y + 0 \cdot z</span><br>
-                  <span>z' = 0 \cdot x + 0 \cdot y + 0 \cdot z </span><br>
+                  <span>$x' = \frac{1}{-z} \cdot x + 0 \cdot y + 0 \cdot z $</span><br>
+                  <span>$y' = 0 \cdot x + \frac{1}{-z} \cdot y + 0 \cdot z $</span><br>
+                  <span>$z' = 0 \cdot x + 0 \cdot y + 0 \cdot z $</span><br>
                 </div>
                 If we arranged these weights as we would for a matrix, we would get
               </p>
               <p>
                 $$
+                F(
+                  \begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                \end{bmatrix}
+                )
+
+                =
                 \begin{bmatrix}
                 \frac{x}{-z}\\
                 \frac{y}{-z}\\
@@ -1460,6 +1469,14 @@
               </p>
               <p>
                 $$
+                H(F(
+                  \begin{bmatrix}
+                x\\
+                y\\
+                z\\
+                \end{bmatrix}
+                ))
+                =
                 \begin{bmatrix}
                 \frac{x}{-z}\\
                 \frac{y}{-z}\\
@@ -1535,11 +1552,12 @@
               </p>
             <p>
               This is a lot easier to deal with.  Again, if we write these values as a system of equations we would get
+              
               <div class="equation">
-                <span>x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w </span><br>
-                <span>y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w</span><br>
-                <span>z' = z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w </span><br>
-                <span>w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w </span><br>
+                <span>$x' = x = 1 \cdot x + 0 \cdot y + 0 \cdot z + 0 \cdot w$ </span><br>
+                <span>$y' = y = 0 \cdot x + 1 \cdot y + 0 \cdot z + 0 \cdot w $</span><br>
+                <span>$z' = z = 0 \cdot x + 0 \cdot y + -1 \cdot z + 0 \cdot w $ </span><br>
+                <span>$w' = z = 1 \cdot x + 0 \cdot y + 1 \cdot z + 0 \cdot w $</span><br>
               </div>
               
               Giving us the following, more proper looking, matrix
