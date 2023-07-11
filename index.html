@@ -1512,14 +1512,17 @@
               </p>
               <p>
                 Okay now we are a bit closer, but the matrix \(F_0\)is not encoding a linear transformation since our weights aren't constant.  i.e, the weights are a function of \(z\).
-                It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation \(F_0\) that sends 
+                It is important to recall here that all transforms will be in \(\mathcal{P}(\mathbb{R}^4)\).  So what if instead of building a transformation \(F_0\)
                 $$
                 F_0(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix}) = \begin{bmatrix} \frac{x}{-z}\\ \frac{y}{-z} \\ 0\\ 1\end{bmatrix}
                 $$ we make it
-                send 
                 $$
                 F_1(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix})
                 = 
+                -z \cdot F_0(
+                  \begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix})
+                )
+                =
                 -z
                 \begin{bmatrix}
                 \frac{x}{-z}\\
@@ -1532,10 +1535,10 @@
                 
                 $$
               
-                , where the second equivalence comes from the fact that the coordinates are proportional, or <em>equal</em> under homogeneous coordinates.
+                where the second equivalence comes from the fact that the coordinates are proportional, or <em>equal</em> under homogeneous coordinates.
               </p>
               <p>
-                Actually, if we take it one step further:
+                Actually, if we take it one step further by changing the z coordinate from 0 to z:
                 $$
                 F_p(\begin{bmatrix} x\\ y \\ z\\ 1\end{bmatrix})
                 = 
@@ -1623,15 +1626,6 @@
               1\\
               \end{bmatrix}
               \xrightarrow{A}
-              A(
-                \begin{bmatrix}
-              x\\
-              y\\
-              z\\
-              1\\
-              \end{bmatrix}
-              )
-              =
               \begin{bmatrix}
               x'\\
               y'\\
