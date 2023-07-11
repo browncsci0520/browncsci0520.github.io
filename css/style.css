@@ -175,7 +175,27 @@ h1 {
 }
 
 #sidebar {
-    float: left;
+    /* float: left */
+    position: fixed;
+    width: 200px;
+    left: 0;
+    height: 100%;
+    background: #1b1b1b
+}
+
+nav ul li{
+    line-height: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding-left: 40px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
 }
 
 #page-body {
