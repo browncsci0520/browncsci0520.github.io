@@ -128,7 +128,7 @@ export function Shear3DScene(canvas) {
         });
         changeCamAngle.start();
 
-        let pos = {z: 12.5}
+        let pos = {z: -12.5}
         let targetPos = {z: 0};
         let moveToOrigin = new TWEEN.Tween(targetPos).to(pos, 2000);
         moveToOrigin.delay(8000);
