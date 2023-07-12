@@ -41,8 +41,8 @@
     flex-direction:row;
     align-items:center;
     overflow-x: scroll;
-    gap:0.5ch;
-    font-size:.7375rem;
+    gap:1ch;
+    font-size:1.0375rem;
     font-weight:325;
     color:#000000
 }

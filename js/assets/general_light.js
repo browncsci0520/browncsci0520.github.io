@@ -1,5 +1,7 @@
 
-
+/*
+This function creates a light at position (x, y, z) and with provided brightness in the given scene
+*/
 export function GeneralLight(scene, {x, y, z}, brightness) {
     
     const dirLight = new THREE.DirectionalLight( 0x55505a, brightness );

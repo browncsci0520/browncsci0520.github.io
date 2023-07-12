@@ -1,4 +1,7 @@
 
+/*
+    This function creates a dot in the given scene, with color c, and at position (x, y, z)
+*/
 export function Dot(scene, c, {x, y, z}) {
     const geometry = new THREE.SphereGeometry( 1, 32, 16 );
     const material = new THREE.MeshBasicMaterial( { color: c } );

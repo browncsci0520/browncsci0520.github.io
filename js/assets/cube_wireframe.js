@@ -1,4 +1,7 @@
 
+/* 
+The function creates the wireframe for the cube in Projection and Perspective
+*/
 export function CubeWireframe(scene) {
 
     let transform = new THREE.Matrix4();
