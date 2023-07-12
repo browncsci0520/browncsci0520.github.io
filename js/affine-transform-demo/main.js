@@ -33,8 +33,9 @@ const modelMatrixScene = new ModelMatrix(canvas4D);
 
 const shearYXSlider = document.getElementById("shear-yx-slider");
 const shearYZSlider = document.getElementById("shear-yz-slider");
-const shearXSlider = document.getElementById("shear-x-slider");
-const shearYSlider = document.getElementById("shear-y-slider");
+// need to switch x and y because the original effect seems to be more counterintuitive
+const shearXSlider = document.getElementById("shear-y-slider"); 
+const shearYSlider = document.getElementById("shear-x-slider");
 const rotSlider = document.getElementById("rotation-slider");
 const scaleXSlider = document.getElementById("scaling-x-slider");
 const scaleYSlider = document.getElementById("scaling-y-slider");
