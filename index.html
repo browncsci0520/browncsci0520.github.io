@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
-
-    
+    <meta charset="utf-8">
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js" integrity="sha512-lIKG1kC5TMb1Zx32vdz1n31YJMZRknVY20U9MJ28hD3y2c0OKN0Ce5NhJji78v8zX5UOSsm+MTBOcJt7yMBnSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script> 
-
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -13,6 +14,7 @@
     <script 
       src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script type="module"
       src="./js/html_layer.js">
     </script>
@@ -21,29 +23,38 @@
 
   </head>
   <body>
+    <div class="btn">
+      <span class="fas fa-bars"></span>
+    </div>
     <nav class="sidebar">
       <div class="text">Tutorial Topics</div>
       <ul>
-        <li> <a href="index.html">Home</a> </li>
+        <li> <a href="#home">Home</a> </li>
         <li> <a href="#introduction">Why's Translation Special?</a> </li>
         <li> 
-          <a href="#encoding-translation">Encoding Translation</a>
-          <ul>
+          <a href="#encoding-translation" class="trans-btn">Encoding Translation
+            <span class="fas fa-caret-down first"></span>
+          </a>
+          <ul class="trans-show">
             <li><a href="#extending-2D-to-3D">Extending 2D to 3D</a></li>
             <li><a href="#composing-all-transformations">Composing All Transformations</a></li>
           </ul>
         </li>
         <li> 
-          <a href="#homogeneous-coordinates">Homogeneous Coordinates</a> 
-          <ul>
+          <a href="#homogeneous-coordinates" class="homog-btn">Homogeneous Coordinates
+            <span class="fas fa-caret-down second"></span>
+          </a> 
+          <ul class="homog-show">
             <li><a href="#from-1D-points-to-line">From 1D Points to Line</a></li>
             <li><a href="#from-2D-points-to-plane">From 2D Points to Plane</a></li>
             <li><a href="#projective-frame">Projective Frame</a></li>
           </ul>
         </li>
         <li> 
-          <a href="#projection-and-perspective">Projection and Perspective</a> 
-          <ul>
+          <a href="#projection-and-perspective" class="proj-btn">Projection and Perspective
+            <span class="fas fa-caret-down third"></span>
+          </a> 
+          <ul class="proj-show">
             <li><a href="#orthographic-projection">Orthographic Projection</a></li>
             <li><a href="#oblique-projection">Oblique Projection</a></li>
             <li><a href="#perspective">Perspective</a></li>
@@ -52,6 +63,27 @@
 
       </ul>
     </nav>
+    <script>
+    $('.btn').click(function(){
+      $(this).toggleClass("click");
+      $('.sidebar').toggleClass("show");
+    })
+      $('.trans-btn').click(function(){
+        $('nav ul .trans-show').toggleClass("show");
+        $('nav ul .first').toggleClass("rotate");
+      });
+      $('.homog-btn').click(function(){
+        $('nav ul .homog-show').toggleClass("show1");
+        $('nav ul .second').toggleClass("rotate");
+      });
+      $('.proj-btn').click(function(){
+        $('nav ul .proj-show').toggleClass("show2");
+        $('nav ul .third').toggleClass("rotate");
+      });
+      $('nav ul li').click(function(){
+        $(this).addClass('active').siblings().removeClass("active");
+      })
+    </script>
 
 
     <div id="page-body">
@@ -473,7 +505,7 @@
       </div>
       <div id="content">
         <div>
-          <h2 id="index.html">Home</h2>
+          <h2 id="#home">Home</h2>
           <p>
             Hello!
           </p>
@@ -795,7 +827,7 @@
         </div>
         <div>
           <h2 id="homogeneous-coordinates">Homogeneous Coordinates</h2>
-            <h1 id="from-1D-points-to-Line">From 1D Points to Line</h1>
+            <h1 id="from-1D-points-to-line">From 1D Points to Line</h1>
             <p>
               We call the coordinate system of this intermediate 'higher-dimension-to-encode-lower-dimension' world <i>homogeneous coordinates</i>.  And likewise, adding the 1 in the 
               \(z\) slot for our originally 2D coordinate is called homogenizing that coordinate, while recovering the 2D coordinate from the homogeneous 3D coordinate by ignoring the \(z\) slot is called
