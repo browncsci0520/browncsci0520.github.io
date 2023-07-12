@@ -2,7 +2,7 @@
 
 export function Subspace(scene, {x, y, z}) {
 
-    const bigNum = 10000;
+    const bigNum = 100000;
 
     this.posX = x;
     this.posY = y;

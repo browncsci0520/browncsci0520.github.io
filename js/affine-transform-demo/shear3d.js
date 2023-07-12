@@ -118,7 +118,7 @@ export function Shear3DScene(canvas) {
         moveCam.start();   
         
         let camAngle = {theta: Math.PI / 2};
-        let targetCamAngle = {theta: Math.PI + 0.5};
+        let targetCamAngle = {theta: Math.PI - 0.5};
         let changeCamAngle = new TWEEN.Tween(camAngle).to(targetCamAngle, 4000);
         changeCamAngle.delay(3500);
         changeCamAngle.onUpdate(function() {

@@ -5,7 +5,7 @@ export function ShearSheep(scene, height, depth_pos) {
     let scaleMat = new THREE.Matrix4();
 
     const geometry = new THREE.BoxGeometry( 10, height, 10);
-    geometry.rotateX( - Math.PI / 2 );
+    geometry.rotateX(  - Math.PI / 2 );
     geometry.translate(0, 0, depth_pos);
 
     const material = new THREE.MeshPhongMaterial({

@@ -1,5 +1,7 @@
 
-
+/*
+creates the horizontal and vertical lines for the grid background
+ */
 export function GridBasis(scene, z) {
 
     const size = 2000;
