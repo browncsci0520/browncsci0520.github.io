@@ -151,7 +151,7 @@ h1 {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     float: left;
-    width: 45%;
+    width: 46%;
     height: 900px;
 }
 
@@ -196,7 +196,7 @@ h1 {
     transition: left 0.4s ease;
 }
 .btn.click{
-    left: 210px;
+    left: 15%;
 }
 .btn span{
     color: white;
@@ -208,10 +208,10 @@ h1 {
 }
 .sidebar{
     position: fixed;
-    width: 200px;
+    width: 14%;
     height: 100%;
     top: 0;
-    left: -200px;
+    left: -24%;
     background: #1b1b1b;
     transition: left 0.4s ease;
 }
@@ -220,7 +220,7 @@ h1 {
 }
 .sidebar .text{
     color: white;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
     line-height: 45px;
     text-align: center;
@@ -299,10 +299,10 @@ nav ul li a span.rotate{
     transform: translateY(-50%) rotate(-180deg);
 }
 #page-body {
-    margin-top: 5%;
+    margin-top: 0%;
     margin-bottom: 5%;
     margin-left: 15%;
-    margin-right: 5%;
+    margin-right: 1%;
 }
 .hide-below {
     display: none;
@@ -373,7 +373,7 @@ input[type="range"] {
     display: inline;
 }
 
-
+/*
 #sidebar ul {
     list-style-type: none;
     margin: 0;
@@ -401,7 +401,7 @@ input[type="range"] {
     background-color: #555;
     color: white;
 }
-
+*/
 .center {
     display: block;
     margin-left: auto;
