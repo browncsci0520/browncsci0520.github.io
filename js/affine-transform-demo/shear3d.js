@@ -72,8 +72,8 @@ export function Shear3DScene(canvas) {
 
     function createSceneSubjects(scene) {
         const sceneSubjects = [
-            new GeneralLight(scene, {x: -20, y: -10, z: 20}, 6),
-            new GeneralLight(scene, {x: 20, y: 10, z: -20}, 5),
+            new GeneralLight(scene, {x: 20, y: 10, z: 20}, 6),
+            new GeneralLight(scene, {x: -20, y: -10, z: -20}, 5),
         ];
 
         return sceneSubjects
