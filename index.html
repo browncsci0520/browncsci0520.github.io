@@ -707,6 +707,11 @@
               for the purpose of homogenizing the point and of creating the 3D shear matrix. 
             </p>
             <p>
+              Note that in a homogeneous coordinate system, the points and objects are actually in 2D. 
+              So the fact that there is no shear along the z axis differentiates it from a real 3D affine matrix, which can also include shearing along the z axis. 
+              Take some time to fully understand this subtle difference. 
+            </p>
+            <p>
               Why does this work?  If we multiply
               the 3D shear matrix with any vector in \(\mathbb{R}^3\), \((x, y, z)\) we get the following:
             </p>
