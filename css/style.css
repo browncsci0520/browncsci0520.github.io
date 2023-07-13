@@ -1,4 +1,4 @@
-
+@charset "utf-8";
 /* fira-sans-200 - latin */
 @font-face {
     font-family: 'Fira Sans';
@@ -35,16 +35,19 @@
 }
    
 .matrix-equation {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    position:relative;
     background-color:rgb(255, 255, 255);
-    padding:0px;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    overflow-x:auto;
+    padding: 2px;
+    display:inline-flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: visible;
     gap:0.3em;
     font-size:1.0375rem;
     font-weight:325;
-    color:#000000
+    color:#000000;
 }
 
 .matrix-equation>span {
@@ -117,7 +120,7 @@ body {
   line-height: 2;
   font-size: 16px;
   color: var(--text-color);
-  overflow-x: hidden;
+  overflow-x:hidden;
 }
 
 p {
@@ -126,6 +129,8 @@ p {
 }
 
 .slidecontainer p {
+    opacity: 0.7;
+
     line-height: 32px;   /* within paragraph */
     margin-bottom: 10px; /* between paragraphs */
 }
@@ -308,21 +313,36 @@ nav ul li a span.rotate{
 }
 .demo-sliders{
     display: flex;
-    width: 700px;
+    /* width: 700px; */
+    width: fit-content;
     height: 180px;
-   
+}
+.slider{
+    background: linear-gradient(90deg, rgb(117, 252, 117), 60%, rgb(214, 214, 214), 60%);
+    outline: none;
+    opacity: 0.7;
+}
+@media only screen and (max-width < 1000px){
+    .demo-sliders{
+        height: 580px;
+    }
 }
 .demo-sliders ul{
     align-items: center;
 }
 .demo-sliders li {
-    display: inline;
+    display:inline-flex;
 }
 .slidecontainer {
+    margin-top:10px;
     display: inline-block;
     vertical-align: top;
+    text-align:center;
+    align-items: left;
+    /* width: 100px; */
     width: 100px;
-    height: 50px;
+    height: 100px;
+    overflow-y:visible;
 }
 
 .demo-matrices{

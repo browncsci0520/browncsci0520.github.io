@@ -14,6 +14,9 @@
     <script 
       src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     </script>
+    <script 
+    src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script type="module"
       src="./js/html_layer.js">
@@ -116,6 +119,7 @@
                       <div class="slidecontainer" id="rotation-sliders">
                         Rotation
                         <input type="range" min="0" max="6.28318530718" step="0.1" value="0" class="slider" id="rotation-slider">
+                        <p>Value: <span id="value"></span></p>
                       </div>
                     </li>
                     <li>
@@ -125,9 +129,9 @@
                           X
                           <input type="checkbox" id="reflect-x">      
                       </p>            
-                      Y
+                      <p>Y
                         <input type="checkbox" id="reflect-y">     
-                                       
+                      </p>               
                       </div>
                     </li>
                     <li>
@@ -135,7 +139,7 @@
                         Scaling
                         <p>X</p>
                         <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-x-slider">
-                        Y
+                        <p>Y</p>
                         <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-y-slider">
                       </div>
                     </li>
@@ -199,7 +203,8 @@
                   <div id="reflection-matrix-wrapper">
                   <div class="matrix undefined" id="reflection-2d-matrix">
                     <div class="matrix-label" style="font-size: 14px;">Reflection Matrix</div>
-                    <div class="matrix-elements affine-demo-matrix-elements" style="grid-template: repeat(2, 1fr) / repeat(2, auto);">
+                    <div class="matrix-elements affine-demo-matrix-elements" 
+                    style="grid-template: repeat(2, 1fr) / repeat(2, auto);">
                       <span class="limit-dp elem-2d">1</span>
                       <span class="limit-dp elem-2d">0</span>
                       <span class="limit-dp elem-3d">0</span>
@@ -313,7 +318,7 @@
 
                   <div id="model-matrix-wrapper">
                   <div class="matrix undefined" id="model-matrix">
-                    <div class="matrix-label" style="font-size: 14px;">Affine Matrix</div>
+                    <div class="matrix-label" style="font-size: 14px;">Transformation Matrix</div>
                     <div class="matrix-elements affine-demo-matrix-elements" style="grid-template: repeat(2, 1fr) / repeat(2, auto);">
                       <span class="limit-dp elem-2d">1</span>
                       <span class="limit-dp elem-2d">0</span>
@@ -552,13 +557,17 @@
             These transforms are linear because they satisfy two properties:  <a href="https://en.wikipedia.org/wiki/Linear_map#Definition_and_first_consequences" target="_blank">additivity and homogeneity</a>.
           </p>
           <p>
-            We compose the rotation, reflection, scaling, and shearing into one final matrix: the <em>affine matrix</em>, or \(A\).  This allows us to use just one matrix for all transformations.  Scroll horizontally along the matrix equation to see the resulting affine matrix.
+            We compose the rotation, reflection, scaling, and shearing into one <b><em>transformation matrix</em></b>, or transformation <b>\(A\)</b>.  
+          
+          <p>
+            Notice what's missing from this list of common transformations of 2D geometry: <b><em>translation</em></b>. If translation was included, 
+            the above transformation matrix would have a better name: the <b><em>affine matrix</em></b>. An affine transformation includes translation, rotation, reflection, scaling, and shear. 
+            But here we only have an "affine" transformation without translation.
           </p>
           <p>
-            Why do we call this an affine matrix? That's because affine transformation is basically just a combination of reflection, rotation, scaling, and shear transformations. It also preserves points and straight lines, which is exactly what's happening here.
+            Translation moves a point around in space.  We can use it to describe any displacement of an object in a scene.  
+            For example, translating ball rolling on the floor, an egg falling from a skyscraper, a car driving down the road, etc.  Let's derive a function that will do this for us.  
           </p>
-          <p>
-            Notice what's missing from this list of common transformations of 2D geometry: translation. Translation moves a point around in space.  We can use it to describe any displacement of an object in a scene.  For example, translating ball rolling on the floor, an egg falling from a skyscraper, a car driving down the road, etc.  Let's derive a function that will do this for us.  </p>
             <p>
               First think about what a translation of \(2\) units to the left and \(3\) units up does to a vector \((1,2)\) in \( \mathbb{R}^2 \).  It results in a vector \((1 - 2, 2 + 3)\) or \((-1, 5)\).  
             If we generalize this function for any vector \((x, y)\) and any translation right by \(a\) and up by \(b\), then we define $$
@@ -576,7 +585,7 @@
               a\\
               b
               \end{bmatrix} $$
-              Where \(a\) and \(b\) are stored in a vector called the translation vector.
+              where \(a\) and \(b\) are stored in a vector called the translation vector.
           </p>
           <p>
             The trouble is that this function is not linear.  Why might this be?
@@ -619,7 +628,7 @@
           </p>
   
           <p>
-            If we apply the affine matrix to the vector first, we have \(A(
+            If we apply the transformation matrix to the vector first, we have \(A(
             \begin{bmatrix}
             x\\
             y
@@ -642,7 +651,7 @@
               b
               \end{bmatrix}
             $$
-            If we do no transformations before translation, \(A\) is just the identity matrix.
+            If we do no effective transformations before translation, \(A\) is just the identity matrix.
           </p>
           <p>
             $$
@@ -1388,7 +1397,8 @@
               \end{bmatrix}
               $$
 
-              Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(A\), the affine matrix.  And \(M\) is the orthographic projection matrix.  And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
+              Where all transformations (rotation, reflection, scaling, shearing, and translation) are stored in \(A\), the transformation matrix.  And \(M\) is the orthographic projection matrix.  
+              And at the end we append -1 to the z slot if its in front of the screen, or we just throw everything away if its behind the screen.
             </p>
 
             <p>
