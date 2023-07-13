@@ -91,7 +91,13 @@
         <div id="affine-transform-demo">
      
           <div  id="shear-2d-cross-section-canvas-wrapper">
-            <canvas  class="demo-canvas" id="shear-2d-cross-section-canvas" width="700" height="500"></canvas>
+            <canvas  class="demo-canvas" id="shear-2d-cross-section-canvas" width="700" height="500">
+              <style>
+                .demo-canvas{
+                  width: fit-content;
+                }
+              </style>
+            </canvas>
           </div>
 
           <div  id="shear-3d-canvas-wrapper">
@@ -155,8 +161,6 @@
               </div>
      
               <div class="demo-matrices">
-
-
 
                 <div class="matrix-equation" id="matrices-2d">
 
@@ -424,7 +428,7 @@
                 
                 <div class="slidecontainer" id="lambda-slider-wrapper">
                   <p>lambda</p>
-                  <input type="range" min="-2" max="2" step="0.1" value="1" class="slider" id="lambda-slider">
+                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider" id="lambda-slider">
                 </div>
               </div>
 

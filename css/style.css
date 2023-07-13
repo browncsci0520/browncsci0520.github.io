@@ -36,12 +36,12 @@
    
 .matrix-equation {
     background-color:rgb(255, 255, 255);
-    padding:20px;
+    padding:0px;
     display:flex;
     flex-direction:row;
     align-items:center;
-    overflow-x: scroll;
-    gap:1ch;
+    overflow-x:auto;
+    gap:0.3em;
     font-size:1.0375rem;
     font-weight:325;
     color:#000000
@@ -173,7 +173,6 @@ h1 {
 #demos::-webkit-scrollbar {
     display: none;
 }
-
 /*#sidebar {
     float: left;
 } */
@@ -327,10 +326,10 @@ nav ul li a span.rotate{
 }
 
 .demo-matrices{
-    width: 500px;
+    width: fit-content;
     height: 200px;
     display: flex;
-    justify-content: center;
+    justify-content:stretch;
     align-items: center;
     padding: 10px;
     /*background-color: antiquewhite;*/
@@ -345,16 +344,16 @@ input[type="range"] {
 
 .demo-canvas{
     padding: 0px;
-    width: 800px;
+    width: auto;
     height: 600px;
     align-items: center;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     border-collapse: separate;
     border-spacing: 15px;
     border-style: solid;
-    /* display: none; */
+
 }
 
 #affine-transform-demo{
