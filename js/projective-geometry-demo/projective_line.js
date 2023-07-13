@@ -136,8 +136,8 @@ export function ProjectiveLineScene(canvas) {
         });
         
         const linePoints = [];
-        linePoints.push( new THREE.Vector3( -100, offset, 0.1 ) );
-        linePoints.push( new THREE.Vector3(100, offset, 0.1 ) );
+        linePoints.push( new THREE.Vector3( -1000, offset, 0.1 ) );
+        linePoints.push( new THREE.Vector3(1000, offset, 0.1 ) );
         
         const lineGeometry = new THREE.BufferGeometry().setFromPoints( linePoints );
         
