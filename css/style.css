@@ -187,7 +187,24 @@ h1 {
     width: 50%;
     height: 600px;
 }
-
+#shear-2d-cross-section-canvas{
+    width: fit-content;
+}
+#shear-3d-canvas{
+    width: fit-content;
+}
+#projective-line-canvas{
+    width: fit-content;
+}
+#projective-plane-canvas{
+    width: fit-content;
+}
+#screen-canvas{
+    width: fit-content;
+}
+#orthographic-projection-canvas{
+    width: fit-content;
+}
 /* Hide scrollbar for Chrome, Safari and Opera */
 #demos::-webkit-scrollbar {
     display: none;
