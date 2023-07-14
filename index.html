@@ -1270,7 +1270,7 @@
             <p>
               But now we have a problem.  We can represent the 3D transforms mathematically, but we have to view them through two dimensional screens.  We need a function which will take a point in 3D and <b><em>project</em></b> it to a 2D screen.  In computer graphics, we define a screen as a rectangle positioned at the plane \(z = -1\).  Everything in \(z \leq -1\) is considered "in front" of the screen and is projected to it, while everything in \(z > -1 \) is considered "behind" the screen and thrown away.
             </p>
-            <img src="projection_01.jpg"  width="500" height="500" class="center">
+            <img src="orthographic projection.PNG"  width="500" height="500" class="center">
             <p>
               Every point that falls within this quadrilateral will be seen.  To do this we will use a projection.
             </p>
@@ -1295,7 +1295,7 @@
               $$
               since the \(z\) slot is already \(0\).  In this example, we send every vector not on the plane \(z = 0\) to \(z = 0\), and we send every vector already on the plane \(z = 0\) to itself.
             </p>
-            <img src="projection_02.jpg"  width="500" height="300" class="center">
+            <img src="projection map.PNG"  width="500" height="300" class="center">
 
             <p>
               The function we discussed above is actually called <b><em>orthographic projection</em></b>.
@@ -1455,7 +1455,7 @@
               The problem with these parallel projections is that while they may be practical, they hardly look 3D.  That is because of <b><em>perspective</em></b>.  Perspective is a distortion of parallel lines caused by them converging at a focal point.  This is more accurate to real life because rays of light converge at our eye.
             </p>
 
-            <img src="projection_03.jpg"  width="500" height="500" class="center">
+            <img src="oblique projection.PNG"  width="500" height="500" class="center">
 
 
             <p>
@@ -1466,13 +1466,13 @@
               To derive this function, let us walk through an example.  Take 2D slice of a scene where a unit box sits at \(z = -3\).
             </p>
 
-            <img src="projection_04.jpg"  width="500" height="350" class="center">
+            <img src="perspective question.PNG"  width="500" height="350" class="center">
 
             <p>
               This forms a triangle with the end of it being the side of the box, and a similar triangle where the screen intersects the it at \(z = -1\).  That means we can bisect the tringle and use the proportion to solve for the length of the side displayed on the screen.
             </p>
 
-            <img src="projection_05.jpg"  width="500" height="300" class="center"> 
+            <img src="perspective solve.PNG"  width="500" height="220" class="center"> 
 
             <p>
   
@@ -1484,7 +1484,7 @@
               Then repeat for the right triangle, and we get
               </p>
 
-              <img src="projection_06.jpg"  width="500" height="350" class="center">
+              <img src="perspective completed.PNG"  width="500" height="350" class="center">
 
               <p>
                 If we generalize this function, we see that for a given point, we divide its \(x\) by the negative of its \(z\) (i.e, \(-z\) ) to get the corresponding \(x\) on the screen.
