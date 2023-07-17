@@ -31,14 +31,35 @@ const shear3DScene = new Shear3DScene(canvas3D);
 const shear2DCrossSectionScene = new Shear2DCrossSectionScene(canvas2D);
 const modelMatrixScene = new ModelMatrix(canvas4D);
 
-const shearYXSlider = document.getElementById("shear-yx-slider");
 const shearYZSlider = document.getElementById("shear-yz-slider");
+var shearYZOutput = document.getElementById("translateX-val");
+var shearYZMax = document.getElementById("shear-yz-slider").max;
+var shearYZMin = document.getElementById("shear-yz-slider").min;
+const shearYXSlider = document.getElementById("shear-yx-slider");
+var shearYXOutput = document.getElementById("translateY-val");
+var shearYXMax = document.getElementById("shear-yx-slider").max;
+var shearYXMin = document.getElementById("shear-yx-slider").min;
 // need to switch x and y because the original effect seems to be more counterintuitive
 const shearXSlider = document.getElementById("shear-y-slider"); 
+var shearXOutput = document.getElementById("shearX-val");
+var shearXMax = document.getElementById("shear-x-slider").max;
 const shearYSlider = document.getElementById("shear-x-slider");
+var shearYOutput = document.getElementById("shearY-val");
+var shearYMax = document.getElementById("shear-y-slider").max;
+
 const rotSlider = document.getElementById("rotation-slider");
+var rotOutput = document.getElementById('rotate-val');
+var rotMax = document.getElementById('rotation-slider').max;
+
 const scaleXSlider = document.getElementById("scaling-x-slider");
+var scaleXOutput = document.getElementById('scaleX-val');
+var scaleXMax = document.getElementById('scaling-x-slider').max;
+var scaleXMin = document.getElementById('scaling-x-slider').min;
 const scaleYSlider = document.getElementById("scaling-y-slider");
+var scaleYOutput = document.getElementById('scaleY-val');
+var scaleYMax = document.getElementById('scaling-y-slider').max;
+var scaleYMin = document.getElementById('scaling-y-slider').min;
+
 const reflectXCheck = document.getElementById('reflect-x');
 const reflectYCheck = document.getElementById('reflect-y');
 
@@ -118,22 +139,26 @@ export function reset() {
     
 
 }
-
+rotOutput.innerHTML = "Rotation: " + (rotSlider.value);
+scaleXOutput.innerHTML = "Scaling X: " + (scaleXSlider.value);
+scaleYOutput.innerHTML = "Scaling Y: " + (scaleYSlider.value);
+shearXOutput.innerHTML = "Shear X: " + (shearXSlider.value);
+shearYOutput.innerHTML = "Shear Y: " + (shearYSlider.value);
 function bindEventListeners() {
-
+    /* reflection along the x axis*/
     reflectXCheck.oninput = function() {
         refMatrixHTML[0].innerHTML = -1 * parseInt(refMatrixHTML[0].innerHTML);
         updateMatrix();
         update();
     }
-
+    /* reflection along the y axis*/
     reflectYCheck.oninput = function() {
         refMatrixHTML[5].innerHTML = -1 * parseInt(refMatrixHTML[5].innerHTML);
         console.log(refMatrixHTML);
         updateMatrix();
         update();
     }
-
+    /* rotation */
     rotSlider.oninput = function() {
         console.log(rotSlider.value);
 
@@ -147,47 +172,104 @@ function bindEventListeners() {
 
         updateMatrix();
         update();
-    };
-
+        
+        rotOutput.innerHTML = "Rotation: " + (rotSlider.value /  Math.PI).toFixed(2);
+    }
+    rotSlider.addEventListener("mousemove", function(){
+        var x = rotSlider.value;
+        var result = 100*(x/rotMax);
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        rotSlider.style.background = color;
+    })
+    /* scaling along the x axis*/
     scaleXSlider.oninput = function() {
         scaleMatrixHTML[0].innerHTML = scaleXSlider.value;
         updateMatrix();
         update();
-    }
 
+        scaleXOutput.innerHTML = "Scaling X: " + scaleXSlider.value;
+    }
+    scaleXSlider.addEventListener("mousemove", function(){
+        var x = scaleXSlider.value;
+        var result = (x - scaleXMin) / (scaleXMax - scaleXMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        scaleXSlider.style.background = color;
+    })
+    /* scaling along the y axis*/
     scaleYSlider.oninput = function() {
         scaleMatrixHTML[5].innerHTML = scaleYSlider.value;
         updateMatrix();
         update();
+        scaleYOutput.innerHTML = "Scaling Y: " + scaleYSlider.value;
     }
-
+    scaleYSlider.addEventListener("mousemove", function(){
+        var x = scaleYSlider.value;
+        var result = (x - scaleYMin) / (scaleYMax - scaleYMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        scaleYSlider.style.background = color;
+    })
+    /* shearing along the x axis*/
     shearXSlider.oninput = function() {
      
         shearMatrixHTML[1].innerHTML = shearXSlider.value;
         updateMatrix();
         update();
+        shearXOutput.innerHTML = "Shear X: " + shearXSlider.value;
     };
-
+    shearXSlider.addEventListener("mousemove", function(){
+        var x = shearXSlider.value;
+        var result = x / shearXMax * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        shearXSlider.style.background = color;
+    })
+    /* shearing along the y axis*/
     shearYSlider.oninput = function() {
         console.log(shearMatrixHTML[2].innerHTML);
         console.log("val: " + shearYSlider.value);
         shearMatrixHTML[4].innerHTML = shearYSlider.value;
         updateMatrix();
         update();
+        shearYOutput.innerHTML = "Shear Y: " + shearYSlider.value;
     };
-
-
-    shearYXSlider.oninput = function() {
-        affineMatrixHTML[9].innerHTML = shearYXSlider.value;
-        updateMatrix();
-        update();
-    };
-
+    shearYSlider.addEventListener("mousemove", function(){
+        var x = shearYSlider.value;
+        var result = x / shearYMax * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        shearYSlider.style.background = color;
+    })
+    /* shearing along the x axis*/
     shearYZSlider.oninput = function() {
         affineMatrixHTML[8].innerHTML = shearYZSlider.value;
         updateMatrix();
         update();
+        shearYZOutput.innerHTML = "Translate X: " + shearYZSlider.value;
     };
+    shearYZSlider.addEventListener("mousemove", function(){
+        var x = shearYZSlider.value;
+        var result = (x - shearYZMin) / (shearYZMax - shearYZMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        shearYZSlider.style.background = color;
+    })
+    /* shearing along the y axis*/
+    shearYXSlider.oninput = function() {
+        affineMatrixHTML[9].innerHTML = shearYXSlider.value;
+        updateMatrix();
+        update();
+        shearYXOutput.innerHTML = "Translate Y: " + shearYXSlider.value;
+    };
+    shearYXSlider.addEventListener("mousemove", function(){
+        var x = shearYXSlider.value;
+        var result = (x - shearYXMin) / (shearYXMax - shearYXMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        shearYXSlider.style.background = color;
+    })
 }
 
 function render() {

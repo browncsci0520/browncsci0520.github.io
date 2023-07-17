@@ -21,14 +21,29 @@ const projectiveFrameSliderWrapper = document.getElementById('projective-frame-s
 const numSubspacesSliderWrapper = document.getElementById('num-subspaces-slider-wrapper');
 const affine1DSliderWrapper = document.getElementById('affine-1d-slider-wrapper');
 const affine2DSliderWrapper = document.getElementById('affine-2d-slider-wrapper');
+
 const affineXSlider = document.getElementById('affine-x-slider');
+var affineXOutput = document.getElementById("affineX-val");
+var affineXMax = document.getElementById("affine-x-slider").max;
+var affineXMin = document.getElementById("affine-x-slider").min
 const affineZXSlider = document.getElementById('affine-zx-slider');
+var affineZXOutput = document.getElementById("affineZX-val");
+var affineZXMax = document.getElementById("affine-zx-slider").max;
+var affineZXMin = document.getElementById("affine-zx-slider").min;
 const affineZYSlider = document.getElementById('affine-zy-slider');
+var affineZYOutput = document.getElementById("affineZY-val");
+var affineZYMax = document.getElementById("affine-zy-slider").max;
+var affineZYMin = document.getElementById("affine-zy-slider").min;
 const projMatrices = document.getElementById('proj-matrices');
 
 const subspaceEquivalence = document.getElementById('subspace-equivalence');
 const lambdaSliderWrapper = document.getElementById('lambda-slider-wrapper');
 const lambdaSlider = document.getElementById('lambda-slider');
+var lambdaOutput = document.getElementById('lambda-val');
+var lambdaMax = document.getElementById("lambda-slider").max;
+var lambdaMin = document.getElementById("lambda-slider").min;
+
+
 let greenDotPos = document.getElementById('green-dot-pos');
 let blueDotPos = document.getElementById('blue-dot-pos');
 let lambdaDisplay = document.getElementsByClassName('lambda-display');
@@ -97,7 +112,7 @@ export function startTranslation() {
 }
 
 function bindEventListeners() {
-
+    /* Translate 1D point along the x axis */
     affineXSlider.oninput = function() {
         let v =  Math.round(affineXSlider.value * 100) / 100;
         matrix.set(1, v, 0, 0,
@@ -108,8 +123,16 @@ function bindEventListeners() {
         greenDotPos.innerHTML = Math.round(lambdaSlider.value * affineXSlider.value * 100) / 100;
         projectiveLineScene.applyTransform(matrix.clone());
         buildToHTML(matrix, affineMatrixHTML);
+        affineXOutput.innerHTML = "Translate X: " + affineXSlider.value
     }
-
+    affineXSlider.addEventListener("mousemove", function(){
+        var x = affineXSlider.value;
+        var result = (x - affineXMin) / (affineXMax - affineXMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        affineXSlider.style.background = color;
+    })
+    /* Translate a 2D point along the x axis*/
     affineZXSlider.oninput = function() {
         let x = affineZXSlider.value;
         let y = affineZYSlider.value;
@@ -120,8 +143,16 @@ function bindEventListeners() {
         affineMatrixHTML[2].innerHTML = affineZXSlider.value;
         projectivePlaneScene.applyTransform(matrix.clone());
         buildToHTML(matrix, affineMatrixHTML);
+        affineZXOutput.innerHTML = "Translate X: " + affineZXSlider.value;
     }
-
+    affineZXSlider.addEventListener("mousemove", function(){
+        var x = affineZXSlider.value;
+        var result = (x - affineZXMin) / (affineZXMax - affineZXMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        affineZXSlider.style.background = color;
+    })
+    /* Translate a 2D point along the y axis */
     affineZYSlider.oninput = function() {
         let x = affineZXSlider.value;
         let y = affineZYSlider.value;
@@ -132,8 +163,15 @@ function bindEventListeners() {
         affineMatrixHTML[2].innerHTML = affineZXSlider.value;
         projectivePlaneScene.applyTransform(matrix.clone());
         buildToHTML(matrix, affineMatrixHTML);
+        affineZYOutput.innerHTML = "Translate Y: " + affineZYSlider.value;
     }
-
+    affineZYSlider.addEventListener("mousemove", function(){
+        var x = affineZYSlider.value;
+        var result = (x - affineZYMin) / (affineZYMax - affineZYMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        affineZYSlider.style.background = color;
+    })
     numSubspacesSlider.oninput = function() {
         projectiveLineScene.resetSubspaces(numSubspacesSlider.value);
         projectivePlaneScene.resetSubspaces(numSubspacesSlider.value);
@@ -143,13 +181,21 @@ function bindEventListeners() {
         projectiveLineScene.moveFrame( projectiveFrameSlider.value);
         projectivePlaneScene.moveFrame( projectiveFrameSlider.value);
     }
-
+    /* move the red dot in the subspace line in the homogeneous coordinates */
     lambdaSlider.oninput = function() {
         projectiveLineScene.moveGreenDot(lambdaSlider.value);
         lambdaDisplay[0].innerHTML = lambdaSlider.value;
         lambdaDisplay[1].innerHTML = lambdaSlider.value;
         greenDotPos.innerHTML =  Math.round(affineXSlider.value * lambdaSlider.value * 100) / 100;
+        lambdaOutput.innerHTML = "lambda: " + lambdaSlider.value;
     }
+    lambdaSlider.addEventListener("mousemove", function(){
+        var x = lambdaSlider.value;
+        var result = (x - lambdaMin) / (lambdaMax - lambdaMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        lambdaSlider.style.background = color;
+    })
 }
 
 function render() {

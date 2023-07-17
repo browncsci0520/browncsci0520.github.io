@@ -117,9 +117,10 @@
                 <ul>
                     <li>
                       <div class="slidecontainer" id="rotation-sliders">
-                        Rotation
-                        <input type="range" min="0" max="6.28318530718" step="0.1" value="0" class="slider" id="rotation-slider">
-                        <p>Value: <span id="value"></span></p>
+                        <p class="value"><span id="rotate-val">Rotation:</span>&#8508; </p>
+                        <div class="value_left">0</div>
+                          <input type="range" min="0" max="6.28318530718" step="0.1" value="0" class="slider" id="rotation-slider">
+                        <div class="value_right"> 2<span>&#8508;</span> </div>
                       </div>
                     </li>
                     <li>
@@ -136,29 +137,38 @@
                     </li>
                     <li>
                       <div class="slidecontainer" id="scaling-sliders">
-                        Scaling
-                        <p>X</p>
-                        <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-x-slider">
-                        <p>Y</p>
-                        <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-y-slider">
-                      </div>
+                        <p id="scaleX-val">Scaling X</p>
+                        <div class="value_left">1</div>
+                          <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-x-slider">
+                        <div class="value_right">4</div>
+                          <p id="scaleY-val">Scaling Y</p>
+                          <div class="value_left">1</div>
+                            <input type="range" min="1" max="4" step="0.1" value="1" class="slider" id="scaling-y-slider">
+                          <div class="value_right">4</div>
+                        </div>
                     </li>
                     <li>
                       <div class="slidecontainer" id="shear-2d-sliders">
-                        Shear
-                        <p>along X axis</p>
+                        <p id="shearX-val">Shear X</p>
+                        <div class="value_left">0</div>
                         <input type="range" min="0" max="4" step="0.1" value="0" class="slider" id="shear-x-slider">
-                        along Y axis
+                        <div class="value_right">4</div>
+                        <p id="shearY-val">Shear Y </p>
+                        <div class="value_left">0</div>
                         <input type="range" min="0" max="4" step="0.1" value="0" class="slider" id="shear-y-slider">
+                        <div class="value_right">4</div>
                       </div>
                     </li>
                     <li>
                       <div class="slidecontainer" id="shear-3d-sliders">
-                        Translate
-                        <p>X</p>
-                        <input type="range" min="-2" max="2" step="0.1" value="0" class="slider" id="shear-yz-slider">
-                        Y
-                        <input type="range" min="-2" max="2" step="0.1" value="0" class="slider" id="shear-yx-slider">
+                        <p id="translateX-val">Translate X</p>
+                        <div class="value_left">-2</div>
+                        <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="shear-yz-slider">
+                        <div class="value_right">2</div>
+                        <p id="translateY-val">Translate Y</p>
+                        <div class="value_left">-2</div>
+                        <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="shear-yx-slider">
+                        <div class="value_right">2</div>
                       </div>
                     </li>
                 </ul>
@@ -414,26 +424,34 @@
               <div class="demo-sliders">
                 <div class="slidecontainer" id="num-subspaces-slider-wrapper">
                   <p>number of subspaces shown</p>
-                  <input type="range" min="1" max="100" step="1" value="20" class="slider" id="num-subspaces-slider">
+                  <input type="range" min="1" max="100" step="1" value="20" class="slider-20" id="num-subspaces-slider">
                 </div>
                 <div class="slidecontainer" id="projective-frame-slider-wrapper">
                   <p>projective frame</p>
                   <input type="range" min="1" max="100" step="1" value="20" class="slider" id="projective-frame-slider">
                 </div>
                 <div class="slidecontainer" id="affine-1d-slider-wrapper">
-                  <p>translate x</p>
-                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider" id="affine-x-slider">
+                  <p id="affineX-val">Translate X</p>
+                  <div class="value_left">-2</div>
+                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="affine-x-slider">
+                  <div class="value_right">2</div>
                 </div>
                 <div class="slidecontainer" id="affine-2d-slider-wrapper">
-                  <p>translate x</p>
-                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider" id="affine-zx-slider">
-                  <p>translate y</p>
-                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider" id="affine-zy-slider">
+                  <p id="affineZX-val">Translate X</p>
+                  <div class="value_left">-2</div>
+                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="affine-zx-slider">
+                  <div class="value_right">2</div>
+                  <p id="affineZY-val">Translate Y</p>
+                  <div class="value_left">-2</div>
+                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="affine-zy-slider">
+                  <div class="value_right">2</div>
                 </div>
                 
                 <div class="slidecontainer" id="lambda-slider-wrapper">
-                  <p>lambda</p>
-                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider" id="lambda-slider">
+                  <p id="lambda-val">lambda</p>
+                  <div class="value_left">-2</div>
+                  <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="lambda-slider">
+                  <div class="value_right">2</div>
                 </div>
               </div>
 

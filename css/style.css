@@ -65,7 +65,7 @@
 }
 .matrix-equation>span {
     position:relative;
-    top:2rem
+    top:1.3rem
 }
 
 .matrix {
@@ -142,10 +142,9 @@ p {
 }
 
 .slidecontainer p {
-    opacity: 0.7;
 
-    line-height: 32px;   /* within paragraph */
-    margin-bottom: 10px; /* between paragraphs */
+    line-height: 32px;   
+    margin-bottom: 10px; 
 }
 
 h3 {
@@ -347,14 +346,113 @@ nav ul li a span.rotate{
     display: flex;
     /* width: 700px; */
     width: fit-content;
-    height: 180px;
+    height: 250px;
     z-index: 2;
 }
-.slider{
-    background: linear-gradient(90deg, rgb(117, 252, 117), 60%, rgb(214, 214, 214), 60%);
+/* .slider{
+    background: linear-gradient(90deg, rgb(214, 214, 214), 60%, rgb(214, 214, 214), 60%);
     outline: none;
     opacity: 0.7;
+} */
+.slider{
+    appearance: none;
+    width: 100%;  
+    height: 10px;
+    background: linear-gradient(90deg, rgb(214, 214, 214) 60%, rgb(214, 214, 214) 60%);
+    outline: none;
+    opacity: 0.7;
+    transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+    box-shadow: 0px 1px 5px 1px black;
+} 
+.slider-mid{
+    appearance: none;
+    width: 100%;  
+    height: 10px;
+    background: linear-gradient(90deg, rgb(122, 158, 237) 50%, rgb(214, 214, 214) 60%);
+    outline: none;
+    opacity: 0.7;
+    transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+    box-shadow: 0px 1px 5px 1px black;
+} 
+.slider-20{
+    appearance: none;
+    width: 100%;  
+    height: 10px;
+    background: linear-gradient(90deg, rgb(214, 214, 214) 20%, rgb(214, 214, 214) 60%);
+    outline: none;
+    opacity: 0.7;
+    transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+    box-shadow: 0px 1px 5px 1px black;
+} 
+.slider:hover{
+    opacity: 1;
+} 
+.slider-mid:hover{
+    opacity: 1;
+} 
+.slider-20:hover{
+    opacity: 1;
+} 
+.slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background:  #664AFF;
+    border-radius: 50%;
+    cursor: pointer;
+} 
+.slider-mid::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background:  #664AFF;
+    border-radius: 50%;
+    cursor: pointer;
+} 
+.slider-20::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background:  #664AFF;
+    border-radius: 50%;
+    cursor: pointer;
+} 
+.value_left{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
+    left: -40%;
+    top: 54%;
 }
+.value_right{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
+    left: 40%;
+    bottom: 12%;
+}
+#value{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+/* .value{
+    margin-top:0px;
+    opacity: 0.7;
+    line-height: 16px;    /* within paragraph  
+    margin-bottom: 0px;   /* between paragraphs 
+}  */
 @media only screen and (max-width < 1000px){
     .demo-sliders{
         height: 580px;
@@ -373,12 +471,13 @@ nav ul li a span.rotate{
     text-align:center;
     align-items: left;
     /* width: 100px; */
-    width: 100px;
+    width: 120px;
     height: 100px;
     overflow-y:visible;
 }
 
 .demo-matrices{
+    margin-top: 31px;
     width: fit-content;
     height: 200px;
     display: flex;
