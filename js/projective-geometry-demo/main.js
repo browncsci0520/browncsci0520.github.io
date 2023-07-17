@@ -16,7 +16,15 @@ const affineMatrixHTML = document.getElementById('proj-affine-matrix').getElemen
 
 
 const numSubspacesSlider = document.getElementById("num-subspaces-slider");
+var numSubspacesOutput = document.getElementById("num-subspaces-val");
+var numSubspacesMax = document.getElementById("num-subspaces-slider").max;
+var numSubspacesMin = document.getElementById("num-subspaces-slider").min;
+
 const projectiveFrameSlider = document.getElementById("projective-frame-slider");
+var projectiveFrameOutput = document.getElementById("projective-frame-val");
+var projectiveFrameMax = document.getElementById("projective-frame-slider").max;
+var projectiveFrameMin = document.getElementById("projective-frame-slider").min;
+
 const projectiveFrameSliderWrapper = document.getElementById('projective-frame-slider-wrapper');
 const numSubspacesSliderWrapper = document.getElementById('num-subspaces-slider-wrapper');
 const affine1DSliderWrapper = document.getElementById('affine-1d-slider-wrapper');
@@ -110,7 +118,7 @@ export function startTranslation() {
     affine2DSliderWrapper.style.display = "block";
     projectivePlaneScene.startAnimation();
 }
-
+projectiveFrameOutput.innerHTML = "Projective Frame: z = " + projectiveFrameSlider.value;
 function bindEventListeners() {
     /* Translate 1D point along the x axis */
     affineXSlider.oninput = function() {
@@ -172,15 +180,32 @@ function bindEventListeners() {
         "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
         affineZYSlider.style.background = color;
     })
+    /* Change the number of subspaces (Red lines) */
     numSubspacesSlider.oninput = function() {
         projectiveLineScene.resetSubspaces(numSubspacesSlider.value);
         projectivePlaneScene.resetSubspaces(numSubspacesSlider.value);
+        numSubspacesOutput.innerHTML = "Number of subspaces shown: " + numSubspacesSlider.value;
     }
-
+    numSubspacesSlider.addEventListener("mousemove", function(){
+        var x = numSubspacesSlider.value;
+        var result = (x - numSubspacesMin) / (numSubspacesMax - numSubspacesMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        numSubspacesSlider.style.background = color;
+    })
+    /* Changes the number of projective frames */
     projectiveFrameSlider.oninput = function() {
         projectiveLineScene.moveFrame( projectiveFrameSlider.value);
         projectivePlaneScene.moveFrame( projectiveFrameSlider.value);
+        projectiveFrameOutput.innerHTML = "Projective Frame: z = " + projectiveFrameSlider.value;
     }
+    projectiveFrameSlider.addEventListener("mousemove", function(){
+        var x = projectiveFrameSlider.value;
+        var result = (x - projectiveFrameMin) / (projectiveFrameMax - projectiveFrameMin) * 100;
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        projectiveFrameSlider.style.background = color;
+    })
     /* move the red dot in the subspace line in the homogeneous coordinates */
     lambdaSlider.oninput = function() {
         projectiveLineScene.moveGreenDot(lambdaSlider.value);

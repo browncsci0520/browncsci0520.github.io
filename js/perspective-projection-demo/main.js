@@ -13,6 +13,8 @@ const realignButton = document.getElementById('realign-camera-button');
 const resetRotationButton = document.getElementById('reset-rotation-button');
 
 const obliqueAngleSlider = document.getElementById('oblique-angle-slider');
+var obliqueAngleOutput = document.getElementById("oblique-angle-val");
+var obliqueAngleMax = document.getElementById("oblique-angle-slider").max;
 
 const obliqueMatrixWrapper = document.getElementById('oblique-matrix-wrapper');
 const obliqueMatrix = document.getElementById('oblique-matrix').getElementsByTagName('span');;
@@ -39,7 +41,7 @@ export function oblique() {
     $('.demo-sliders').css("display", "block");
 
 }
-
+obliqueAngleOutput.innerHTML = " Move slider below to change \alpha\: " + (obliqueAngleSlider.value/  Math.PI).toFixed(2);
 function bindEventListeners() {
 
     pauseButton.onclick = function() {
@@ -60,9 +62,15 @@ function bindEventListeners() {
         let sin = Math.sin(obliqueAngleSlider.value / 2);
         obliqueMatrix[8].innerHTML = Math.round(cos * 100) / 100;
         obliqueMatrix[9].innerHTML = Math.round(sin * 100) / 100;
-
+        obliqueAngleOutput.innerHTML = " Move slider below to change \alpha\: " + (obliqueAngleSlider.value/  Math.PI).toFixed(2);
     }
-
+    obliqueAngleSlider.addEventListener("mousemove", function(){
+        var x = obliqueAngleSlider.value;
+        var result = 100*(x/obliqueAngleMax);
+        var color = 
+        "linear-gradient(90deg, rgb(122, 158, 237)" + result + "%, rgb(214, 214, 214)" + result + "%";
+        obliqueAngleSlider.style.background = color;
+    })
 }
 
 function render() {

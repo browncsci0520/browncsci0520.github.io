@@ -382,7 +382,7 @@ nav ul li a span.rotate{
     appearance: none;
     width: 100%;  
     height: 10px;
-    background: linear-gradient(90deg, rgb(214, 214, 214) 20%, rgb(214, 214, 214) 60%);
+    background: linear-gradient(90deg, rgb(122, 158, 237) 20%, rgb(214, 214, 214) 60%);
     outline: none;
     opacity: 0.7;
     transition: 0.2s;
@@ -432,15 +432,29 @@ nav ul li a span.rotate{
     font-weight: 400;
     color: #664AFF;
     left: -40%;
-    top: 54%;
+    top: 17%;
+}
+.value_left_last{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
 }
 .value_right{
     position: relative;
     font-size: 17px;
     font-weight: 400;
     color: #664AFF;
-    left: 40%;
-    bottom: 12%;
+    left: 30%;
+    bottom: 49%;
+}
+.value_right_last{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
+    left: 30%;
+    bottom: 17%;
 }
 #value{
     margin-top: 0px;

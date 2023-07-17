@@ -423,12 +423,16 @@
 
               <div class="demo-sliders">
                 <div class="slidecontainer" id="num-subspaces-slider-wrapper">
-                  <p>number of subspaces shown</p>
+                  <p id="num-subspaces-val">Number of subspaces shown</p>
+                  <div class="value_left">1</div>
                   <input type="range" min="1" max="100" step="1" value="20" class="slider-20" id="num-subspaces-slider">
+                  <div class="value_right">100</div>
                 </div>
                 <div class="slidecontainer" id="projective-frame-slider-wrapper">
-                  <p>projective frame</p>
-                  <input type="range" min="1" max="100" step="1" value="20" class="slider" id="projective-frame-slider">
+                  <p id="projective-frame-val">Projective frame</p>
+                  <div class="value_left">1</div>
+                  <input type="range" min="1" max="100" step="1" value="20" class="slider-20" id="projective-frame-slider">
+                  <div class="value_right">100</div>
                 </div>
                 <div class="slidecontainer" id="affine-1d-slider-wrapper">
                   <p id="affineX-val">Translate X</p>
@@ -436,7 +440,7 @@
                   <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="affine-x-slider">
                   <div class="value_right">2</div>
                 </div>
-                <div class="slidecontainer" id="affine-2d-slider-wrapper">
+                <div class="slidecontainer" id="affine-2d-slider-wrapper" height="80">
                   <p id="affineZX-val">Translate X</p>
                   <div class="value_left">-2</div>
                   <input type="range" min="-2" max="2" step="0.1" value="0" class="slider-mid" id="affine-zx-slider">
@@ -511,8 +515,10 @@
                 </div>
               </div>
               <div class="demo-sliders">
-                <p>Move slider below to change \( \alpha\) </p>
+                <p id="val"><span id="oblique-angle-val"> Move slider below to change \( \alpha\) </span>&#8508;</p>
+                <div class="value_left_last">0</div>
                 <input type="range" min="0" max="6.28318530718" step="0.1" value="0" class="slider" id="oblique-angle-slider">
+                <div class="value_right_last"> 2<span>&#8508;</span> </div>
               </div>
             </div>
           </div>
