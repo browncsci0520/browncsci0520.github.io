@@ -5,7 +5,7 @@ import * as PERS from "./perspective-projection-demo/main.js"
 
 
 /* affine transform demo triggers */
-
+const resetAffineButton = document.getElementById("reset-eg-matrices-button");
 const affineAnimateButton = document.getElementById('animate-button');
 const affineFullTransformButton = document.getElementById('full-transform-button');
 //const affineModelMatrixButton = document.getElementById('affine-model-matrix-button');
@@ -29,7 +29,7 @@ const persObliqueButton = document.getElementById('pers-oblique-button');
 AFFINE.start();
 let $input = $('#affine-transform-demo-input');
 $('#affine-transform-demo-input-start').html($input);
-
+resetAffineButton.onclick = AFFINE.resetInput;
 
 /* second state */
 

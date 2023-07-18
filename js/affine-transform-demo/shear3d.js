@@ -105,6 +105,7 @@ export function Shear3DScene(canvas) {
         shearSheep.applyTransform(mat.clone());
         grid.applyTransform(mat.clone());
         sheepIntersection.applyTransform(mat.clone());
+        sheepIntersection.setDepth(0);
         
         let camPos = {x: 0, y: 0, z: 40};
         let targetCamPos = {x: 0, y: 0, z: 70};

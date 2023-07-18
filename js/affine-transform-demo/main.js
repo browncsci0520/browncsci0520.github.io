@@ -40,10 +40,10 @@ var shearYXOutput = document.getElementById("translateY-val");
 var shearYXMax = document.getElementById("shear-yx-slider").max;
 var shearYXMin = document.getElementById("shear-yx-slider").min;
 // need to switch x and y because the original effect seems to be more counterintuitive
-const shearXSlider = document.getElementById("shear-y-slider"); 
+const shearXSlider = document.getElementById("shear-x-slider"); 
 var shearXOutput = document.getElementById("shearX-val");
 var shearXMax = document.getElementById("shear-x-slider").max;
-const shearYSlider = document.getElementById("shear-x-slider");
+const shearYSlider = document.getElementById("shear-y-slider");
 var shearYOutput = document.getElementById("shearY-val");
 var shearYMax = document.getElementById("shear-y-slider").max;
 
@@ -84,7 +84,7 @@ export function animate(){
     canvas3DWrapper.style.display = "block";
     shear3DScene.start();
     shear2DCrossSectionScene.applyTransform(new THREE.Matrix4());
-    resetInput();
+    // resetInput();
 
     $("#rotation-matrix-wrapper").css("display", "none");
     $("#reflection-matrix-wrapper").css("display", "none");
@@ -214,7 +214,7 @@ function bindEventListeners() {
     /* shearing along the x axis*/
     shearXSlider.oninput = function() {
      
-        shearMatrixHTML[1].innerHTML = shearXSlider.value;
+        shearMatrixHTML[4].innerHTML = shearXSlider.value;
         updateMatrix();
         update();
         shearXOutput.innerHTML = "Shear X: " + shearXSlider.value;
@@ -230,7 +230,7 @@ function bindEventListeners() {
     shearYSlider.oninput = function() {
         console.log(shearMatrixHTML[2].innerHTML);
         console.log("val: " + shearYSlider.value);
-        shearMatrixHTML[4].innerHTML = shearYSlider.value;
+        shearMatrixHTML[1].innerHTML = shearYSlider.value;
         updateMatrix();
         update();
         shearYOutput.innerHTML = "Shear Y: " + shearYSlider.value;
@@ -331,13 +331,14 @@ function buildToHTML(mat, matrixHTML) {
     matrixHTML[13].innerHTML = arr[13];
     matrixHTML[14].innerHTML = arr[14];
     matrixHTML[15].innerHTML = arr[15];
+
 }
 
 function makeIdentity(matrixHTML) {
     buildToHTML(new THREE.Matrix4(), matrixHTML);
 }
 
-function resetInput() {
+export function resetInput() {
     makeIdentity(rotMatrixHTML);
     makeIdentity(refMatrixHTML);
     makeIdentity(scaleMatrixHTML);
@@ -352,6 +353,21 @@ function resetInput() {
     scaleYSlider.value = 0;
     reflectXCheck.value = 0;
     reflectYCheck.value = 0;
+
+    rotOutput.innerHTML = "Rotation: 0";
+    scaleXOutput.innerHTML = "Scaling X: 1";
+    scaleYOutput.innerHTML = "Scaling Y: 1";
+    shearXOutput.innerHTML = "Shear X: 0";
+    shearYOutput.innerHTML = "Shear Y: 0";
+    shearYZOutput.innerHTML = "Translate X: 0";
+    shearYXOutput.innerHTML = "Translate Y: 0";
+
+    $('.slider').css("background", "linear-gradient(90deg, rgb(214, 214, 214) 60%, rgb(214, 214, 214) 60%");
+    $('.slider-mid').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 50%, rgb(214, 214, 214) 60%");
+    $('.slider-20').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 20%, rgb(214, 214, 214) 60%");
+
+    updateMatrix();
+    update();
 }
 
 function update() {
