@@ -33,7 +33,9 @@ const affine2DSliderWrapper = document.getElementById('affine-2d-slider-wrapper'
 const affineXSlider = document.getElementById('affine-x-slider');
 var affineXOutput = document.getElementById("affineX-val");
 var affineXMax = document.getElementById("affine-x-slider").max;
-var affineXMin = document.getElementById("affine-x-slider").min
+var affineXMin = document.getElementById("affine-x-slider").min;
+const affineXMatrixHTML = document.getElementById("proj-affine-matrix").getElementsByTagName('span');
+
 const affineZXSlider = document.getElementById('affine-zx-slider');
 var affineZXOutput = document.getElementById("affineZX-val");
 var affineZXMax = document.getElementById("affine-zx-slider").max;
@@ -253,8 +255,38 @@ function buildToHTML(mat, matrixHTML) {
     matrixHTML[15].innerHTML = arr[15];
 }
 
+function makeIdentity(matrixHTML) {
+    buildToHTML(new THREE.Matrix4(), matrixHTML);
+}
 
+export function resetInput(){
+    makeIdentity(affineXMatrixHTML);
+    affineXSlider.value = 0;
+
+    affineXOutput.innerHTML = "Translate X: 0";
+
+    $('.slider').css("background", "linear-gradient(90deg, rgb(214, 214, 214) 60%, rgb(214, 214, 214) 60%");
+    $('.slider-mid').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 50%, rgb(214, 214, 214) 60%");
+    $('.slider-20').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 20%, rgb(214, 214, 214) 60%");
+
+    update();
+    // blueDotPos.innerHTML = 0;
+    // greenDotPos.innerHTML = Math.round(lambdaSlider.value * affineXSlider.value * 100) / 100;
+    // projectiveLineScene.applyTransform(matrix.clone());
+    // buildToHTML(matrix, affineMatrixHTML);
+
+    // projectiveLineScene.resetSubspaces();
+    matrix.set(1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1);
+    blueDotPos.innerHTML = 0;
+    greenDotPos.innerHTML = Math.round(lambdaSlider.value * affineXSlider.value * 100) / 100;
+    projectiveLineScene.applyTransform(matrix.clone());
+    buildToHTML(matrix, affineMatrixHTML);
+}
 
 function update() {
-
+    projectiveLineScene.applyTransform(matrix.clone());
+    projectivePlaneScene.applyTransform(matrix.clone());
 }

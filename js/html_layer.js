@@ -11,6 +11,8 @@ const affineFullTransformButton = document.getElementById('full-transform-button
 //const affineModelMatrixButton = document.getElementById('affine-model-matrix-button');
 
 /* projective geometry demo triggers */
+const reset1DTransButton = document.getElementById("reset-1D-translation-button");
+
 const projStartButton = document.getElementById('proj-start-button');
 const projSubspaceButton = document.getElementById('proj-subspace-button');
 const projLineButton = document.getElementById('proj-line-button');
@@ -55,6 +57,7 @@ projStartButton.onclick = function() {
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-start').html($input);
 }
+reset1DTransButton.onclick = PROJ.resetInput;
 
 /* fifth state */
 projSubspaceButton.onclick = function() {
