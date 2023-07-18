@@ -38,7 +38,7 @@
 }
    
 .matrix-equation {
-    width: 120px;
+    width: 95px;
     height: 200px;
     /* margin-top: 100px;
     margin-bottom: 100px; */
@@ -486,7 +486,18 @@ nav ul li a span.rotate{
     text-align:center;
     align-items: left;
     /* width: 100px; */
-    width: 120px;
+    width: 100px;
+    height: 100px;
+    overflow-y:visible;
+}
+.slidecontainer-subspace {
+    margin-top:10px;
+    display: inline-block;
+    vertical-align: top;
+    text-align:center;
+    align-items: left;
+    /* width: 100px; */
+    width: 130px;
     height: 100px;
     overflow-y:visible;
 }

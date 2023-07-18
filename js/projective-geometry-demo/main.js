@@ -312,7 +312,14 @@ export function resetSubspaces(){
     projectivePlaneScene.resetSubspaces(20);
     numSubspacesOutput.innerHTML = "Number of subspaces shown: 20";
     $('.slider-20').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 20%, rgb(214, 214, 214) 60%");
+}
 
+export function resetFrame(){
+    projectiveFrameSlider.value = 20;
+    projectiveLineScene.moveFrame(20);
+    projectivePlaneScene.moveFrame(20);
+    projectiveFrameOutput.innerHTML = "Projective Frame: z = 20";
+    $('.slider-20').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 20%, rgb(214, 214, 214) 60%");
 }
 function update() {
     projectiveLineScene.applyTransform(matrix.clone());
