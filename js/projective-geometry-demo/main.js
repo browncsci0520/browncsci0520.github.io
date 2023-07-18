@@ -285,7 +285,26 @@ export function resetInput(){
     projectiveLineScene.applyTransform(matrix.clone());
     buildToHTML(matrix, affineMatrixHTML);
 }
+export function resetLambda(){
+    lambdaOutput.innerHTML = "lambda: 0";
+    lambdaSlider.value = 0;
 
+    $('.slider').css("background", "linear-gradient(90deg, rgb(214, 214, 214) 60%, rgb(214, 214, 214) 60%");
+    $('.slider-mid').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 50%, rgb(214, 214, 214) 60%");
+
+    // greenDotPos.innerHTML = 0;
+    // matrix.set(1, 0, 0, 0,
+    //     0, 1, 0, 0,
+    //     0, 0, 1, 0,
+    //     0, 0, 0, 1);
+    // projectiveLineScene.applyTransform(matrix.clone());
+    // buildToHTML(matrix, affineMatrixHTML);
+
+    projectiveLineScene.moveGreenDot(0);
+    lambdaDisplay[0].innerHTML = 0;
+    lambdaDisplay[1].innerHTML = 0;
+    greenDotPos.innerHTML =  0;
+}
 function update() {
     projectiveLineScene.applyTransform(matrix.clone());
     projectivePlaneScene.applyTransform(matrix.clone());
