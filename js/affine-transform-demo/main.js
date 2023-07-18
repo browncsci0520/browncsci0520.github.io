@@ -354,6 +354,8 @@ export function resetInput() {
     reflectXCheck.value = 0;
     reflectYCheck.value = 0;
 
+    reflectXCheck.checked = false;
+    reflectYCheck.checked = false;
     rotOutput.innerHTML = "Rotation: 0";
     scaleXOutput.innerHTML = "Scaling X: 1";
     scaleYOutput.innerHTML = "Scaling Y: 1";
