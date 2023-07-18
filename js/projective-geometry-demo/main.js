@@ -305,6 +305,15 @@ export function resetLambda(){
     lambdaDisplay[1].innerHTML = 0;
     greenDotPos.innerHTML =  0;
 }
+
+export function resetSubspaces(){
+    numSubspacesSlider.value = 20;
+    projectiveLineScene.resetSubspaces(20);
+    projectivePlaneScene.resetSubspaces(20);
+    numSubspacesOutput.innerHTML = "Number of subspaces shown: 20";
+    $('.slider-20').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 20%, rgb(214, 214, 214) 60%");
+
+}
 function update() {
     projectiveLineScene.applyTransform(matrix.clone());
     projectivePlaneScene.applyTransform(matrix.clone());
