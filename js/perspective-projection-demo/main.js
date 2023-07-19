@@ -54,6 +54,12 @@ function bindEventListeners() {
 
     resetRotationButton.onclick = function() {
         orthographicProjectionScene.resetRotation();
+        obliqueAngleSlider.value = 0;
+        orthographicProjectionScene.oblique(0);
+        obliqueMatrix[8].innerHTML = 0
+        obliqueMatrix[9].innerHTML = 0
+        obliqueAngleOutput.innerHTML = " Move slider below to change \alpha\: 0";
+        $('.slider').css("background", "linear-gradient(90deg, rgb(214, 214, 214) 60%, rgb(214, 214, 214) 60%");
     }
 
     obliqueAngleSlider.oninput = function() {
