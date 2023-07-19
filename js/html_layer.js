@@ -15,6 +15,7 @@ const reset1DTransButton = document.getElementById("reset-1D-translation-button"
 const resetLambdaButton = document.getElementById("reset-lambda-button");
 const resetSubspacesButton = document.getElementById("reset-subspaces-button");
 const resetFrameButton = document.getElementById("reset-frame-button");
+const reset2DTransButton = document.getElementById("reset-2D-translation-button");
 
 const projStartButton = document.getElementById('proj-start-button');
 const projSubspaceButton = document.getElementById('proj-subspace-button');
@@ -64,6 +65,7 @@ reset1DTransButton.onclick = PROJ.resetInput;
 resetLambdaButton.onclick = PROJ.resetLambda;
 resetSubspacesButton.onclick = PROJ.resetSubspaces;
 resetFrameButton.onclick = PROJ.resetFrame;
+reset2DTransButton.onclick = PROJ.resetTrans;
 
 /* fifth state */
 projSubspaceButton.onclick = function() {

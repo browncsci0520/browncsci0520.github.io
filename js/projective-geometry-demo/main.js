@@ -321,6 +321,35 @@ export function resetFrame(){
     projectiveFrameOutput.innerHTML = "Projective Frame: z = 20";
     $('.slider-20').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 20%, rgb(214, 214, 214) 60%");
 }
+
+export function resetTrans(){
+    affineZXSlider.value = 0;
+    affineZYSlider.value = 0;
+
+    // matrix.set(1, 0, 0, 0,
+    //     0, 1, 0, 0,
+    //     0, 0, 1, 0,
+    //     0, 0, 0, 1);
+    // affineMatrixHTML[2].innerHTML = 0;
+    // projectivePlaneScene.applyTransform(matrix.clone());
+    // buildToHTML(matrix, affineMatrixHTML);
+    // affineZXOutput.innerHTML = "Translate X: 0";
+    // affineMatrixHTML[2].innerHTML = 0;
+    // projectivePlaneScene.applyTransform(matrix.clone());
+    // buildToHTML(matrix, affineMatrixHTML);
+    // affineZYOutput.innerHTML = "Translate Y: 0";
+    let x = affineZXSlider.value;
+    let y = affineZYSlider.value;
+    matrix.set(1, 0, x, 0,
+                0, 1, y, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1);
+    affineMatrixHTML[2].innerHTML = affineZXSlider.value;
+    projectivePlaneScene.applyTransform(matrix.clone());
+    buildToHTML(matrix, affineMatrixHTML);
+
+    $('.slider-mid').css("background", "linear-gradient(90deg, rgb(122, 158, 237) 50%, rgb(214, 214, 214) 60%");
+}
 function update() {
     projectiveLineScene.applyTransform(matrix.clone());
     projectivePlaneScene.applyTransform(matrix.clone());

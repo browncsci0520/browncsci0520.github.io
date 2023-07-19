@@ -441,6 +441,22 @@ nav ul li a span.rotate{
     font-weight: 400;
     color: #664AFF;
 }
+.value_left_2dAffine{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
+    left: 0%;
+    top: 17%;
+}
+.value_right_2dAffine{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
+    left: 5%;
+    top: 50%;
+}
 .value_right{
     position: relative;
     font-size: 17px;
@@ -480,7 +496,8 @@ nav ul li a span.rotate{
     display:inline-flex;
 }
 .slidecontainer {
-    margin-top:10px;
+    margin-top:0px;
+    margin-bottom: 0px;
     display: inline-block;
     vertical-align: top;
     text-align:center;
@@ -489,6 +506,7 @@ nav ul li a span.rotate{
     width: 100px;
     height: 100px;
     overflow-y:visible;
+    z-index: 3;
 }
 .slidecontainer-subspace {
     margin-top:10px;
