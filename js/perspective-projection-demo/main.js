@@ -46,6 +46,10 @@ function bindEventListeners() {
 
     pauseButton.onclick = function() {
         orthographicProjectionScene.pause();
+        if (pauseButton.innerText == "Pause")
+            pauseButton.innerText = "Move";
+        else
+            pauseButton.innerText = "Pause";
     }
 
     realignButton.onclick = function() {

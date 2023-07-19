@@ -69,6 +69,7 @@ reset2DTransButton.onclick = PROJ.resetTrans;
 
 /* fifth state */
 projSubspaceButton.onclick = function() {
+    AFFINE.reset();
     PROJ.subspaceState();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-subspace').html($input);
@@ -76,6 +77,7 @@ projSubspaceButton.onclick = function() {
 
 /* sixth state */
 projLineButton.onclick = function() {
+    AFFINE.reset();
     PROJ.lineState();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-line').html($input);
@@ -83,6 +85,7 @@ projLineButton.onclick = function() {
 
 /* seventh state */
 projPlaneButton.onclick = function() {
+    AFFINE.reset();
     PROJ.startPlane();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-plane').html($input);
@@ -90,6 +93,7 @@ projPlaneButton.onclick = function() {
 
 /* eighth state */
 projFrameButton.onclick = function() {
+    AFFINE.reset();
     PROJ.startFrame();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-frame').html($input);
@@ -97,6 +101,7 @@ projFrameButton.onclick = function() {
 
 /* ninth state */
 projTransButton.onclick = function() {
+    AFFINE.reset();
     PROJ.startTranslation();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-translate').html($input);
@@ -114,6 +119,7 @@ affineModelMatrixButton.onclick = function() {
 
 
 persStartButton.onclick = function() {
+    AFFINE.reset();
     PROJ.reset();
     PERS.start();
     $('#projective-geometry-demo-hide').html($('#projective-geometry-demo-input'));
@@ -122,6 +128,8 @@ persStartButton.onclick = function() {
 }
 
 persObliqueButton.onclick = function() {
+    AFFINE.reset();
+    PROJ.reset();
     PERS.oblique();
     let $input = $('#perspective-projection-demo-input');
     $('#perspective-projection-demo-oblique').html($input);
