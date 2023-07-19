@@ -25,6 +25,7 @@ const shearMatrixHTML = document.getElementById('shear-2d-matrix').getElementsBy
 const affineMatrixHTML = affine.getElementsByTagName('span');
 const modelMatrixHTML = document.getElementById('model-matrix').getElementsByTagName('span');
 
+
 let matrix = new THREE.Matrix4();
 
 const shear3DScene = new Shear3DScene(canvas3D);
@@ -63,7 +64,7 @@ var scaleYMin = document.getElementById('scaling-y-slider').min;
 const reflectXCheck = document.getElementById('reflect-x');
 const reflectYCheck = document.getElementById('reflect-y');
 
-
+export const hideMatricesButton = document.getElementById("hide-matrices-button");
 
 
 bindEventListeners();
@@ -85,7 +86,7 @@ export function animate(){
     shear3DScene.start();
     shear2DCrossSectionScene.applyTransform(new THREE.Matrix4());
     // resetInput();
-
+    
     $("#rotation-matrix-wrapper").css("display", "none");
     $("#reflection-matrix-wrapper").css("display", "none");
     $("#scaling-matrix-wrapper").css("display", "none");
@@ -100,7 +101,7 @@ export function animate(){
     $('#scaling-sliders').css("display", "none");
     $('#reflect-sliders').css("display", "none");
 
-
+    $("#hide-matrices-button").css('display', "block");
 }
 
 export function fullTransform() {
@@ -145,6 +146,39 @@ scaleYOutput.innerHTML = "Scaling Y: " + (scaleYSlider.value);
 shearXOutput.innerHTML = "Shear X: " + (shearXSlider.value);
 shearYOutput.innerHTML = "Shear Y: " + (shearYSlider.value);
 function bindEventListeners() {
+    /* Show and hide the "affine" (except translation) matrices*/
+    hideMatricesButton.onclick = function(){
+        if (hideMatricesButton.innerText == "Hide rotation, reflection, scaling, shear matrices"){
+            hideMatricesButton.innerText = "Show rotation, reflection, scaling, shear matrices";
+            $("#rotation-matrix-wrapper").css("display", "none");
+            $("#reflection-matrix-wrapper").css("display", "none");
+            $("#scaling-matrix-wrapper").css("display", "none");
+            $("#shear-matrix-wrapper").css("display", "none");
+            $(".big").css("display", "none");
+            $("#model-matrix-wrapper").css("display", "none");
+
+            $('#shear-2d-sliders').css("display", "none");
+            $('#rotation-sliders').css("display", "none");
+            $('#scaling-sliders').css("display", "none");
+            $('#reflect-sliders').css("display", "none");
+        }
+        else{
+            resetInput();
+            hideMatricesButton.innerText = "Hide rotation, reflection, scaling, shear matrices";
+            $("#rotation-matrix-wrapper").css("display", "block");
+            $("#reflection-matrix-wrapper").css("display", "block");
+            $("#scaling-matrix-wrapper").css("display", "block");
+            $("#shear-matrix-wrapper").css("display", "block");
+            $(".big").css("display", "block");
+            $("#affine-x").css("display", "none");
+            $("#model-matrix-wrapper").css("display", "block");
+
+            $('#shear-2d-sliders').css("display", "block");
+            $('#rotation-sliders').css("display", "block");
+            $('#scaling-sliders').css("display", "block");
+            $('#reflect-sliders').css("display", "block");
+        }
+     }
     /* reflection along the x axis*/
     reflectXCheck.oninput = function() {
         refMatrixHTML[0].innerHTML = -1 * parseInt(refMatrixHTML[0].innerHTML);

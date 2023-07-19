@@ -66,7 +66,7 @@
 }
 .matrix-equation>span {
     position:relative;
-    top:1.6rem
+    top:1.4rem
 }
 
 .matrix {
@@ -446,16 +446,32 @@ nav ul li a span.rotate{
     font-size: 17px;
     font-weight: 400;
     color: #664AFF;
-    left: 0%;
-    top: 17%;
+    left: 10%;
+    top: 100%;
+}
+.value_left_subspace{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
+    left: -20%;
+    top: 53%;
+}
+.value_right_subspace{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: #664AFF;
+    left: 20%;
+    bottom: 10%;
 }
 .value_right_2dAffine{
     position: relative;
     font-size: 17px;
     font-weight: 400;
     color: #664AFF;
-    left: 5%;
-    top: 50%;
+    left: -5%;
+    top: 10%;
 }
 .value_right{
     position: relative;
@@ -515,11 +531,13 @@ nav ul li a span.rotate{
     text-align:center;
     align-items: left;
     /* width: 100px; */
-    width: 130px;
+    width: 270px;
     height: 100px;
     overflow-y:visible;
 }
-
+#reset-eg-matrices-button{
+    margin-top: 30px;
+}
 .demo-matrices{
     margin-top: 31px;
     /* width: fit-content; */

@@ -110,9 +110,12 @@
           <div  id="model-matrix-canvas-wrapper">
             <canvas class="demo-canvas" id="model-matrix-canvas" width="400" height="300"></canvas>
           </div>
-
           <div class="hide-below" id="affine-transform-demo-hide">
             <div id="affine-transform-demo-input">
+              <button id="hide-matrices-button" type="button"
+              style="width: 380px; height: 35px; font-family: Georgia; font-size: 15px;">
+                Hide rotation, reflection, scaling, shear matrices
+              </button>
               <div class="demo-sliders">
                 <ul>
                     <li>
@@ -428,9 +431,9 @@
               <div class="demo-sliders">
                 <div class="slidecontainer-subspace" id="num-subspaces-slider-wrapper">
                   <p id="num-subspaces-val">Number of subspaces shown</p>
-                  <div class="value_left">1</div>
+                  <div class="value_left_subspace">1</div>
                   <input type="range" min="1" max="100" step="1" value="20" class="slider-20" id="num-subspaces-slider">
-                  <div class="value_right">100</div>
+                  <div class="value_right_subspace">100</div>
                   <button id="reset-subspaces-button" type="button"
                 style="width: 120px; height: 36px; font-family: Georgia; font-size: 15px;">
                   Reset number of subspaces
@@ -438,9 +441,9 @@
                 </div>
                 <div class="slidecontainer-subspace" id="projective-frame-slider-wrapper">
                   <p id="projective-frame-val">Projective frame</p>
-                  <div class="value_left">1</div>
+                  <div class="value_left_subspace">1</div>
                   <input type="range" min="1" max="100" step="1" value="20" class="slider-20" id="projective-frame-slider">
-                  <div class="value_right">100</div>
+                  <div class="value_right_subspace">100</div>
                   <button id="reset-frame-button" type="button"
                 style="width: 120px; height: 36px; font-family: Georgia; font-size: 15px;">
                   Reset projective frame
@@ -603,7 +606,10 @@
           <p>
             Their corresponding matrices are shown below. 
           </p>
- 
+          <!-- <button id="hide-matrices-button" type="button"
+              style="width: 380px; height: 35px; font-family: Georgia; font-size: 15px;">
+                Hide rotation, reflection, scaling, shear matrices
+              </button> -->
           <div id="affine-transform-demo-input-start"></div>
           <p>
             Here we see rotation, reflection, scaling, and shear transforms, each of which is represented by a \(2\) by \(2\) matrix.
@@ -1377,7 +1383,7 @@
             <div id="perspective-projection-demo-start"></div>
 
             <p>
-              Here the red line indicates the front of the cube. By realigning views, we are realigning the red line. Then we'll be able to look at the 3D cube and its projection from the same direction, without the need to rotate one of them to fit the other. 
+              Here the red line indicates the front of the cube. By realigning views, we are realigning the 3D view and changing the direction of the red line. 
             </p>
             <p>
               Of course since all of our transformations happen in homogeneous coordinates, we must homogenize this matrix.  In homogeneous coordinates, the orthographic projection looks like:

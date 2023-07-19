@@ -29,18 +29,53 @@ const persStartButton = document.getElementById('pers-start-button');
 const persObliqueButton = document.getElementById('pers-oblique-button');
 
 
+// hideMatricesButton.onclick = function(){
+//     if (hideMatricesButton.innerText == "Hide Matrices"){
+//         hideMatricesButton.innerText = "Show Matrices";
+//         $("#rotation-matrix-wrapper").css("display", "none");
+//         $("#reflection-matrix-wrapper").css("display", "none");
+//         $("#scaling-matrix-wrapper").css("display", "none");
+//         $("#shear-matrix-wrapper").css("display", "none");
+//         $(".big").css("display", "none");
+//         $("#model-matrix-wrapper").css("display", "none");
 
+//         $('#shear-2d-sliders').css("display", "none");
+//         $('#rotation-sliders').css("display", "none");
+//         $('#scaling-sliders').css("display", "none");
+//         $('#reflect-sliders').css("display", "none");
+//     }
+//     else{
+//         hideMatricesButton.innerText = "Hide Matrices";
+//         // AFFINE.start();
+//         $("#rotation-matrix-wrapper").css("display", "block");
+//         $("#reflection-matrix-wrapper").css("display", "block");
+//         $("#scaling-matrix-wrapper").css("display", "block");
+//         $("#shear-matrix-wrapper").css("display", "block");
+//         $(".big").css("display", "block");
+//         $("#affine-x").css("display", "none");
+//         $("#model-matrix-wrapper").css("display", "block");
+
+//         $('#shear-2d-sliders').css("display", "block");
+//         $('#rotation-sliders').css("display", "block");
+//         $('#scaling-sliders').css("display", "block");
+//         $('#reflect-sliders').css("display", "block");
+//     }
+// }
 /* first state */
 
 AFFINE.start();
+// $("#hide-matrices-button").css("display", "inline");
+PROJ.reset();
+PERS.reset();
 let $input = $('#affine-transform-demo-input');
 $('#affine-transform-demo-input-start').html($input);
 resetAffineButton.onclick = AFFINE.resetInput;
-
 /* second state */
 
 affineAnimateButton.onclick = function() {
     AFFINE.animate();
+    PROJ.reset();
+    PERS.reset();
     let $input = $('#affine-transform-demo-input');
     $('#affine-transform-demo-input-animate').html($input);
 };
@@ -49,6 +84,8 @@ affineAnimateButton.onclick = function() {
 
 affineFullTransformButton.onclick = function() {
     AFFINE.fullTransform();
+    PROJ.reset();
+    PERS.reset();
     let $input = $('#affine-transform-demo-input');
     $('#affine-transform-demo-input-full-transform').html($input);
 };
@@ -56,6 +93,7 @@ affineFullTransformButton.onclick = function() {
 /* fourth state */
 projStartButton.onclick = function() {
     PROJ.start();
+    PERS.reset();
     AFFINE.reset();
     $('#affine-transform-demo-hide').html($('#affine-transform-demo-input'));
     let $input = $('#projective-geometry-demo-input');
@@ -70,6 +108,7 @@ reset2DTransButton.onclick = PROJ.resetTrans;
 /* fifth state */
 projSubspaceButton.onclick = function() {
     AFFINE.reset();
+    PERS.reset();
     PROJ.subspaceState();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-subspace').html($input);
@@ -78,6 +117,7 @@ projSubspaceButton.onclick = function() {
 /* sixth state */
 projLineButton.onclick = function() {
     AFFINE.reset();
+    PERS.reset();
     PROJ.lineState();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-line').html($input);
@@ -86,6 +126,7 @@ projLineButton.onclick = function() {
 /* seventh state */
 projPlaneButton.onclick = function() {
     AFFINE.reset();
+    PERS.reset();
     PROJ.startPlane();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-plane').html($input);
@@ -94,6 +135,7 @@ projPlaneButton.onclick = function() {
 /* eighth state */
 projFrameButton.onclick = function() {
     AFFINE.reset();
+    PERS.reset();
     PROJ.startFrame();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-frame').html($input);
@@ -102,6 +144,7 @@ projFrameButton.onclick = function() {
 /* ninth state */
 projTransButton.onclick = function() {
     AFFINE.reset();
+    PERS.reset();
     PROJ.startTranslation();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-translate').html($input);
