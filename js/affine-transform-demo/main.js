@@ -67,6 +67,7 @@ const reflectYCheck = document.getElementById('reflect-y');
 export const hideMatricesButton = document.getElementById("hide-matrices-button");
 
 
+
 bindEventListeners();
 render();
 
@@ -145,7 +146,34 @@ scaleXOutput.innerHTML = "Scaling X: " + (scaleXSlider.value);
 scaleYOutput.innerHTML = "Scaling Y: " + (scaleYSlider.value);
 shearXOutput.innerHTML = "Shear X: " + (shearXSlider.value);
 shearYOutput.innerHTML = "Shear Y: " + (shearYSlider.value);
+
+export function reshow(){
+    $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
+    resetInput();
+    $("#rotation-matrix-wrapper").css("display", "block");
+    $("#reflection-matrix-wrapper").css("display", "block");
+    $("#scaling-matrix-wrapper").css("display", "block");
+    $("#shear-matrix-wrapper").css("display", "block");
+    $(".big").css("display", "block");
+    $("#affine-x").css("display", "none");
+    $("#model-matrix-wrapper").css("display", "block");
+
+    $('#shear-2d-sliders').css("display", "block");
+    $('#rotation-sliders').css("display", "block");
+    $('#scaling-sliders').css("display", "block");
+    $('#reflect-sliders').css("display", "block");
+    $('.demo-sliders').css("display", "block");
+}
+
 function bindEventListeners() {
+    // affineCanvasButton.onclick = function(){
+    //     // demo.style.display = "block";
+    //     // $("#affine-matrix-wrapper").css("display", "none");
+    //     // $("#affine-x").css("display", "none");
+    //     // $('#shear-3d-sliders').css("display", "none");
+    //     // canvas2D.style.display = "block";
+    //     $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
+    // }
     /* Show and hide the "affine" (except translation) matrices*/
     hideMatricesButton.onclick = function(){
         if (hideMatricesButton.innerText == "Hide rotation, reflection, scaling, shear matrices"){

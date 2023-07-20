@@ -7,6 +7,7 @@ export const demo = document.getElementById('projective-geometry-demo');
 export const canvas = document.getElementById('projective-line-canvas');
 export const canvasLineWrapper = document.getElementById('projective-line-canvas-wrapper');
 export const projectiveLineScene = new ProjectiveLineScene(canvas);
+const projectiveLineStart = document.getElementById("projective-geometry-demo-input-start");
 
 const canvasPlane = document.getElementById('projective-plane-canvas');
 const canvasPlaneWrapper = document.getElementById('projective-plane-canvas-wrapper');
@@ -79,6 +80,7 @@ export function reset() {
 }
 
 export function start() {
+    projectiveLineStart.style.display = "block";
     $(".elem-3d").css("display", "none");
     $(".elem-4d").css("display", "none");
     $(".affine-demo-matrix-elements").css("grid-template", "repeat(2, 1fr) / repeat(2, auto)");
