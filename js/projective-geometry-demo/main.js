@@ -2,11 +2,11 @@
 import { ProjectiveLineScene } from './projective_line.js'
 import { ProjectivePlaneScene } from './projective_plane.js'
 
-const demo = document.getElementById('projective-geometry-demo');
+export const demo = document.getElementById('projective-geometry-demo');
 
-const canvas = document.getElementById('projective-line-canvas');
-const canvasLineWrapper = document.getElementById('projective-line-canvas-wrapper');
-const projectiveLineScene = new ProjectiveLineScene(canvas);
+export const canvas = document.getElementById('projective-line-canvas');
+export const canvasLineWrapper = document.getElementById('projective-line-canvas-wrapper');
+export const projectiveLineScene = new ProjectiveLineScene(canvas);
 
 const canvasPlane = document.getElementById('projective-plane-canvas');
 const canvasPlaneWrapper = document.getElementById('projective-plane-canvas-wrapper');
@@ -27,7 +27,7 @@ var projectiveFrameMin = document.getElementById("projective-frame-slider").min;
 
 const projectiveFrameSliderWrapper = document.getElementById('projective-frame-slider-wrapper');
 const numSubspacesSliderWrapper = document.getElementById('num-subspaces-slider-wrapper');
-const affine1DSliderWrapper = document.getElementById('affine-1d-slider-wrapper');
+export const affine1DSliderWrapper = document.getElementById('affine-1d-slider-wrapper');
 const affine2DSliderWrapper = document.getElementById('affine-2d-slider-wrapper');
 
 const affineXSlider = document.getElementById('affine-x-slider');
@@ -85,12 +85,29 @@ export function start() {
     demo.style.display = "block";
     canvas.style.display = "block";
     affine1DSliderWrapper.style.display = "block";
+    /* The following are used to avoid any messy illustrations 
+    if the student returns to click this button after having clicked later buttons*/
+    subspaceEquivalence.style.display = "none";
+    lambdaSliderWrapper.style.display = "none";
+    numSubspacesSliderWrapper.style.display = "none";
+    canvasPlaneWrapper.style.display = "none";
+    projectiveFrameSliderWrapper.style.display = "none";
+    projMatrices.style.display = "none";
+    $(".elem-3d").css("display", "none");
+    affine2DSliderWrapper.style.display = "none";
     projectiveLineScene.start();
 }
 
 export function subspaceState() {
     subspaceEquivalence.style.display = "block";
     lambdaSliderWrapper.style.display = "block";
+
+    numSubspacesSliderWrapper.style.display = "none";
+    canvasPlaneWrapper.style.display = "none";
+    projectiveFrameSliderWrapper.style.display = "none";
+    projMatrices.style.display = "none";
+    $(".elem-3d").css("display", "none");
+    affine2DSliderWrapper.style.display = "none";
     projectiveLineScene.subspaceState();
 }
 
@@ -100,15 +117,30 @@ export function lineState() {
     subspaceEquivalence.style.display = "none";
     lambdaSliderWrapper.style.display = "none";
     numSubspacesSliderWrapper.style.display = "block";
+
+    canvasPlaneWrapper.style.display = "none";
+    projectiveFrameSliderWrapper.style.display = "none";
+    projMatrices.style.display = "none";
+    $(".elem-3d").css("display", "none");
+    affine2DSliderWrapper.style.display = "none";
     projectiveLineScene.lineState();
 }
 
 export function startPlane() {
     canvasPlaneWrapper.style.display = "block";
+
+    projectiveFrameSliderWrapper.style.display = "none";
+    projMatrices.style.display = "none";
+    $(".elem-3d").css("display", "none");
+    affine2DSliderWrapper.style.display = "none";
 }
 
 export function startFrame() {
     projectiveFrameSliderWrapper.style.display = "block";
+
+    projMatrices.style.display = "none";
+    $(".elem-3d").css("display", "none");
+    affine2DSliderWrapper.style.display = "none";
 }
 
 export function startTranslation() {

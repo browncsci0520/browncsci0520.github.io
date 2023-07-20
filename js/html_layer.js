@@ -29,38 +29,6 @@ const persStartButton = document.getElementById('pers-start-button');
 const persObliqueButton = document.getElementById('pers-oblique-button');
 
 
-// hideMatricesButton.onclick = function(){
-//     if (hideMatricesButton.innerText == "Hide Matrices"){
-//         hideMatricesButton.innerText = "Show Matrices";
-//         $("#rotation-matrix-wrapper").css("display", "none");
-//         $("#reflection-matrix-wrapper").css("display", "none");
-//         $("#scaling-matrix-wrapper").css("display", "none");
-//         $("#shear-matrix-wrapper").css("display", "none");
-//         $(".big").css("display", "none");
-//         $("#model-matrix-wrapper").css("display", "none");
-
-//         $('#shear-2d-sliders').css("display", "none");
-//         $('#rotation-sliders').css("display", "none");
-//         $('#scaling-sliders').css("display", "none");
-//         $('#reflect-sliders').css("display", "none");
-//     }
-//     else{
-//         hideMatricesButton.innerText = "Hide Matrices";
-//         // AFFINE.start();
-//         $("#rotation-matrix-wrapper").css("display", "block");
-//         $("#reflection-matrix-wrapper").css("display", "block");
-//         $("#scaling-matrix-wrapper").css("display", "block");
-//         $("#shear-matrix-wrapper").css("display", "block");
-//         $(".big").css("display", "block");
-//         $("#affine-x").css("display", "none");
-//         $("#model-matrix-wrapper").css("display", "block");
-
-//         $('#shear-2d-sliders').css("display", "block");
-//         $('#rotation-sliders').css("display", "block");
-//         $('#scaling-sliders').css("display", "block");
-//         $('#reflect-sliders').css("display", "block");
-//     }
-// }
 /* first state */
 
 AFFINE.start();
@@ -98,6 +66,13 @@ projStartButton.onclick = function() {
     $('#affine-transform-demo-hide').html($('#affine-transform-demo-input'));
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-start').html($input);
+    /* The following ensures that the diagram/animation on the right will not be cleared
+    if the student returns to click this button after having clicked later buttons */
+    PROJ.demo.style.display = "block";
+    PROJ.canvas.style.display = "block";
+    PROJ.affine1DSliderWrapper.style.display = "block";
+    PROJ.canvasLineWrapper.style.display = "block";
+    PROJ.projectiveLineScene.style.display = "block";
 }
 reset1DTransButton.onclick = PROJ.resetInput;
 resetLambdaButton.onclick = PROJ.resetLambda;
