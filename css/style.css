@@ -182,12 +182,14 @@ h1 {
 }
 
 #demos {
-    position: relative;
+    position: fixed;
     overflow:auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     float: right;
-    width: 50%;
+    width: fit-content;
+    margin-right: 1%;
+    margin-left: 50%;
     /* height: 600px; */
     height: 100%;
 }
@@ -224,7 +226,8 @@ h1 {
     font-family: 'Poppins', sans-serif;
 }
 .btn{
-    position: absolute;
+    /* position: absolute; */
+    position:fixed;
     left: 45px;
     height: 45px;
     width: 45px;
@@ -371,8 +374,8 @@ nav ul li a span.rotate{
 } 
 .slider-mid{
     appearance: none;
-    width: 100%;  
-    /* width: 100px; */
+    /* width: 100%;   */
+    width: 100px;
     height: 10px;
     background: linear-gradient(90deg, rgb(122, 158, 237) 50%, rgb(214, 214, 214) 60%);
     outline: none;
