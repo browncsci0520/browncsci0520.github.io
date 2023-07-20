@@ -84,13 +84,15 @@ affineFullTransformButton.onclick = function() {
 
 /* fourth state */
 projStartButton.onclick = function() {
-    PROJ.reset();
+    // PROJ.reset();
     PROJ.start();
     PERS.reset();
     AFFINE.reset();
+    // $(".demo-sliders").css("display", "block");
     $('#affine-transform-demo-hide').html($('#affine-transform-demo-input'));
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-start').html($input);
+    $('#projective-geometry-demo-input-start').css("display", "block");
     /* The following ensures that the diagram/animation on the right will not be cleared
     if the student returns to click this button after having clicked later buttons */
     PROJ.demo.style.display = "block";
@@ -98,8 +100,8 @@ projStartButton.onclick = function() {
     PROJ.affine1DSliderWrapper.style.display = "block";
     PROJ.canvasLineWrapper.style.display = "block";
     PROJ.projectiveLineScene.style.display = "block";
-
-    $("#show-initial-diagram-button").css("display", "block");
+    PROJ.projectiveLineStart.style.display = "block";
+    // $("#show-initial-diagram-button").css("display", "block");
 }
 reset1DTransButton.onclick = PROJ.resetInput;
 resetLambdaButton.onclick = PROJ.resetLambda;
