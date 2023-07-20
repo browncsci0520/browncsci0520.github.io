@@ -368,6 +368,7 @@ nav ul li a span.rotate{
 .slider-mid{
     appearance: none;
     width: 100%;  
+    /* width: 100px; */
     height: 10px;
     background: linear-gradient(90deg, rgb(122, 158, 237) 50%, rgb(214, 214, 214) 60%);
     outline: none;
@@ -534,7 +535,7 @@ nav ul li a span.rotate{
     overflow-y:visible;
 }
 #reset-eg-matrices-button{
-    margin-top: 30px;
+    margin-top: 60px;
 }
 .demo-matrices{
     margin-top: 31px;

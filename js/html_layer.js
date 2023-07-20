@@ -52,23 +52,34 @@ affineCanvasButton.onclick = function(){
 /* second state */
 
 affineAnimateButton.onclick = function() {
+    AFFINE.reshow();
     AFFINE.animate();
     PROJ.reset();
     PERS.reset();
     let $input = $('#affine-transform-demo-input');
     $('#affine-transform-demo-input-animate').html($input);
     $("#show-initial-diagram-button").css("display", "block");
+    $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
 };
 
 /* third state */
 
 affineFullTransformButton.onclick = function() {
+    AFFINE.reshow();
     AFFINE.fullTransform();
     PROJ.reset();
     PERS.reset();
     let $input = $('#affine-transform-demo-input');
     $('#affine-transform-demo-input-full-transform').html($input);
     $("#show-initial-diagram-button").css("display", "block");
+    $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
+    // AFFINE.canvas3DWrapper.style.display = "block";
+    $("#affine-matrix-wrapper").css("display", "block");
+
+    $(".affine-demo-matrix-elements").css("grid-template", "repeat(3, 1fr) / repeat(3, auto)");
+    $(".elem-3d").css("display", "block");
+
+    $('#shear-3d-sliders').css("display", "inline-block");
 };
 
 /* fourth state */

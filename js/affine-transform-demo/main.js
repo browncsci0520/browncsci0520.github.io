@@ -3,7 +3,7 @@ import { Shear3DScene } from './shear3d.js'
 import { Shear2DCrossSectionScene } from './shear2d_cross_section.js'
 import { ModelMatrix } from "./model_matrix.js";
 
-const canvas3DWrapper = document.getElementById('shear-3d-canvas-wrapper');
+export const canvas3DWrapper = document.getElementById('shear-3d-canvas-wrapper');
 const canvas3D = document.getElementById('shear-3d-canvas');
 const canvas2D = document.getElementById('shear-2d-cross-section-canvas');
 const canvas4DWrapper = document.getElementById('model-matrix-canvas-wrapper');
@@ -28,7 +28,7 @@ const modelMatrixHTML = document.getElementById('model-matrix').getElementsByTag
 
 let matrix = new THREE.Matrix4();
 
-const shear3DScene = new Shear3DScene(canvas3D);
+export const shear3DScene = new Shear3DScene(canvas3D);
 const shear2DCrossSectionScene = new Shear2DCrossSectionScene(canvas2D);
 const modelMatrixScene = new ModelMatrix(canvas4D);
 
