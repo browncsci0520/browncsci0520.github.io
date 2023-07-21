@@ -54,13 +54,13 @@
    
 .matrix-equation {
     width: 95px;
-    height: 200px;
-    /* margin-top: 100px;
-    margin-bottom: 100px; */
+    height: 100px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     position:relative;
     /* background-color:rgb(255, 255, 255); */
     background-color: transparent;
-    padding: 2px;
+    padding: 0px;
     display:inline-flex;
     flex-direction: row;
     align-items: center;
@@ -169,7 +169,7 @@ p {
 .slidecontainer p {
 
     line-height: 32px;   
-    margin-bottom: 10px; 
+    margin-bottom: 0; 
 }
 
 h3 {
@@ -576,15 +576,16 @@ nav ul li a span.rotate{
     display:inline-flex;
 }
 .slidecontainer {
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 0px;
+    padding: 0;
     display: inline-block;
     vertical-align: top;
     text-align:center;
     align-items: left;
     /* width: 100px; */
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 0px;
     overflow-y:visible;
     z-index: 3;
 }
@@ -600,20 +601,21 @@ nav ul li a span.rotate{
     overflow-y:visible;
 }
 #reset-eg-matrices-button{
-    margin-top: 60px;
+    margin-top: 0px;
+    padding: 0;
 }
 .demo-matrices{
-    margin-top: 31px;
+    margin-top: 0px;
     /* width: fit-content; */
     width: fit-content;
     height: 200px;
     display: flex;
     justify-content:stretch;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     /*background-color: antiquewhite;*/
     border-collapse: separate;
-    border-spacing: 5px;
+    border-spacing: 0px;
 
 }
 
