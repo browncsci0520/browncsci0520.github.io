@@ -60,7 +60,7 @@ function bindEventListeners() {
         orthographicProjectionScene.resetRotation();
         obliqueAngleSlider.value = 0;
         orthographicProjectionScene.oblique(0);
-        obliqueMatrix[8].innerHTML = 0
+        obliqueMatrix[8].innerHTML = 0.5
         obliqueMatrix[9].innerHTML = 0
         obliqueAngleOutput.innerHTML = " Move slider below to change \alpha\: 0";
         $('.slider').css("background", "linear-gradient(90deg, rgb(214, 214, 214) 60%, rgb(214, 214, 214) 60%");
@@ -70,8 +70,10 @@ function bindEventListeners() {
         orthographicProjectionScene.oblique(obliqueAngleSlider.value);
         let cos = Math.cos(obliqueAngleSlider.value) / 2;
         let sin = Math.sin(obliqueAngleSlider.value) / 2;
-        obliqueMatrix[8].innerHTML = Math.round(cos * 100) / 100;
-        obliqueMatrix[9].innerHTML = Math.round(sin * 100) / 100;
+        // obliqueMatrix[8].innerHTML = Math.round(cos * 100) / 100;
+        // obliqueMatrix[9].innerHTML = Math.round(sin * 100) / 100;
+        obliqueMatrix[8].innerHTML = cos.toFixed(3);
+        obliqueMatrix[9].innerHTML = sin.toFixed(3);
         obliqueAngleOutput.innerHTML = " Move slider below to change \alpha\: " + (obliqueAngleSlider.value/  Math.PI).toFixed(2);
     }
     obliqueAngleSlider.addEventListener("mousemove", function(){
