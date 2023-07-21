@@ -162,7 +162,6 @@ export function reshow(){
     $('#rotation-sliders').css("display", "block");
     $('#scaling-sliders').css("display", "block");
     $('#reflect-sliders').css("display", "block");
-    $('.demo-sliders').css("display", "block");
 }
 
 function bindEventListeners() {

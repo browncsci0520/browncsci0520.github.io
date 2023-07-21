@@ -73,7 +73,9 @@ affineFullTransformButton.onclick = function() {
     $('#affine-transform-demo-input-full-transform').html($input);
     $("#show-initial-diagram-button").css("display", "block");
     $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
+
     // AFFINE.canvas3DWrapper.style.display = "block";
+
     $("#affine-matrix-wrapper").css("display", "block");
 
     $(".affine-demo-matrix-elements").css("grid-template", "repeat(3, 1fr) / repeat(3, auto)");
@@ -84,7 +86,7 @@ affineFullTransformButton.onclick = function() {
 
 /* fourth state */
 projStartButton.onclick = function() {
-    // PROJ.reset();
+    PROJ.reset();
     PROJ.start();
     PERS.reset();
     AFFINE.reset();
@@ -94,6 +96,8 @@ projStartButton.onclick = function() {
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-start').html($input);
     // $('#projective-geometry-demo-input-start').css("display", "block");
+
+
     /* The following ensures that the diagram/animation on the right will not be cleared
     if the student returns to click this button after having clicked later buttons */
     PROJ.demo.style.display = "block";
