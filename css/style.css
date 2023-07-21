@@ -38,12 +38,14 @@
 
 @supports (-webkit-touch-callout: none) {
     body,#root {
-        height: -webkit-fill-available
+        height: -webkit-fill-available;
+        max-height: 100%;
 
     }
 }
 #MathJax_Hidden{
     height: 0px;
+    max-height: 100px;
 }
 .big {
     font-size:1.875rem;
@@ -125,7 +127,9 @@ text-align: center;
  -moz-box-sizing:border-box;
  -webkit-box-sizing:border-box;
  margin:0;
- padding:0
+ padding:0;
+ max-height: 100;
+ height: fit-content;
 }
 
 .matrix .elem-3d {
@@ -204,30 +208,32 @@ h1 {
     /* max-width: 100%;
     max-height: 100%; */
     display: block;
-    flex-wrap: wrap;
     position: fixed;
     /* overflow:auto; */
-    overflow: clip;
     /* overflow-clip-margin: content-box; */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     float: right;
-    width: fit-content;
+    /* width: fit-content; */
     margin-right: 1%;
     margin-left: 46%;
     margin-top: 0%;
-    margin-bottom: 1%;
+    margin-bottom: 46%;
     padding: 0;
     /* height: 600px; */
     height: 100%;
-    /* height: fit-content; */
 }
+
 #shear-2d-cross-section-canvas{
-    max-width: 100%;
+    position:relative;
+    /*max-width: 100%;*/
     width: fit-content;
-    height: fit-content;
-    max-height: 100%;
-    display: block;
+    height: 100%; 
+    max-width: 100%;
+    max-height: 100%; /*These lines are the key*/
+    /* display: block; */
+    overflow: clip;
+    overflow-clip-margin: content-box;
 }
 #shear-3d-canvas{
     max-width: 100%;
@@ -616,11 +622,11 @@ input[type="range"] {
 }
 
 .demo-canvas{
-    max-width: 100%;
+    /* max-width: 100%; */
     padding: 0px;
-    width: fit-content;
+    /* width: fit-content; */
     /* height: auto; 600px */
-    height: 100%;
+    max-height: 100%;
     height: fit-content;
     /* max-height: 100%; */
     align-items: center;
@@ -638,8 +644,9 @@ input[type="range"] {
     max-width: 100%;
     max-height: 100%;
     height: fit-content;
-    width: fit-content;
-    position:static;
+    /* width: fit-content; */
+    /* position:static; */
+    position: relative;
     overflow: clip;
     overflow-clip-margin: content-box;
 }
