@@ -68,8 +68,8 @@ function bindEventListeners() {
 
     obliqueAngleSlider.oninput = function() {
         orthographicProjectionScene.oblique(obliqueAngleSlider.value);
-        let cos = Math.cos(obliqueAngleSlider.value / 2);
-        let sin = Math.sin(obliqueAngleSlider.value / 2);
+        let cos = Math.cos(obliqueAngleSlider.value) / 2;
+        let sin = Math.sin(obliqueAngleSlider.value) / 2;
         obliqueMatrix[8].innerHTML = Math.round(cos * 100) / 100;
         obliqueMatrix[9].innerHTML = Math.round(sin * 100) / 100;
         obliqueAngleOutput.innerHTML = " Move slider below to change \alpha\: " + (obliqueAngleSlider.value/  Math.PI).toFixed(2);
