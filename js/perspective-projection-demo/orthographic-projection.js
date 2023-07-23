@@ -23,7 +23,7 @@ export function OrthographicProjectionScene(canvas, canvas2) {
     const camera = buildCamera(screenDimensions);
     const rtcamera = buildOrthoCamera(screenDimensions);
 
-
+    /* Builds a second renderer */
     const renderer2 = new THREE.WebGLRenderer({ 
         canvas: canvas2, 
         antialias: true,
@@ -35,6 +35,7 @@ export function OrthographicProjectionScene(canvas, canvas2) {
     renderer2.setSize(screenDimensions.width, screenDimensions.height);
 
     const controls = new OrbitControls(camera, renderer.domElement);
+    // const controls2 = new OrbitControls(rtcamera, renderer2.domElement);
 
     const cube = new CubeWireframe();
     const cube2 = new CubeWireframe();
@@ -87,9 +88,9 @@ export function OrthographicProjectionScene(canvas, canvas2) {
         let top = 25;
         let bottom = -25;
         let near = 1
-        let far = 2000;
+        let far = 20000;
         const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
-    camera.position.set(0, 0, 1000);
+        camera.position.set(0, 0, 1000);
 
         return camera;
         
@@ -139,6 +140,7 @@ export function OrthographicProjectionScene(canvas, canvas2) {
     this.realign = function() {
         let normPos = normal.getPosition();
         camera.position.set(normPos.x * 20, normPos.y * 20, normPos.z * 20);
+        // rtcamera.position.set(normPos.x * 20, normPos.y * 20, normPos.z * 20);
         console.log(normPos.x + " " + normPos.y + " " +  normPos.z);
         camera.lookAt(0, 0, 0);
     }
@@ -155,8 +157,8 @@ export function OrthographicProjectionScene(canvas, canvas2) {
             // create shear matrix
         let alpha = parseFloat(a); // or Math.PI / 4
 
-        let Szx = - 0.5 * Math.cos( alpha );
-        let Szy = - 0.5 * Math.sin( alpha );
+        let Szx = 0.5 * Math.cos( alpha );
+        let Szy = 0.5 * Math.sin( alpha );
 
 
         let matrix = new THREE.Matrix4();

@@ -218,29 +218,41 @@ h1 {
     margin-right: 1%;
     margin-left: 46%;
     margin-top: 0%;
-    margin-bottom: 46%;
+    margin-bottom: 10%;
     padding: 0;
     /* height: 600px; */
     height: 100%;
 }
-
+#shear-2d-cross-section-canvas-wrapper {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    height: 50vh; 
+  }
+  
 #shear-2d-cross-section-canvas{
     position:relative;
-    /*max-width: 100%;*/
     width: fit-content;
-    height: 100%; 
     max-width: 100%;
-    max-height: 100%; /*These lines are the key*/
-    /* display: block; */
-    overflow: clip;
-    overflow-clip-margin: content-box;
+    height: 100%; 
+}
+#shear-3d-canvas-wrapper{
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    height: 50vh; 
 }
 #shear-3d-canvas{
     max-width: 100%;
-    max-height: 100%;
     width: fit-content;
-    height: fit-content;
+    height: 100%;
     display: block;
+}
+#projective-line-canvas-wrapper{
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    height: 50vh; 
 }
 #projective-line-canvas{
     max-width: 100%;
@@ -248,17 +260,35 @@ h1 {
     width: fit-content;
     height: fit-content;
 }
+#projective-plane-canvas-wrapper{
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    height: 50vh; 
+}
 #projective-plane-canvas{
     max-width: 100%;
     max-height: 100%;
     width: fit-content;
     height: fit-content;
 }
+#screen-canvas-wrapper{
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    height: 50vh; 
+}
 #screen-canvas{
     max-width: 100%;
     max-height: 100%;
     width: fit-content;
     height: fit-content;
+}
+#orthographic-projection-canvas-wrapper{
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    height: 50vh; 
 }
 #orthographic-projection-canvas{
     max-width: 100%;
