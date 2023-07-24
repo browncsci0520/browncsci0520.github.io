@@ -38,7 +38,7 @@ PROJ.reset();
 PERS.reset();
 let $input = $('#affine-transform-demo-input');
 $('#affine-transform-demo-input-start').html($input);
-AFFINE.hideMatricesButton.style.display = "none";
+// AFFINE.hideMatricesButton.style.display = "none";
 resetAffineButton.onclick = AFFINE.resetInput;
 affineCanvasButton.onclick = function(){
     AFFINE.reshow();
@@ -58,7 +58,7 @@ affineAnimateButton.onclick = function() {
     PROJ.reset();
     PERS.reset();
     let $input = $('#affine-transform-demo-input');
-    AFFINE.hideMatricesButton.style.display = "block";
+    //AFFINE.hideMatricesButton.style.display = "block";
     $('#affine-transform-demo-input-animate').html($input);
     $("#show-initial-diagram-button").css("display", "block");
     $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
@@ -73,7 +73,7 @@ affineFullTransformButton.onclick = function() {
     PERS.reset();
     let $input = $('#affine-transform-demo-input');
     $('#affine-transform-demo-input-full-transform').html($input);
-    AFFINE.hideMatricesButton.style.display = "none";
+    // AFFINE.hideMatricesButton.style.display = "none";
     $("#show-initial-diagram-button").css("display", "block");
     $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
 
@@ -98,7 +98,7 @@ projStartButton.onclick = function() {
     $('#affine-transform-demo-hide').html($('#affine-transform-demo-input'));
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-start').html($input);
-    AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     // $('#projective-geometry-demo-input-start').css("display", "block");
 
 
@@ -125,7 +125,7 @@ projSubspaceButton.onclick = function() {
     PROJ.subspaceState();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-subspace').html($input);
-    AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     $("#show-initial-diagram-button").css("display", "block");
 }
 
@@ -136,7 +136,7 @@ projLineButton.onclick = function() {
     PROJ.lineState();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-line').html($input);
-    AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     $("#show-initial-diagram-button").css("display", "block");
 }
 
@@ -147,7 +147,7 @@ projPlaneButton.onclick = function() {
     PROJ.startPlane();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-plane').html($input);
-    AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     $("#show-initial-diagram-button").css("display", "block");
 }
 
@@ -158,7 +158,7 @@ projFrameButton.onclick = function() {
     PROJ.startFrame();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-frame').html($input);
-    AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     $("#show-initial-diagram-button").css("display", "block");
 }
 
@@ -170,7 +170,7 @@ projTransButton.onclick = function() {
     PROJ.startTranslation();
     let $input = $('#projective-geometry-demo-input');
     $('#projective-geometry-demo-input-translate').html($input);
-    AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     $("#show-initial-diagram-button").css("display", "block");
 }
 
@@ -192,7 +192,7 @@ persStartButton.onclick = function() {
     $('#projective-geometry-demo-hide').html($('#projective-geometry-demo-input'));
     let $input = $('#perspective-projection-demo-input');
     $('#perspective-projection-demo-start').html($input);
-    AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     $("#show-initial-diagram-button").css("display", "block");
 }
 
@@ -202,7 +202,7 @@ persObliqueButton.onclick = function() {
     PERS.oblique();
     let $input = $('#perspective-projection-demo-input');
     $('#perspective-projection-demo-oblique').html($input);
-     AFFINE.hideMatricesButton.style.display = "block";
+    // AFFINE.hideMatricesButton.style.display = "block";
     $("#show-initial-diagram-button").css("display", "block");
 }
 

@@ -64,7 +64,7 @@ var scaleYMin = document.getElementById('scaling-y-slider').min;
 const reflectXCheck = document.getElementById('reflect-x');
 const reflectYCheck = document.getElementById('reflect-y');
 
-export const hideMatricesButton = document.getElementById("hide-matrices-button");
+// export const hideMatricesButton = document.getElementById("hide-matrices-button");
 
 
 
@@ -174,38 +174,38 @@ function bindEventListeners() {
     //     $('#shear-2d-cross-section-canvas-wrapper').css("display", "block");
     // }
     /* Show and hide the "affine" (except translation) matrices*/
-    hideMatricesButton.onclick = function(){
-        if (hideMatricesButton.innerText == "Hide rotation, reflection, scaling, shear matrices"){
-            hideMatricesButton.innerText = "Show rotation, reflection, scaling, shear matrices";
-            $("#rotation-matrix-wrapper").css("display", "none");
-            $("#reflection-matrix-wrapper").css("display", "none");
-            $("#scaling-matrix-wrapper").css("display", "none");
-            $("#shear-matrix-wrapper").css("display", "none");
-            $(".big").css("display", "none");
-            $("#model-matrix-wrapper").css("display", "none");
+    // hideMatricesButton.onclick = function(){
+    //     if (hideMatricesButton.innerText == "Hide rotation, reflection, scaling, shear matrices"){
+    //         hideMatricesButton.innerText = "Show rotation, reflection, scaling, shear matrices";
+    //         $("#rotation-matrix-wrapper").css("display", "none");
+    //         $("#reflection-matrix-wrapper").css("display", "none");
+    //         $("#scaling-matrix-wrapper").css("display", "none");
+    //         $("#shear-matrix-wrapper").css("display", "none");
+    //         $(".big").css("display", "none");
+    //         $("#model-matrix-wrapper").css("display", "none");
 
-            $('#shear-2d-sliders').css("display", "none");
-            $('#rotation-sliders').css("display", "none");
-            $('#scaling-sliders').css("display", "none");
-            $('#reflect-sliders').css("display", "none");
-        }
-        else{
-            resetInput();
-            hideMatricesButton.innerText = "Hide rotation, reflection, scaling, shear matrices";
-            $("#rotation-matrix-wrapper").css("display", "block");
-            $("#reflection-matrix-wrapper").css("display", "block");
-            $("#scaling-matrix-wrapper").css("display", "block");
-            $("#shear-matrix-wrapper").css("display", "block");
-            $(".big").css("display", "block");
-            $("#affine-x").css("display", "none");
-            $("#model-matrix-wrapper").css("display", "block");
+    //         $('#shear-2d-sliders').css("display", "none");
+    //         $('#rotation-sliders').css("display", "none");
+    //         $('#scaling-sliders').css("display", "none");
+    //         $('#reflect-sliders').css("display", "none");
+    //     }
+    //     else{
+    //         resetInput();
+    //         hideMatricesButton.innerText = "Hide rotation, reflection, scaling, shear matrices";
+    //         $("#rotation-matrix-wrapper").css("display", "block");
+    //         $("#reflection-matrix-wrapper").css("display", "block");
+    //         $("#scaling-matrix-wrapper").css("display", "block");
+    //         $("#shear-matrix-wrapper").css("display", "block");
+    //         $(".big").css("display", "block");
+    //         $("#affine-x").css("display", "none");
+    //         $("#model-matrix-wrapper").css("display", "block");
 
-            $('#shear-2d-sliders').css("display", "block");
-            $('#rotation-sliders').css("display", "block");
-            $('#scaling-sliders').css("display", "block");
-            $('#reflect-sliders').css("display", "block");
-        }
-     }
+    //         $('#shear-2d-sliders').css("display", "block");
+    //         $('#rotation-sliders').css("display", "block");
+    //         $('#scaling-sliders').css("display", "block");
+    //         $('#reflect-sliders').css("display", "block");
+    //     }
+    //  }
     /* reflection along the x axis*/
     reflectXCheck.oninput = function() {
         refMatrixHTML[0].innerHTML = -1 * parseInt(refMatrixHTML[0].innerHTML);

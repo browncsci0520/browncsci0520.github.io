@@ -170,6 +170,20 @@ p {
 
     line-height: 32px;   
     margin-bottom: 0; 
+    padding: 0;
+}
+
+.slidecontainer li p {
+
+    line-height: 32px;   
+    margin-bottom: 0; 
+    padding: 0;
+}
+.slidecontainer-subspace li p {
+
+    line-height: 32px;   
+    margin-bottom: 0; 
+    padding: 0;
 }
 
 h3 {
@@ -205,22 +219,15 @@ h1 {
 }
 
 #demos {
-    /* max-width: 100%;
-    max-height: 100%; */
     display: block;
     position: fixed;
-    /* overflow:auto; */
-    /* overflow-clip-margin: content-box; */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    /* float: right; */
-    /* width: fit-content; */
     margin-right: 1%;
     margin-left: 46%;
     margin-top: 0%;
     margin-bottom: 0%;
     padding: 0;
-    /* height: 600px; */
     height: 100%;
 }
 #shear-2d-cross-section-canvas-wrapper {
@@ -448,6 +455,7 @@ nav ul li a span.rotate{
 #show-initial-diagram-button{
     display: none;
 }
+
 .slider{
     appearance: none;
     width: 100%;  
@@ -527,7 +535,7 @@ nav ul li a span.rotate{
     font-weight: 400;
     color: #664AFF;
     left: -40%;
-    top: 17%;
+    top: 50px;
 }
 .value_left_last{
     position: relative;
@@ -540,8 +548,8 @@ nav ul li a span.rotate{
     font-size: 17px;
     font-weight: 400;
     color: #664AFF;
-    left: 10%;
-    top: 100%;
+    left: -40%;
+    top: 50%;
 }
 .value_left_subspace{
     position: relative;
@@ -564,16 +572,16 @@ nav ul li a span.rotate{
     font-size: 17px;
     font-weight: 400;
     color: #664AFF;
-    left: -5%;
-    top: 10%;
+    left: 35%;
+    bottom: 15%;
 }
 .value_right{
     position: relative;
     font-size: 17px;
     font-weight: 400;
     color: #664AFF;
-    left: 30%;
-    bottom: 49%;
+    left: 40%;
+    bottom: 17px;
 }
 .value_right_last{
     position: relative;
@@ -618,6 +626,28 @@ nav ul li a span.rotate{
     height: 0px;
     overflow-y:visible;
     z-index: 3;
+}
+.slidecontainer-affine-2d li{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0;
+    display: inline-block;
+    vertical-align: top;
+    text-align:center;
+    align-items: left;
+    /* width: 100px; */
+    width: 120px;
+    height: 100px;
+    overflow-y:visible;
+    z-index: 3;
+}
+.slidecontainer-affine-2d li p{
+    padding: 0;
+    margin-bottom: 0;
+}
+#reset-2D-translation-button{
+    margin-top: 72px;
+    margin-left: 60px
 }
 .slidecontainer-subspace {
     margin-top:10px;
