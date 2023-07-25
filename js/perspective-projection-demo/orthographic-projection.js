@@ -4,6 +4,7 @@ import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/exampl
 import { CubeWireframe } from "../assets/cube_wireframe.js";
 
 import { Subspace } from "../assets/subspace.js";
+import { SubspaceHide} from "../assets/subspace_hide.js";
 
 export function OrthographicProjectionScene(canvas, canvas2) {
 
@@ -11,6 +12,7 @@ export function OrthographicProjectionScene(canvas, canvas2) {
 
     let paused = false;
     let obliqueMatrix = new THREE.Matrix4();
+    
     
     const screenDimensions = {
         width: canvas.width,
@@ -39,11 +41,19 @@ export function OrthographicProjectionScene(canvas, canvas2) {
 
     const cube = new CubeWireframe();
     const cube2 = new CubeWireframe();
-    const normal = new Subspace(scene, {x: 0, y: 0, z: 1});
-    const normal2 = new Subspace(scene2, {x: 0, y: 0, z: 1});
+    const normal = new SubspaceHide(scene, {x: 0, y: 0, z: 1});
+    const normal2 = new SubspaceHide(scene2, {x: 0, y: 0, z: 1});
     scene.add(cube);
     scene2.add(cube2);
-
+    const axesHelper = new THREE.AxesHelper(1000000);
+    const axesHelper2 = new THREE.AxesHelper(1000000);
+    axesHelper.setColors("red",'green', 'olive');
+    axesHelper2.setColors('red', 'green', 'olive');
+    scene.add(axesHelper);
+    scene2.add(axesHelper2);
+    // scene.remove(normal)
+    // scene2.remove(normal2)
+    
 
     function buildScene() {
 
@@ -53,7 +63,6 @@ export function OrthographicProjectionScene(canvas, canvas2) {
 
         return scene;
     }
-
     function buildRenderer({ width, height }) {
         const renderer = new THREE.WebGLRenderer({ 
             canvas: canvas, 
@@ -72,7 +81,7 @@ export function OrthographicProjectionScene(canvas, canvas2) {
 
         const aspectRatio = width / height;
         const fov = 60;
-        const nearPlane = 1;
+        const nearPlane = 0.1;
         const farPlane = 1000;
         const camera = new THREE.PerspectiveCamera(fov, aspectRatio, nearPlane, farPlane)
 
@@ -115,14 +124,16 @@ export function OrthographicProjectionScene(canvas, canvas2) {
 
         if (!paused) {
             cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-
+            // cube.rotation.y += 0.01;
+            // cube.rotation.z += 0.01;
+            
             normal.rotate(0.01, 0.01, 0);
 
             normal2.rotate(0.01, 0.01, 0);
 
             cube2.rotation.x += 0.01;
-            cube2.rotation.y += 0.01;
+            // cube2.rotation.y += 0.01;
+            // cube2.rotation.z += 0.01;
         }
 
 
@@ -139,10 +150,12 @@ export function OrthographicProjectionScene(canvas, canvas2) {
 
     this.realign = function() {
         let normPos = normal.getPosition();
+        // let normPos2 = normal2.getPosition();
         camera.position.set(normPos.x * 20, normPos.y * 20, normPos.z * 20);
         // rtcamera.position.set(normPos.x * 20, normPos.y * 20, normPos.z * 20);
         console.log(normPos.x + " " + normPos.y + " " +  normPos.z);
         camera.lookAt(0, 0, 0);
+        // rtcamera.lookAt(0, 0, 0);
     }
 
     this.resetRotation = function() {
