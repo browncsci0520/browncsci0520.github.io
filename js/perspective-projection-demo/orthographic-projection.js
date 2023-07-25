@@ -160,7 +160,7 @@ export function OrthographicProjectionScene(canvas, canvas2) {
 
     this.resetRotation = function() {
         cube.rotation.set(0, 0, 0);
-        cube2.rotation.set(0, 0, 0);
+        cube2.rotation.set(0, 0.5 * Math.PI, 0);
         normal.setRotation(0, 0, 0);
         normal2.setRotation(0, 0, 0);
         
@@ -170,8 +170,8 @@ export function OrthographicProjectionScene(canvas, canvas2) {
             // create shear matrix
         let alpha = parseFloat(a); // or Math.PI / 4
 
-        let Szx = 0.5 * Math.cos( alpha );
-        let Szy = 0.5 * Math.sin( alpha );
+        let Szx = 0.5 * Math.cos( alpha - 0.5 * Math.PI);
+        let Szy = 0.5 * Math.sin( alpha - 0.5 * Math.PI);
 
 
         let matrix = new THREE.Matrix4();
