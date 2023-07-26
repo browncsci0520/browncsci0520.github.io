@@ -59,10 +59,10 @@ export function OrthographicProjectionScene(canvas, canvas2) {
     gridHelper2.material.linewidth = 0.0001;
     axesHelper.setColors("red",'green', 'olive');
     axesHelper2.setColors('red', 'green', 'olive');
-    scene.add(axesHelper);
-    scene2.add(axesHelper2);
     scene.add(gridHelper);
     scene2.add(gridHelper2);
+    scene.add(axesHelper);
+    scene2.add(axesHelper2);
     // scene.remove(normal)
     // scene2.remove(normal2)
     
