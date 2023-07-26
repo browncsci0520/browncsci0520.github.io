@@ -23,7 +23,11 @@ export function OrthographicProjectionScene(canvas, canvas2) {
     const scene2 = buildScene();
     const renderer = buildRenderer(screenDimensions);
     const camera = buildCamera(screenDimensions);
+    const originalCameraPosition = camera.position.clone();
+    const originalCameraRotation = camera.rotation.clone();
     const rtcamera = buildOrthoCamera(screenDimensions);
+    const originalRTCameraPosition = rtcamera.position.clone();
+    const originalRTCameraRotation = rtcamera.rotation.clone();
 
     /* Builds a second renderer */
     const renderer2 = new THREE.WebGLRenderer({ 
@@ -47,10 +51,18 @@ export function OrthographicProjectionScene(canvas, canvas2) {
     scene2.add(cube2);
     const axesHelper = new THREE.AxesHelper(1000000);
     const axesHelper2 = new THREE.AxesHelper(1000000);
+    const gridHelper = new THREE.GridHelper(200, 50, 'red');
+    const gridHelper2 = new THREE.GridHelper(200, 50, 'red');
+    gridHelper.material.color.set('red');
+    gridHelper2.material.color.set('red'); 
+    gridHelper.material.linewidth = 0.0001;
+    gridHelper2.material.linewidth = 0.0001;
     axesHelper.setColors("red",'green', 'olive');
     axesHelper2.setColors('red', 'green', 'olive');
     scene.add(axesHelper);
     scene2.add(axesHelper2);
+    scene.add(gridHelper);
+    scene2.add(gridHelper2);
     // scene.remove(normal)
     // scene2.remove(normal2)
     
@@ -159,11 +171,13 @@ export function OrthographicProjectionScene(canvas, canvas2) {
     }
 
     this.resetRotation = function() {
-        cube.rotation.set(0, 0, 0);
-        cube2.rotation.set(0, 0.5 * Math.PI, 0);
-        normal.setRotation(0, 0, 0);
-        normal2.setRotation(0, 0, 0);
-        
+        // cube.rotation.set(0, 0, 0);
+        // cube2.rotation.set(0, 0.5 * Math.PI, 0);
+        // normal.setRotation(0, 0, 0);
+        // normal2.setRotation(0, 0, 0);
+        camera.position.copy(originalCameraPosition);
+        camera.rotation.copy(originalCameraRotation);
+        camera.updateProjectionMatrix();
     }
 
     this.oblique = function(a) {
