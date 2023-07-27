@@ -13,4 +13,5 @@ export function Dot(scene, c, {x, y, z}) {
         material.dispose();
         scene.remove(mesh);
     }
+    
 } 
